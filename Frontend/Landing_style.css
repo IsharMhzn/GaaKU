@@ -8,6 +8,8 @@ body{
 	background-color: white;
 	padding: 5px;
 	display: flex;
+	font-family: 'Oswald', sans-serif;
+	font-weight: 400;
 }
 /* Front and back spacing */
 .nav-gutter{
@@ -16,7 +18,7 @@ body{
 /* Logo */
 #logo{
 	padding-top: 5px;
-	width: 160px;
+	width: 10rem;
 }
 /* Search section */
 .search-section{
@@ -87,8 +89,6 @@ body{
 
 .main-nav li a{
 	text-decoration: none;
-	font-family: 'Oswald', sans-serif;
-	font-weight: 400;
 	font-size: 1.1em;
 	color: #837F7F;
 }
@@ -119,6 +119,8 @@ body{
 
 /* Category Section */
 .categories{
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 400;
 	background-color: #592998;
 	padding: 0.1px;
 	box-shadow: 0 6px 6px rgba(0,0,0,16%);
@@ -140,8 +142,6 @@ body{
 
 .category-container li a{
 	text-decoration: none;
-	font-family: 'Open Sans', sans-serif;
-	font-weight: 400;
 	font-size: 1em;
 	font-weight:bold;
 	color: white;
@@ -180,5 +180,86 @@ body{
 	transition: all .5s;
 }
 
+/* Cover Section */
+.container{
+	height:72.4vh;
+	margin:45px 100px;
+	display: flex;
+	justify-content: center;
+	align-self: center;
+}
 
-  
+.red{
+	background-color: red;
+}
+
+.box{
+	/* border: 2px solid black; */
+	margin:10px;
+	padding: 0;
+	box-shadow: 1px 6px 6px rgba(0,0,0,16%);
+}
+
+.text-section{
+	color: black;
+	width: 25%;
+	background-color: white;
+	border-radius:30px 0 0 30px;
+}
+.catlog-section{
+	width: 75%;
+	border-radius: 0 30px 30px 0;
+}
+
+.catlog{
+	width: 100%;
+	height: 100%;
+	border-radius: 0 30px 30px 0;
+}
+
+.cover-container{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.cover-title{
+	font-family: 'Oswald', sans-serif;
+	font-weight: 400;
+	text-align: center;
+	text-decoration: underline;
+	font-size: 2em;
+
+}
+
+.cover-body{
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 400;
+	text-align: center;
+	color: #847E7E;
+}
+
+.cover-text{
+	padding: 2.5em 3em;
+}
+
+.cover-button {
+	background-color:#3F3F3F;
+	border-radius:15px;
+	border:1px solid #707070;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family: 'Oswald', sans-serif;
+	font-size:19px;
+	padding:15px 25px;
+}
+.cover-button:hover {
+	background:linear-gradient(to bottom, #1f1f1f 5%, #5a5e5c 100%);
+	background-color:#1f1f1f;
+}
+.cover-button:active {
+	position:relative;
+	top:1px;
+}
