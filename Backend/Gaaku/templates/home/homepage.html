@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+    <h1 align='center'>Welcome to GaaKU, {{request.user}}</h1>
+    <!-- Cover Section -->
+	<div class="container">
+		<div class="box text-section cover-container" >
+			<div class="cover-title">Focused For First Year</div>
+			<div class="cover-body">
+				<p class="cover-text">
+				Get good qualtity drafters
+				straight from the hands from
+				your trusty seniors and make
+				your drawing classes easy
+				and interesting.
+				</p>
+			</div>
+			<div>
+				<button class="cover-button">
+					View More <i class="fa fa-angle-down" aria-hidden="true"></i>
+				</button>
+			</div>
+		</div>
+		<div class="box catlog-section"><img src="{% static 'image/Drafter.png' %}" class="catlog"></div>
+	</div>
+{% endblock %}

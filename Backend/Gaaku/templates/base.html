@@ -1,0 +1,68 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Document Title -->
+	<title>Home</title>
+	<!-- Font Awesome Import -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
+	<!-- Font Import -->
+	<link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:ital,wght@0,300;0,700;1,300&family=Oswald:wght@400;500&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+	<!-- CSS Style Import -->
+	<link rel="stylesheet" type="text/css" href="{% static 'css/Landing_style.css' %}">
+</head>
+<body>
+	<!-- Navigation Bar -->
+	<header>
+	<!-- Navigation Bar Container-->
+	<nav class="zone">
+		<!-- Adding space at the front -->
+		<div class="nav-gutter"></div> 
+		<!-- GAAKU LOGO -->
+		<div class="image-section">
+            <a href="{% url 'Gaaku home' %}">
+                <img src="{% static 'image/Logo-3.png' %}" alt="Logo" id="logo">
+            </a>
+		</div>
+		<!-- Search bar -->
+		<div class="search-section">
+			<div class="search-bar">
+				<input type="text" placeholder="Type to search" id="search-text">
+				<a class="search-btn" href="#">
+					<i class="fas fa-search"></i>
+				</a>
+			</div>
+		</div>
+		<!-- Navigation menu -->
+		<div class=nav-section>
+			<ul class="main-nav">
+				<li><a href="{% url 'Gaaku wishlist' %}" class="wishlist">Wishlist</a></li>
+				<li><a href="{% url 'Gaaku about' %}" class="about">About</a></li>
+				<li><a href="#" class="profile">Profile</a></li>
+			</ul>	
+		</div>
+		<!-- Adding space at the back -->
+		<div class="nav-gutter"></div>
+	</nav>
+	</header>
+
+	<!-- Categories -->
+	<nav class ="categories">
+		<ul class="category-container">
+			<li></li>
+			<li><a href="#">Electronics <i class="fa fa-angle-down" aria-hidden="true"></i></a></li>
+			<li><a href="#">Home and Furnitures <i class="fa fa-angle-down" aria-hidden="true"></i></a></li>
+			<li><a href="#">Sports <i class="fa fa-angle-down" aria-hidden="true"></i></a></li>
+			<li><a href="#">Education Material <i class="fa fa-angle-down" aria-hidden="true"></i></a></li>
+			<li><a href="#">Other Accessories <i class="fa fa-angle-down" aria-hidden="true"></i></a></li>
+			<li><div class="category-gutter"></div></li>
+		</ul>
+    </nav>
+
+    {% block body %}
+    {% endblock %}
+</body>
+</html>
