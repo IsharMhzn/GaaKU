@@ -1,0 +1,265 @@
+body{
+	margin: 0;
+	background-color: #F5F5F5;
+}
+/* Navigation Bar */
+/* navigation-bar conatiner */
+.zone{
+	background-color: white;
+	padding: 5px;
+	display: flex;
+	font-family: 'Oswald', sans-serif;
+	font-weight: 400;
+}
+/* Front and back spacing */
+.nav-gutter{
+	margin: 0 5vw;
+}
+/* Logo */
+#logo{
+	padding-top: 5px;
+	width: 10rem;
+}
+/* Search section */
+.search-section{
+	margin-left: auto;
+	align-self: center;
+}
+
+.search-bar {
+    background: white;
+	border: 1px solid #D2CECE;
+	box-shadow: 0px 5px 6px  #ccc;
+    height: 25px;
+    border-radius: 25px;
+    padding: 10px;
+}
+
+.search-bar:hover>#search-text{
+	width:240px;
+	padding:0 6px;
+
+}
+
+.search-bar:hover>.search-btn{
+	background:#6E2BB7;
+	color: white;
+}
+
+.search-btn {
+    color: #6E2BB7;
+    float: right;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+}
+
+#search-text{
+	border: none;
+	background: none;
+	outline: none;
+	float: left;
+	padding:0;
+	color:black;
+	font-size: 16px;
+	transition:0.4s;
+	line-height:25px;
+	width: 0px;
+}
+/* Navigation section */
+.nav-section{
+	width: 270px;
+}
+
+.main-nav {
+	display: flex;
+	list-style: none;
+	justify-content: flex-end;
+}
+
+.main-nav li{
+
+	padding: 0px 20px;
+}
+
+.main-nav li a{
+	text-decoration: none;
+	font-size: 1.1em;
+	color: #837F7F;
+}
+
+.nav-section{
+	margin-left: 10px;
+}
+.nav-section .main-nav li{
+	align-self: flex-end;
+}
+/* .nav-section hover effect */
+.main-nav li a::after{
+	content: "";
+	width: 0%;
+	height: 3px;
+	display: block;
+	background-color: #6E2BB7;
+	/* margin-bottom: 10px; */
+}
+
+.main-nav li a:hover::after{
+	width: 100%;
+	transition: all .5s;
+
+}
+
+
+
+/* Category Section */
+.categories{
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 400;
+	background-color: #592998;
+	padding: 0.1px;
+	box-shadow: 0 6px 6px rgba(0,0,0,16%);
+}
+
+.category-gutter{
+	margin: 0 3vw 0 0;
+}
+
+.category-container{
+	margin-top:9.5px;
+	margin-bottom: 9.5px;
+	display: flex;
+	list-style: none;
+	justify-content: space-around;
+	align-items: center;
+	
+}
+
+.category-container li a{
+	text-decoration: none;
+	font-size: 1em;
+	font-weight:bold;
+	color: white;
+	padding: 5px 10px;
+	z-index: 1;
+	position: relative;
+}
+
+.category-container li a:hover{
+	color: black;
+}
+
+.category-container li a::after{
+	position: absolute;
+	top:0;
+	left:0;
+	bottom:0;
+	right:0;
+	margin:auto;
+	content: ".";
+	width: 100%;
+	height: 1px;
+	display: block;
+	color:transparent;
+	background-color: white;
+	visibility: none;
+	opacity: 0;
+	z-index: -1;
+	border-radius: 20px;
+}
+
+.category-container li a:hover::after{
+	opacity: 1;
+	height:100%;
+	visibility: visible;
+	transition: all .5s;
+}
+
+/* Cover Section */
+.container{
+	height:72.4vh;
+	margin:45px 100px;
+	display: flex;
+	justify-content: center;
+	align-self: center;
+}
+
+.red{
+	background-color: red;
+}
+
+.box{
+	/* border: 2px solid black; */
+	margin:10px;
+	padding: 0;
+	box-shadow: 1px 6px 6px rgba(0,0,0,16%);
+}
+
+.text-section{
+	color: black;
+	width: 25%;
+	background-color: white;
+	border-radius:30px 0 0 30px;
+}
+.catlog-section{
+	width: 75%;
+	border-radius: 0 30px 30px 0;
+}
+
+.catlog{
+	width: 100%;
+	height: 100%;
+	border-radius: 0 30px 30px 0;
+}
+
+.cover-container{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.cover-title{
+	font-family: 'Oswald', sans-serif;
+	font-weight: 400;
+	text-align: center;
+	text-decoration: underline;
+	font-size: 2em;
+
+}
+
+.cover-body{
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 400;
+	text-align: center;
+	color: #847E7E;
+}
+
+.cover-text{
+	padding: 2.5em 3em;
+}
+
+.cover-button {
+	background-color:#3F3F3F;
+	border-radius:15px;
+	border:1px solid #707070;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family: 'Oswald', sans-serif;
+	font-size:19px;
+	padding:15px 25px;
+}
+.cover-button:hover {
+	background:linear-gradient(to bottom, #1f1f1f 5%, #5a5e5c 100%);
+	background-color:#1f1f1f;
+}
+.cover-button:active {
+	position:relative;
+	top:1px;
+}
