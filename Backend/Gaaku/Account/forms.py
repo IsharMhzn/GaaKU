@@ -31,7 +31,7 @@ class SignUpForm(UserCreationForm):
     department = forms.CharField(widget=forms.Select(choices=department_choices))
     group = forms.CharField()
     semester = forms.CharField(widget=forms.Select(choices=semester_choices))
-    phone_no = forms.IntegerField()
+    phone_no = forms.CharField()
 
     class meta:
         model = User

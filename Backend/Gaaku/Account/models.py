@@ -14,7 +14,7 @@ class Profile(models.Model):
     department = models.CharField(max_length=100, null=True)
     group = models.CharField(max_length=50, null=True)
     semester = models.SmallIntegerField(null=True)
-    phone_no = models.BigIntegerField(null=True)
+    phone_no = models.CharField(max_length=15, null=True)
 
     def __str__(self):
         return f'{self.first_name} {self.last_name}' 
