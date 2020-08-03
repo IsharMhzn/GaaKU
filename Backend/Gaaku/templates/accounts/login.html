@@ -1,0 +1,12 @@
+<form method='POST' action=''>
+    {% csrf_token %}
+    {%if messages %}
+        {%for message in messages%}
+            {{message}}
+        {% endfor %}
+    {% endif %}
+    <input type='text' name='username'>
+    <input type='password' name='password'>
+    <button type="submit" value='Login'>Login</button>
+    <a href="{% url 'signup' %}">Make an account.</a>
+</form>
