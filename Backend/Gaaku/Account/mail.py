@@ -7,7 +7,7 @@ sender = os.getenv('gaaku_email')
 password = os.getenv('gaaku_pwd')
 
 
-def send(domain, userid, email):
+def send(domain, userid, email, type):
     server = smtplib.SMTP('smtp.gmail.com', 587)
     server.starttls()
     server.login(sender, password)
@@ -15,11 +15,14 @@ def send(domain, userid, email):
     message = MIMEMultipart()
     message['From'] = sender
     message['To'] = email
-    message['Subject'] = "GaaKU - Confirm your email"
+    if type == 'confirm':
+        message['Subject'] = "GaaKU - Confirm your email"
+    else:
+        message['Subject'] = "GaaKU - Password Reset for your account"
     
     body = f"""
             Please follow the link below to confirm your account.
-            http://{domain}/confirm/{userid}
+            http://{domain}/{type}/{userid}
             Thank you!
     """
     message.attach(MIMEText(body, 'html'))
