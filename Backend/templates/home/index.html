@@ -1,0 +1,66 @@
+{% extends 'base.html' % }
+{% load static %}
+
+{% block title %}
+    GaaKU - Get Anything at KU
+{% endblock %}
+
+{% block body %}
+	<!-- Cover Section -->
+	<div class="cover-container">
+		<div class="flexbox padding">
+  			<div class="col2 text-alignment" style="flex-basis: 20%">
+  				<h1 class="cover-title">Focused for the First Years</h1>
+  				<p class="cover-text">
+					Get good qualtity drafters
+					straight from the hands from
+					your trusty seniors and make
+					your drawing classes easy
+					and interesting.
+				</p>
+				<div class="view-btn">
+					<a href="#" class="btn">View More <i class="fa fa-angle-right" aria-hidden="true"></i></a>
+				</div>
+  			</div>
+  			<div class="col2" style="flex-basis: 70%">
+  				<img src="{%static 'image/Drafter.png'%}" class="cover-image">
+  			</div>
+		</div>
+	</div>
+
+
+	<!-- Scrolling Section -->
+	<div class="scrolling-container">
+		<div class="flexbox content-manipulation">
+			<div class="col8 left scroll-button">
+				<img src="{% static 'image/Scrolling-left.png' %}">
+			</div>
+			<div class="col8 circle circle-active">
+				<img src="{% static 'image/Drafter-circle.png'%}" >
+			</div>
+			<div class="col8 circle">
+				<img src="{% static 'image/Electronics-circle.png'%}">
+			</div>
+			<div class="col8 circle">
+				<img src="{% static 'image/Furniture-circle.png'%}">
+			</div>
+			<div class="col8 circle">
+				<img src="{% static 'image/Musical-circle.png'%}">
+			</div>
+			<div class="col8 circle">
+				<img src="{% static 'image/books-circle.png'%}">
+			</div>
+			<div class="col8 circle">
+				<img src="{% static 'image/Shoes-circle.png'%}">
+			</div>
+			<div class="col8 right scroll-button">
+				<img src="{% static 'image/Scrolling-right.png'%}">
+			</div>
+		</div>
+	</div>
+	
+	<script type="text/javascript" src="{% static 'javascript/index.js' %}"></script>	
+{% endblock %}
+
+	
+
