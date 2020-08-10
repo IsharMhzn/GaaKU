@@ -1,0 +1,27 @@
+    {% extends 'base.html' %}
+    {% load static %}
+    
+
+    {% block products %}
+        <div class="product-container">
+                {% for product in products %}
+                    <div class="product-card">
+                        <div class="badge">New</div>
+                         <div class="product-tumb">
+                             <img src="{{product.image_url}}" alt="" class="model">
+                        </div>
+                        <div class="product-details">
+                            <span class="product-catagory">{{product.category}}</span>
+                            <h4><a href="">{{product.name}}</a></h4>
+                            <div class="product-bottom-details">
+                               <div class="product-price">Rs.{{product.price}}</div>
+                                <div class="product-links">
+                                    <a href=""><i class="fa fa-heart"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+        </div>
+        
+{% endblock%}

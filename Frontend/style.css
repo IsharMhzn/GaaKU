@@ -4,6 +4,10 @@ body{
 	padding:0;
 	background-color: #F5F5F5;
 }
+
+ul{
+	list-style: none;
+}
 /* Navigation Bar */
 /*.fixed-nav{
 	position: fixed;
@@ -488,12 +492,16 @@ a{
 
 .new_arrival_container{
 	width: 100%;
-	background: #C1A9DA;
+	background: #AA82D3;
 	display: flex;
 	align-items:center;
 
 }
 
+.new-arrival{
+	height: 100%;
+
+}
 .image{
 	margin-left: 40px;
 	margin-right: 80px;

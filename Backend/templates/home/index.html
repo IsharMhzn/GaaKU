@@ -58,7 +58,40 @@
 			</div>
 		</div>
 	</div>
-	<script type="text/javascript" src="{% static 'javascript/index.js' %}"></script>	
+
+	<!--New Arrivals-->
+	<div class="new_arrival_container">
+		<div class="new-arrival">
+			<img src="{% static 'image/Arrival.png' %}" class="image">
+		</div>
+		<ul id="autoWidth" class="cs-hidden">
+			{% for product in products %}
+			  <li class="item-a">
+				  <div class="product-card">
+					<div class="badge">New</div>
+					<div class="product-tumb">
+						<img src="{{product.image_url}}" alt="" class="model">
+					</div>
+					<div class="product-details">
+						<span class="product-catagory">{{product.category}}</span>
+						<h4><a href="">{{product.name}}</a></h4>
+						<div class="product-bottom-details">
+							<div class="product-price">Rs.{{product.price}}</div>
+							<div class="product-links">
+								<a href=""><i class="fa fa-heart"></i></a>
+							</div>
+						</div>
+					</div>
+				</div>
+			  </li>
+			{% endfor %}
+		  </ul>
+	</div>
+	  
+	<script type="text/javascript" src="{% static 'javascript/index.js' %}"></script>
+	<script type="text/javascript" src="{% static 'javascript/JQuery3.3.1.js' %}"></script>	
+	<script type="text/javascript" src="{% static 'javascript/lightslider.js' %}"></script>
+	<script type="text/javascript" src="{% static 'javascript/lightsliderjs.js'%}"></script>	
 {% endblock %}
 
 	
