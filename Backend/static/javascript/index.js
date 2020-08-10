@@ -1,3 +1,4 @@
+
 //DOM ELEMENTS
 
 const selectElement =(element)=> document.querySelector(element);
@@ -35,37 +36,37 @@ function change_template(index){
 		case 0:
 		cover_title.innerHTML="Focused on First Years";
 		cover_text.innerHTML="Get good qualtity drafters straight from the hands from your trusty 		seniors and make your drawing classes easy and interesting.";
-		cover_image.src="image/Drafter.png"
+		cover_image.src='/static/image/Drafter.png';
 		break;
 
 		case 1:
 		cover_title.innerHTML="Focused on Second Years";
 		cover_text.innerHTML="Get good qualtity Electronics straight from the hands from your trusty 		seniors and make your drawing classes easy and interesting.";
-		cover_image.src="image/Electronics-circle.png"
+		cover_image.src="/static/image/Electronics-circle.png"
 		break;
 
 		case 2:
 		cover_title.innerHTML="Focused on Third Years";
 		cover_text.innerHTML="Get good qualtity Furniture straight from the hands from your trusty 		seniors and make your drawing classes easy and interesting.";
-		cover_image.src="image/Furniture-circle.png"
+		cover_image.src="/static/image/Furniture-circle.png";
 		break;
 
 		case 3:
 		cover_title.innerHTML="Focused on Fourth Years";
 		cover_text.innerHTML="Get good qualtity Musical Instrument straight from the hands from your trusty 		seniors and make your drawing classes easy and interesting.";
-		cover_image.src="image/Musical-circle.png"
+		cover_image.src="/static/image/Musical-circle.png";
 		break;
 
 		case 4:
 		cover_title.innerHTML="Focused on All Years";
 		cover_text.innerHTML="Get good qualtity Musical Instrument straight from the hands from your trusty 		seniors and make your drawing classes easy and interesting.";
-		cover_image.src="image/books-circle.png"
+		cover_image.src="/static/image/books-circle.png"
 		break;
 
 		case 5:
 		cover_title.innerHTML="Focused on Not All Years";
 		cover_text.innerHTML="Get good qualtity Musical Instrument straight from the hands from your trusty 		seniors and make your drawing classes easy and interesting.";
-		cover_image.src="image/Shoes-circle.png"
+		cover_image.src="/static/image/Shoes-circle.png";
 		break;
 		default:
 		break;
