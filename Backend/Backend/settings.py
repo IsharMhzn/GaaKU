@@ -39,8 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'Home.apps.HomeConfig',
-    'products.apps.ProductsConfig',
     'store.apps.StoreConfig',
+    'Account.apps.AccountConfig'
 ]
 
 MIDDLEWARE = [
@@ -82,9 +82,9 @@ WSGI_APPLICATION = 'Backend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'Gaaku',
+        'NAME': 'gaaku',
         'USER': 'postgres',
-        'PASSWORD': '1234',
+        'PASSWORD': '4admins',
         'HOST': 'localhost'
     }
 }
