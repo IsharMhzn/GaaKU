@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'Home.apps.HomeConfig',
-    'products.apps.ProductsConfig'
+    'products.apps.ProductsConfig',
+    'store.apps.StoreConfig',
 ]
 
 MIDDLEWARE = [
@@ -81,9 +82,9 @@ WSGI_APPLICATION = 'Backend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'gaaku',
+        'NAME': 'Gaaku',
         'USER': 'postgres',
-        'PASSWORD': '2056',
+        'PASSWORD': '1234',
         'HOST': 'localhost'
     }
 }
@@ -129,3 +130,5 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
+MEDIA_URL ='/media/'
+MEDIA_ROOT =os.path.join(BASE_DIR,'media')
