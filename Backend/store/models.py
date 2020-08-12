@@ -14,8 +14,9 @@ class Customer(models.Model):
 
 class Product(models.Model):
     name = models.CharField(max_length=200,null=True)
+    category = models.CharField(max_length=200)
     price = models.IntegerField()
-    discription = models.TextField()
+    description = models.TextField()
     negotiation = models.BooleanField(default=False,null=True,blank=False)
     img = models.ImageField(upload_to='pics',null=True,blank=True)
     contact_info = models.TextField()

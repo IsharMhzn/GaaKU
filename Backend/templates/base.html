@@ -14,6 +14,8 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'css/product.css' %}">
 	<!--Linking Light Slider-->
 	<link rel="stylesheet" type="text/css" href="{% static 'css/lightslider.css' %}">
+	<!--Linking to Product css-->
+	<link rel="stylesheet" type="text/css" href="{%  static 'css/main.css' %}" >
 </head>
 <body>
 	<header>
@@ -42,7 +44,11 @@
 								<li><a href='{% url "home" %}' class="home">Home</a></li>
 								<li><a href='{% url "pmainpage" %}' class="products">Products</a></li>
 								<li><a href="#" class="about">About</a></li>
+								{% if request.user.is_authenticated %}
 								<li><a href="#" class="profile">Profile</a></li>
+								{% else %}
+								<li><a href="#" class="profile">Login</a></li>
+								{% endif %}
 							</ul>	
 						</div>
 					</nav>
