@@ -41,13 +41,13 @@ function change_template(index){
 		case 1:
 		cover_title.innerHTML="Focused on Second Years";
 		cover_text.innerHTML="Get good qualtity Electronics straight from the hands from your trusty 		seniors and make your drawing classes easy and interesting.";
-		cover_image.src="image/Electronics-circle.png"
+		cover_image.src="image/Electronics.png"
 		break;
 
 		case 2:
 		cover_title.innerHTML="Focused on Third Years";
 		cover_text.innerHTML="Get good qualtity Furniture straight from the hands from your trusty 		seniors and make your drawing classes easy and interesting.";
-		cover_image.src="image/Furniture-circle.png"
+		cover_image.src="image/Homes and Furniture.png"
 		break;
 
 		case 3:
@@ -59,7 +59,7 @@ function change_template(index){
 		case 4:
 		cover_title.innerHTML="Focused on All Years";
 		cover_text.innerHTML="Get good qualtity Musical Instrument straight from the hands from your trusty 		seniors and make your drawing classes easy and interesting.";
-		cover_image.src="image/books-circle.png"
+		cover_image.src="image/Education Materials.png"
 		break;
 
 		case 5:

@@ -147,19 +147,26 @@ a{
 }
 
 .category-container li{
-	font-size: 1.1em;
 	color: white;
 	padding: 5px 10px;
 	z-index: 1;
 	position: relative;
 }
 
-.category-container .category:hover{
+.category-container li a{
+	font-size: 1.05em;
+	color: white;
+	padding: 5px 10px;
+	z-index: 1;
+	position: relative;
+}
+
+.category-container .category a:hover{
 	color: black;
 	cursor: pointer;
 }
 
-.category-container .category::after{
+.category-container .category a::after{
 	position: absolute;
 	top:0;
 	left:0;
@@ -178,7 +185,7 @@ a{
 	border-radius: 20px;
 }
 
-.category-container .category:hover::after{
+.category-container .category:hover a::after{
 	opacity: 1;
 	height:100%;
 	visibility: visible;
