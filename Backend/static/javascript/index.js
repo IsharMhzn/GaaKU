@@ -9,6 +9,7 @@ const right_scrolling_button=document.querySelector(".right");
 const cover_title=document.querySelector('.cover-title');
 const cover_text=document.querySelector('.cover-text');
 const cover_image=document.querySelector('.cover-image');
+const cover_image_first=document.querySelector('.first');
 
 selectElement('.menu-icons').addEventListener('click',()=>{
 	selectElement('.container-nav').classList.toggle('active');
@@ -36,51 +37,38 @@ function change_template(index){
 		case 0:
 		cover_title.innerHTML="Focused on First Years";
 		cover_text.innerHTML="Get good qualtity drafters straight from the hands from your trusty 		seniors and make your drawing classes easy and interesting.";
-		console.log(cover_image.src);
-		cover_image.src='/static/image/Drafter.png';
-		console.log(cover_image.src);
+		cover_image_first.style.marginLeft="0%";
 		break;
 
 		case 1:
 		cover_title.innerHTML="Focused on Second Years";
 		cover_text.innerHTML="Get good qualtity Electronics straight from the hands from your trusty 		seniors and make your drawing classes easy and interesting.";
-		console.log(cover_image.src);
-		cover_image.src="/static/image/Electronics.png"
-		console.log(cover_image.src);
+		cover_image_first.style.marginLeft="-111.3%";
 		break;
 
 		case 2:
 		cover_title.innerHTML="Focused on Third Years";
 		cover_text.innerHTML="Get good qualtity Furniture straight from the hands from your trusty 		seniors and make your drawing classes easy and interesting.";
-		console.log(cover_image.src);
-		cover_image.src="/static/image/Homes and Furniture.png";
-		console.log(cover_image.src);
+		cover_image_first.style.marginLeft="-222.4%";
 		break;
 
 		case 3:
 		cover_title.innerHTML="Focused on Fourth Years";
 		cover_text.innerHTML="Get good qualtity Musical Instrument straight from the hands from your trusty 		seniors and make your drawing classes easy and interesting.";
-		console.log(cover_image.src);
-		cover_image.src="/static/image/Musical-circle.png";
-		console.log(cover_image.src);
+		cover_image_first.style.marginLeft="-333.4%";
 		break;
 
 		case 4:
 		cover_title.innerHTML="Focused on All Years";
 		cover_text.innerHTML="Get good qualtity Musical Instrument straight from the hands from your trusty 		seniors and make your drawing classes easy and interesting.";
-		console.log(cover_image.src);
-		cover_image.src="/static/image/Education Materials.png";
-		console.log(cover_image.src);
+		cover_image_first.style.marginLeft="-444.4%";
 		break;
 
 		case 5:
 		cover_title.innerHTML="Focused on Not All Years";
 		cover_text.innerHTML="Get good qualtity Musical Instrument straight from the hands from your trusty 		seniors and make your drawing classes easy and interesting.";
-		console.log(cover_image.src);
-		cover_image.src="/static/image/Shoes-circle.png";
-		console.log(cover_image.src);
+		cover_image_first.style.marginLeft="-555.4%";
 		break;
-
 		default:
 		break;
 	}
@@ -109,3 +97,7 @@ right_scrolling_button.addEventListener('click',function(){
 left_scrolling_button.addEventListener('click',function(){
 	index_position(h_scrolling,"left");
 });
+
+setInterval(function(){
+	index_position(h_scrolling,"right");
+},5000);
