@@ -23,4 +23,8 @@ def Description(request,id):
 def Landingpage(request):
     context = {}
     return render(request, 'landing.html')
+
+def category(request,category):
+    products=Product.objects.filter(category=category)
+    return render(request,'pmainpage.html',{'products':products})
     

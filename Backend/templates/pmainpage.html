@@ -6,7 +6,11 @@
   <div class="product-container">
           {% for product in products %}
               <div class="product-card">
-                  <div class="badge">New</div>
+                  {% if product.negotiation %}
+                  <div class="badge">Negotiable</div>
+                  {% else %}
+                  <div class="badge">Non-Negotiable</div>
+                  {% endif %}
                    <div class="product-tumb">
                        <img src="{{product.img.url}}" alt="" class="model">
                   </div>
