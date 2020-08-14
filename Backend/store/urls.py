@@ -9,4 +9,5 @@ urlpatterns = [
     path('Description/<int:id>/',views.Description,name='Description'),
     path('Landing/', views.Landingpage,name='Landingpage'),
     path('<category>',views.category,name='category'),
+    path('search/',views.search,name='search'),
 ]

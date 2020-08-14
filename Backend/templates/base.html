@@ -29,7 +29,7 @@
 							<img src="{% static 'image/Logo-3.png'%}" alt="Logo" id="logo">
 						</div>
 					<!-- Search bar -->
-						<form class="search-section" role="search" id="search-form">
+						<form class="search-section" role="search" id="search-form" action="{% url 'search' %}">
 							<div class="search-bar">
 								<input type="text" placeholder="Type to search" name='q' id="search-text">
 								<a class="search-btn" href="javascript:{}" onclick="document.getElementById('search-form').submit()">

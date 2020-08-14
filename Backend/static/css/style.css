@@ -411,11 +411,13 @@ a{
 }
 
 
+
 .cover-title{
 	font-family: 'Oswald', sans-serif;
 	font-weight: 400;
 	text-align: center;
 	text-decoration: underline;
+	color: black;
 }
 
 .cover-text{
@@ -429,7 +431,7 @@ a{
 	text-align: center;
 }
 
-.btn{
+.button{
 	display: inline-block;
 	background: #3F3F3F;
 	color: #fff;
@@ -442,7 +444,7 @@ a{
 	transition:0.5s;
 }
 
-.btn:hover {
+.button:hover {
 	background:linear-gradient(to bottom, #1f1f1f 5%, #5a5e5c 100%);
 	background-color:#1f1f1f;
 	transform: scale(1.05);
