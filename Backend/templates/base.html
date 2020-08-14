@@ -41,13 +41,14 @@
 					<!-- Navigation menu -->
 						<div class="nav-section">
 							<ul class="main-nav">
-								<li><a href='{% url "home" %}' class="home">Home</a></li>
-								<li><a href='{% url "pmainpage" %}' class="products">Products</a></li>
-								<li><a href="#" class="about">About</a></li>
+								<li><a href='{% url "home" %}' class="links">Home</a></li>
+								<li><a href='{% url "pmainpage" %}' class="links">Products</a></li>
+								<li><a href="#" class="links">About</a></li>
 								{% if request.user.is_authenticated %}
 								<li><a href="#">Profile</a></li>
+								<li class="nav-btn"><a href="{% url 'logout' %}" class="login">Logout</a></li>
 								{% else %}
-								<li><a href="#" class="profile">Login</a></li>
+								<li class="nav-btn"><a href="{% url 'login' %}" class="login">Login</a></li>
 								{% endif %}
 							</ul>	
 						</div>

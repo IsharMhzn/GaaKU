@@ -17,7 +17,6 @@ ul{
 }*/
 .firt-nav{
 	background: white;
-	padding:8px;
 }
 
 .header-wrapper{
@@ -34,7 +33,7 @@ ul{
 }
 /* Logo */
 #logo{
-	padding-top: 5px;
+	padding-top: 7.5px;
 	width: 10rem;
 }
 /* Search section */
@@ -106,13 +105,13 @@ a{
 	text-decoration: none;
 }
 
-.main-nav li a{
+.main-nav li .links{
 	font-size: 1.1em;
 	color: #837F7F;
 }
 
 /* .nav-section hover effect */
-.main-nav li a::after{
+.main-nav li .links::after{
 	content: "";
 	width: 0%;
 	height: 3px;
@@ -120,12 +119,31 @@ a{
 	background-color: #6E2BB7;
 }
 
-.main-nav li a:hover::after {
+.main-nav li .links:hover::after {
 	width: 100%;
 	transition: all .5s;
 
 }
 
+.main-nav .nav-btn{
+	padding: 0 30px;
+	line-height: 40px;
+	border-radius: 50px;
+	background: rgb(76,246,230);
+	background: linear-gradient(345deg, rgba(76,246,230,1) 0%, rgba(85,102,212,1) 39%, rgba(91,66,193,1) 63%, rgba(186,31,172,1) 100%);
+	transition: .75s;
+}
+
+.main-nav .nav-btn a{
+	color: white;
+
+}
+
+.main-nav .nav-btn:hover {
+	background: rgb(186,31,172);
+	background: linear-gradient(173deg, rgba(186,31,172,1) 0%, rgba(91,66,193,1) 39%, rgba(85,102,212,1) 63%, rgba(76,246,230,1) 100%);
+	transform: scale(1.1);
+}
 
 
 /*Category Section*/
