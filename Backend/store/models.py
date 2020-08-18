@@ -1,4 +1,5 @@
 from django.db import models
+from django.shortcuts import reverse
 
 from django.contrib.auth.models import User
 
@@ -20,9 +21,11 @@ class Product(models.Model):
     negotiation = models.BooleanField(default=False,null=True,blank=False)
     img = models.ImageField(upload_to='pics',null=True,blank=True)
     contact_info = models.TextField()
-    def __str__(self):
-        return self.name
-
+    slug = models.SlugField()
+   
+    def  get_absolute_url(self):
+        return reverse("Description",kwargs={"pk" : self.pk})
+    
     @property
     def imageUrl(self):
         try:
