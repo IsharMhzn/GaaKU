@@ -1,24 +1,29 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView, View
 from .models import Product
 
 # Create your views here.
-class ProductView(ListView):
+class pmainpage(ListView):
     model=Product
+    template_name = 'pmainpage.html'
 
-def pmainpage(request):
-    products = Product.objects.all()
-    context = {'products':products}
-    print("P is called")
-    return render(request, 'pmainpage.html', context)
+# def pmainpage(request):
+#     products = Product.objects.all()
+#     context = {'products':products}
+#     print("P is called")
+#     return render(request, 'pmainpage.html', context)
+class Description(DetailView):
+    model =Product
+    template_name = 'Description.html'
 
-def Description(request,id):
-    products = Product.objects.filter(id=id)
-    print(products)
-    print('D is called')
-    context={'products':products}
-    return render(request, 'Description.html', context)
+
+# def Description(request,id):
+#     products = Product.objects.filter(id=id)
+#     print(products)
+#     print('D is called')
+#     context={'products':products}
+#     return render(request, 'Description.html', context)
 
 def Landingpage(request):
     context = {}

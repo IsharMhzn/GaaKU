@@ -1,10 +1,16 @@
-{% extends 'pmainpage.html' %}
+{% extends 'base.html' %}
 {% load static %}
-{% block content %}
-
-<h3>Here is the product description</h3>
-
-<h1>Price is </h1>{{ product.price }}
 
 
-{% endblock content %}
+{% block Description %}
+
+<div class="right-column">
+    <div class="produc-description">
+        <div class="image-holder">
+            <img src="{{object.img.url}}" alt="" class="model">
+        </div>
+        <span><h1>Product Name :{{object.name}}</h1></span>
+        <span>{{object.description}}</span>
+    </div>
+</div>
+{% endblock Description %}

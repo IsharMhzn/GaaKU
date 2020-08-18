@@ -16,6 +16,8 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'css/lightslider.css' %}">
 	<!--Linking to Product css-->
 	<link rel="stylesheet" type="text/css" href="{%  static 'css/main.css' %}" >
+		<!--Linking to Product css-->
+	<link rel="stylesheet" type="text/css" href="{%  static 'css/description.css' %}" >
 </head>
 <body>
 	<header>
@@ -144,7 +146,8 @@
 
 	{% block products %}
 	{% endblock %}
-
+	{% block  Description %}
+	{% endblock %}
 	
 	<script type="text/javascript" src="{% static 'javascript/index.js' %}"></script>
 </body>
