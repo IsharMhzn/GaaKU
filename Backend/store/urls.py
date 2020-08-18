@@ -10,4 +10,5 @@ urlpatterns = [
     path('Landing/', views.Landingpage,name='Landingpage'),
     path('<category>',views.category,name='category'),
     path('search/',views.search,name='search'),
+    path('comment/show', views.commentview, name='comment')
 ]

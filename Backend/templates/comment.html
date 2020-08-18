@@ -1,0 +1,12 @@
+<form action='' method='POST'>
+{% csrf_token %}
+    <input name='comment-content' placeholder='Write your comment...' rows='4' cols='50' type='text'>
+    <input type='Submit' value='Submit'>
+</form>
+
+{% if comments %}
+    {% for c in comments %}
+        {{c.content}} by {{c.user}} on {{c.timestamp}}<br>
+    {% endfor %}
+    
+{% endif %}

@@ -32,5 +32,8 @@ class Product(models.Model):
             url =''
         return url
 
-     
-    
+
+class Comment(models.Model):
+    user = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
+    content = models.CharField(max_length=160)
+    timestamp = models.DateTimeField(auto_now_add=True)

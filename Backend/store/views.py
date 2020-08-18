@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.generic import ListView
-from .models import Product
+from .models import Product, Comment
 
 # Create your views here.
 class ProductView(ListView):
@@ -40,4 +40,10 @@ def search(request):
     else:
         return HttpResponse('EMPTY')
     
-    
+def commentview(request):
+    if request.method == 'POST':
+        content = request.POST.get('comment-content')
+        c = Comment(content=content, user=request.user)
+        c.save()
+    comments = Comment.objects.all()
+    return render(request, 'comment.html', {'comments':comments})
