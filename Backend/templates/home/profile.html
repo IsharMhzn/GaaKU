@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+<br>
+<br>
+<br>
+<br><br><br><br><br><br><br>
+{% block notification %}
+    {% if notifs %}
+    <ul>
+        {% for n in notifs %}
+            <li style="list-style-type: circle">
+            <a href='{% url "Description" n.post.id %}'>
+            {% if n.comment.reply %}
+                {{n.user}} replied to your comment on {{n.post.name}} post {{n.comment.timestamp | timesince}} ago
+            {% else %}
+                {{n.user}} commented on your {{n.post.name}} post {{n.comment.timestamp | timesince}} ago
+            {% endif %}
+            </a>
+            </li>
+        {% endfor %}
+    <ul>
+    {% endif %}
+{% endblock %}

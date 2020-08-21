@@ -1,10 +1,63 @@
-{% extends 'pmainpage.html' %}
+{% extends 'base.html' %}
 {% load static %}
-{% block content %}
-
-<h3>Here is the product description</h3>
-
-<h1>Price is </h1>{{ product.price }}
+{% block link %}
+	<link rel="stylesheet" type="text/css" href="{% static 'css/comment.css' %}">
+{% endblock %}
 
 
-{% endblock content %}
+{% block Description %}
+
+<div class="right-column">
+    <div class="produc-description">
+        <div class="image-holder">
+            <img src="{{object.img.url}}" alt="" class="model">
+        </div>
+        <span><h1>Product Name :{{object.name}}</h1></span> {{object.pk}}
+        <span>{{object.description}}</span>
+    </div>
+</div>
+<div class='comment-section'>
+    <form action='' method='POST'>
+    {% csrf_token %}
+        <div class='row'>
+            <div class="col-75">
+                <textarea id="subject" name="comment-content" placeholder="Write a comment..." style="height:50px"></textarea>
+            </div>
+            <div class="row">
+                <input type="submit" value="Comment">
+            </div>
+        </div>
+    </form>
+    <br>
+    {% if comments %}
+        {% for c in comments %}
+            <div class='cmnt-box'>
+                {% if c.reply is None %}
+                    {{c.content}} by {{c.user}} {{c.timestamp | timesince}} ago<br>
+                    <br>
+                {% endif %}
+                {% for reply in replies %}
+                    {% if reply.reply.id == c.id %}
+                    <div class='reply-sec'>
+                        <strong>{{reply.content}}</strong> by {{reply.user}} {{reply.timestamp | timesince}} ago<br><br>
+                    </div>
+                    {% endif %}
+                {% endfor %}
+                    <form action='' method='POST'>
+                        {% csrf_token %}
+                        <div class='row'>
+                            <div class="col-75">
+                                <textarea id = 'subject' name='comment-content' placeholder='Reply...' style="height:45px"></textarea>
+                                <input type='hidden' name='Commentid' value='{{c.id}}'>
+                            </div>
+                            <div class="row">
+                                <input type="submit" value="Reply">
+                            </div>
+                        </div>
+                    </form>
+            </div>
+        {% endfor %}
+        
+    {% endif %}
+</div>
+{% endblock Description %}

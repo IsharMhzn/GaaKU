@@ -1,24 +1,42 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from django.views.generic import ListView
-from .models import Product
+from django.views.generic import ListView, DetailView, View
+from .models import Product, Comment
+from Account.models import Notification
 
 # Create your views here.
-class ProductView(ListView):
+class pmainpage(ListView):
     model=Product
+    template_name = 'pmainpage.html'
 
-def pmainpage(request):
-    products = Product.objects.all()
-    context = {'products':products}
-    print("P is called")
-    return render(request, 'pmainpage.html', context)
+# def pmainpage(request):
+#     products = Product.objects.all()
+#     context = {'products':products}
+#     print("P is called")
+#     return render(request, 'pmainpage.html', context)
 
-def Description(request,id):
-    products = Product.objects.filter(id=id)
-    print(products)
-    print('D is called')
-    context={'products':products}
-    return render(request, 'Description.html', context)
+# class Description(DetailView):
+#     model =Product
+#     template_name = 'Description.html'
+
+
+def Description(request,pk):
+    product = Product.objects.get(id=pk)
+    if request.method == 'POST':
+        content = request.POST.get('comment-content')
+        commentid = request.POST.get('Commentid')
+        if content != '':
+            if commentid is not None:
+                c = Comment(content=content, user=request.user, post=product, reply=Comment.objects.get(id=commentid))
+            else:
+                c = Comment(content=content, user=request.user, post=product)
+            c.save()
+            n = Notification(user=request.user, post=product, comment=c)
+            n.save()
+
+    comments = Comment.objects.filter(post=product, reply=None)
+    replies = Comment.objects.filter(post=product).exclude(reply=None)
+    return render(request, 'Description.html', {'comments':comments,'replies': replies, 'object':product})
 
 def Landingpage(request):
     context = {}
@@ -40,4 +58,10 @@ def search(request):
     else:
         return HttpResponse('EMPTY')
     
-    
+def commentview(request):
+    if request.method == 'POST':
+        content = request.POST.get('comment-content')
+        c = Comment(content=content, user=request.user)
+        c.save()
+    comments = Comment.objects.all()
+    return render(request, 'comment.html', {'comments':comments})
