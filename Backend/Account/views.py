@@ -8,10 +8,12 @@ from django.http import HttpResponse
 from django.contrib.auth.hashers import make_password
 
 from .models import Profile
-from .forms import SignUpForm
+from .forms import SignUpForm, UserUpdateForm, ProfileUpdateForm
 from . import mail
 
 # Create your views here.
+
+
 def signup_view(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
@@ -35,13 +37,16 @@ def signup_view(request):
                 user.save()
                 domain = get_current_site(request)
                 uid = (int(user.pk) + 325) * 556535
-                mail.send(domain = domain, userid=uid, email=user.email, type='confirm')
+                mail.send(domain=domain, userid=uid,
+                          email=user.email, type='confirm')
                 return HttpResponse('Please check your email to complete your registration. Kindly check your spam if needed.')
             else:
-                messages.add_message(request, messages.ERROR, 'You phone number is not valid.')    
+                messages.add_message(
+                    request, messages.ERROR, 'You phone number is not valid.')
     else:
         form = SignUpForm()
     return render(request, 'accounts/signup.html', {'form': form})
+
 
 def login_view(request):
     if request.method == 'POST':
@@ -52,13 +57,16 @@ def login_view(request):
             login(request, user)
             return redirect('home')
         else:
-            messages.add_message(request, messages.INFO, 'The username or password you entered is incorrect.')
+            messages.add_message(
+                request, messages.INFO, 'The username or password you entered is incorrect.')
     return render(request, 'accounts/login.html', {})
+
 
 def logout_user(request):
     if request.user.is_authenticated:
         logout(request)
         return redirect('login')
+
 
 def forgot_password(request):
     if request.method == 'POST':
@@ -66,10 +74,12 @@ def forgot_password(request):
         user = User.objects.get(email=email)
         if user is not None:
             uid = (int(user.pk) + 945) * 556535
-            mail.send(domain = get_current_site(request), userid=uid, email=user.email, type='reset')
+            mail.send(domain=get_current_site(request),
+                      userid=uid, email=user.email, type='reset')
             return HttpResponse('Please check your email to complete your registration. Kindly check your spam if needed.')
         else:
-            messages.add_message(request, messages.INFO, 'This email is not registered.')
+            messages.add_message(request, messages.INFO,
+                                 'This email is not registered.')
     else:
         return render(request, 'accounts/forgot_password.html')
 
@@ -83,12 +93,15 @@ def password_reset(request, userid):
         if p1 == p2:
             user.password = make_password(p1, salt=None, hasher='default')
             user.save()
-            messages.add_message(request, messages.INFO, 'Your password has been updated.')
+            messages.add_message(request, messages.INFO,
+                                 'Your password has been updated.')
             return redirect('login')
         else:
-            messages.add_message(request, messages.ERROR, 'Please match both the passwords.')
+            messages.add_message(request, messages.ERROR,
+                                 'Please match both the passwords.')
     else:
         return render(request, 'accounts/password_reset.html')
+
 
 def activate(request, userid):
     userid = int(userid) / 556535 - 325
@@ -99,7 +112,30 @@ def activate(request, userid):
     if user is not None:
         user.is_active = True
         user.save()
-        messages.add_message(request, messages.INFO, 'Thank you for your email confirmation. Now you can login your account.')
+        messages.add_message(
+            request, messages.INFO, 'Thank you for your email confirmation. Now you can login your account.')
         return redirect('login')
     else:
         return HttpResponse('Activation link is invalid!')
+
+
+def profile(request):
+    if request.method == 'POST':
+        u_form = UserUpdateForm(request.POST, instance=request.user)
+        p_form = ProfileUpdateForm(
+            request.POST, request.FILES, instance=request.user.profile)
+        if u_form.is_valid() and p_form.is_valid():
+            u_form.save()
+            p_form.save()
+            messages.success(request, f'Your account has been updated!')
+            return redirect('profile')
+    else:
+        u_form = UserUpdateForm(instance=request.user)
+        p_form = ProfileUpdateForm(instance=request.user.profile)
+
+    context = {
+        'u_form': u_form,
+        'p_form': p_form
+    }
+
+    return render(request, 'accounts/profile.html', context)

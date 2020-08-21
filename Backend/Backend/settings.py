@@ -38,9 +38,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'Home.apps.HomeConfig',
-    'store.apps.StoreConfig',
-    'Account.apps.AccountConfig'
+    'Home',
+    'store',
+    'Account',
+    'bootstrap4',
+    'crispy_forms',
+
 ]
 
 MIDDLEWARE = [
@@ -59,7 +62,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(BASE_DIR,'templates')
+            os.path.join(BASE_DIR, 'templates')
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -82,9 +85,9 @@ WSGI_APPLICATION = 'Backend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'gaaku',
+        'NAME': 'mergeA',
         'USER': 'postgres',
-        'PASSWORD': os.getenv('GaaKU'),
+        'PASSWORD': '4265063h',
         'HOST': 'localhost'
     }
 }
@@ -130,5 +133,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
-MEDIA_URL ='/media/'
-MEDIA_ROOT =os.path.join(BASE_DIR,'media')
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'

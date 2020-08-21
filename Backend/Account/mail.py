@@ -3,8 +3,8 @@ import os
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
-sender = os.getenv('gaaku_email')
-password = os.getenv('gaaku_pwd')
+sender = 'gaakuapp@gmail.com'
+password = 'gaaku4admins'
 
 
 def send(domain, userid, email, type):
@@ -19,7 +19,7 @@ def send(domain, userid, email, type):
         message['Subject'] = "GaaKU - Confirm your email"
     else:
         message['Subject'] = "GaaKU - Password Reset for your account"
-    
+
     body = f"""
             Please follow the link below to confirm your account.
             http://{domain}/{type}/{userid}
