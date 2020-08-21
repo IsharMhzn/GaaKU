@@ -1,3 +1,6 @@
+@import url("https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css");
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600,700");
+
 body{
 	box-sizing: border-box;
 	margin: 0;
@@ -418,6 +421,7 @@ a{
 	/*border-radius: 0 30px 30px 0;*/
 	margin-right: 10%;
 	transition: 1s;
+	height: auto;
 }
 
 
@@ -476,7 +480,7 @@ a{
 .scrolling-container{
 	margin: auto;
 	margin-bottom: 30px;
-	max-width: 1000px;
+	max-width: 1300px;
 }
 
 .scroll-button{
@@ -522,10 +526,11 @@ a{
 
 .new_arrival_container{
 	width: 100%;
-	background: #AA82D3;
+	background: rgb(148,114,218);
+	background: linear-gradient(180deg, rgba(148,114,218,1) 0%, rgba(207,166,231,1) 100%);
 	display: flex;
 	align-items:center;
-
+	box-shadow: 0 6px 6px rgba(0,0,0,16%);
 }
 
 .new-arrival{
@@ -568,6 +573,7 @@ a{
     display: flex;
     align-items: center;
     justify-content: center;
+    /*width: 205px;*/
     height: 200px;
     padding: 23px;
     background: #f0f0f0;
@@ -643,6 +649,159 @@ a{
     color: #fbb72c;
 }
 
+/*Ad Section*/
+.ad-wrapper{
+	background: rgb(251,251,251);
+	background: radial-gradient(circle, rgba(251,251,251,1) 0%, rgba(232,226,245,1) 100%);
+	overflow: hidden;
+	box-shadow: 0 6px 6px rgba(0,0,0,16%);
+}
+
+.ad-container{
+	max-width: 1150px;
+	margin: 0 auto;
+	padding-left: 25px;
+	padding-right: 25px;
+	font-family: "Open sans", sans-serif;
+	position: relative;
+
+}
+
+.content{
+	position: absolute;
+	transform: translateX(150%);
+	transition: 0.3s;
+}
+
+#content1{
+	transform: translateX(0px);
+}
+
+.ad-row{
+	display: flex;
+	align-items: center;
+	flex-wrap:wrap;
+	justify-content: space-around;
+	}
+
+.ad-col2{
+	flex-basis: 50%;
+	min-width: 300px;
+}
+
+.ad-col2 img{
+	max-width: 100%;
+	padding:50px;
+	height: 483px;
+}
+
+.ad-col2 h1{
+	font-size: 50px;
+	line-height: 60px;
+	margin: 25px 0;
+	font-family: "Open-sans", sans-serif;
+}
+
+.ad-btn{
+	display: inline-block;
+	background: #ff523b;
+	color: white;
+	padding: 15px 30px;
+	margin: 30px 0;
+	border-radius: 30px;
+	transition:.5s;
+	font-weight:bold;
+}
+
+.ad-btn .fas{
+	margin: 0 0px 0 20px;
+	/*color: white;*/
+}
+
+.ad-btn:hover{
+	background: white;
+	color: black;
+	transform:scale(1.1);
+}
+
+
+/* Top choices*/
+
+.small-container{
+	max-width: 1300px;
+	margin: auto auto 30px auto;
+	padding-left: 25px;
+	padding-right: 25px;
+}
+
+.choice-title{
+	text-align: center;
+	/*margin: 0 auto 80px;*/
+	font-family: "Open sans",sans-serif;
+	font-size: 2.5em;
+	position: relative;
+	line-height: 60px;
+	color: #555;
+}
+
+.choice-title::after{
+	content:'';
+	background: #592998;
+	width: 160px;
+	height: 5px;
+	border-radius: 5px;
+	position: absolute;
+	bottom: -50%;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+.thumbnail-slider{
+	width: 100%;
+	float : left;
+	overflow:hidden;
+}
+
+.thumbnail-slider .thumbnail-container{
+	width: 100%;
+	float: left;
+	transition: margin 1s ease;
+}
+
+.thumbnail-slider .thumbnail-items{
+	float : left;
+}
+
+.thumbnail-slider .controls{
+	width: 100%;
+	float: left;
+	padding: 15px
+}
+
+.thumbnail-slider .controls ul{
+	display: block;
+	text-align: center;
+	padding: 0;
+	margin: 0;
+}
+
+.thumbnail-slider .controls ul li{
+	height: 35px;
+	width: 35px;
+	border: 1px solid black;
+	border-radius: 50%;
+	margin: 4px;
+	display: inline-block;
+	line-height: 33px;
+	cursor: pointer;
+}
+
+.thumbnail-slider .controls ul li.active{
+	background: #592998;
+	color: white;
+
+
+}
 
 /* For Small Screens*/
 @media screen and (max-width: 1000px){
@@ -714,12 +873,14 @@ a{
 	.container-nav.active .nav-list{
 		display: flex;
 	}
+
+
 }
 
 @media (max-width: 720px){
-	.product-card{
+	/*.product-card{
 		width: 80%;
-	}
+	}*/
 
 	.image{
 		width: 2rem;

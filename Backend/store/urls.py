@@ -8,6 +8,6 @@ urlpatterns = [
     path ('ProductView/',views.ProductView.as_view()),
     path('Description/<int:id>/',views.Description,name='Description'),
     path('Landing/', views.Landingpage,name='Landingpage'),
-    path('<category>',views.category,name='category'),
+    path('category/<category>',views.category,name='category'),
     path('search/',views.search,name='search'),
 ]
