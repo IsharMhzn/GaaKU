@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8" name="viewport" 
         content= "width=device-width, initial-scale=1.0"> 
-	<title>GaaKU | Online Shpping</title>
+	<title>GaaKU | Get Anything at KU</title>
 	<!-- Linking Font -->
 	<link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@300&family=Open+Sans:ital,wght@0,400;1,300;1,400&family=Oswald:wght@300;400&display=swap" rel="stylesheet">
 	<!-- Linking to Font Awesome -->
@@ -18,6 +18,9 @@
 	<link rel="stylesheet" type="text/css" href="{%  static 'css/main.css' %}" >
 		<!--Linking to Product css-->
 	<link rel="stylesheet" type="text/css" href="{%  static 'css/description.css' %}" >
+
+	{% block link %}
+	{% endblock %}
 </head>
 <body>
 	<header>
@@ -28,7 +31,9 @@
 					<nav class="zone">
 					<!-- GAAKU LOGO -->
 						<div class="image-section">
+							<a href='{% url "home" %}'>
 							<img src="{% static 'image/Logo-3.png'%}" alt="Logo" id="logo">
+							</a>
 						</div>
 					<!-- Search bar -->
 						<form class="search-section" role="search" id="search-form" action="{% url 'search' %}">
@@ -47,7 +52,7 @@
 								<li><a href='{% url "pmainpage" %}' class="links">Products</a></li>
 								<li><a href="#" class="links">About</a></li>
 								{% if request.user.is_authenticated %}
-								<li><a href="#">Profile</a></li>
+								<li><a href='{% url "profile" %}'>Profile</a></li>
 								<li class="nav-btn"><a href="{% url 'logout' %}" class="login">Logout</a></li>
 								{% else %}
 								<li class="nav-btn"><a href="{% url 'login' %}" class="login">Login</a></li>
@@ -92,7 +97,9 @@
 			<div class="container">
 				<nav class="container-nav">
 					<div class="logo-section">
+					<a href = "{% url 'home' %}">
 						<img src="{% static 'image/Logo-3.png' %}" id="logo">
+					</a>
 					</div>
 					<ul class="nav-list">
 						<li>
@@ -125,7 +132,7 @@
 							<a href="#">About</a>
 						</li>
 						<li>
-							<a href="#">Profile</a>
+							<a href='{% url "profile" %}'>Profile</a>
 						</li>
 
 					</ul>
@@ -147,6 +154,9 @@
 	{% block products %}
 	{% endblock %}
 	{% block  Description %}
+	{% endblock %}
+
+	{% block notification %}
 	{% endblock %}
 	
 	<script type="text/javascript" src="{% static 'javascript/index.js' %}"></script>

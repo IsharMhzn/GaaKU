@@ -3,10 +3,12 @@ from django.contrib.auth.models import User
 from django.dispatch import receiver
 from django.db.models.signals import post_save
 
+from store.models import Product, Comment
+
 # Create your models here.
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    email = models.EmailField(max_length=100, verbose_name='email address', unique=True)
+    email = models.EmailField(max_length=100, verbose_name='email address')
     first_name = models.CharField(max_length=60)
     last_name = models.CharField(max_length=60)
     dob = models.DateField(verbose_name='date of birth', null=True)
@@ -25,3 +27,8 @@ def update_profile_signal(sender, instance, created, **kwargs):
     if created:
         Profile.objects.create(user=instance)
     instance.profile.save()
+
+class Notification(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    post = models.ForeignKey(Product, on_delete=models.CASCADE)
+    comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
