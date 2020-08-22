@@ -85,9 +85,9 @@ WSGI_APPLICATION = 'Backend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'mergeA',
+        'NAME': 'gaaku',
         'USER': 'postgres',
-        'PASSWORD': '4265063h',
+        'PASSWORD': os.getenv('GaaKU'),
         'HOST': 'localhost'
     }
 }
