@@ -1,13 +1,16 @@
 {% extends 'base.html' %}
-<br>
-<br>
-<br>
-<br><br><br><br><br><br><br>
+{% load static %}
+{% block link %}
+	<link rel="stylesheet" type="text/css" href="{% static 'css/notification.css' %}">
+{% endblock %}
+
 {% block notification %}
+    <h1 align="center" color="purple">Notifications</h1>
     {% if notifs %}
-    <ul>
+    <div class='notif-container'>
+    <ul class="notif-list">
         {% for n in notifs %}
-            <li style="list-style-type: circle">
+            <li>
             <a href='{% url "Description" n.post.id %}'>
             {% if n.comment.reply %}
                 {{n.user}} replied to your comment on {{n.post.name}} post {{n.comment.timestamp | timesince}} ago
@@ -18,5 +21,7 @@
             </li>
         {% endfor %}
     <ul>
+    </div>
     {% endif %}
+
 {% endblock %}
