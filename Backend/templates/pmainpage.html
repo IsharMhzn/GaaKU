@@ -4,7 +4,7 @@
     
   {% block products %}
   <div class="product-container">
-          {% for product in products %}
+          {% for product in object_list  %}
               <div class="product-card">
                   {% if product.negotiation %}
                   <div class="badge">Negotiable</div>
@@ -20,7 +20,7 @@
                       <div class="product-bottom-details">
                          <div class="product-price">Rs.{{product.price}}</div>
                           <div class="product-links">
-                              <a href=""><i class="fa fa-heart"></i></a>
+                              <a href="{{ product.get_absolute_url }}"><button type ="button">View</button><i class="fa fa-heart"></i></a>
                           </div>
                       </div>
                   </div>

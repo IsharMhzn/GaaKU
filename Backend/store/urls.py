@@ -4,10 +4,10 @@ from . import views
 
 
 urlpatterns = [
-    path('',views.pmainpage,name='pmainpage'),
-    path ('ProductView/',views.ProductView.as_view()),
-    path('Description/<int:id>/',views.Description,name='Description'),
+    path('',views.pmainpage.as_view(),name='pmainpage'),
+    path('Description/<int:pk>/',views.Description.as_view(),name='Description'),
     path('Landing/', views.Landingpage,name='Landingpage'),
     path('<category>',views.category,name='category'),
     path('search/',views.search,name='search'),
+    path('add_to_whishlist/<int:pk>/',views.add_to_whishlist,name='add_to_whishlist'),
 ]
