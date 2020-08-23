@@ -19,7 +19,7 @@ def send(domain, userid, email, type):
         message['Subject'] = "GaaKU - Confirm your email"
     else:
         message['Subject'] = "GaaKU - Password Reset for your account"
-    
+
     body = f"""
             Please follow the link below to confirm your account.
             http://{domain}/{type}/{userid}

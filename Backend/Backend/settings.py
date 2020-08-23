@@ -38,10 +38,19 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+<<<<<<< HEAD
     'Home.apps.HomeConfig',
     'store.apps.StoreConfig',
     'crispy_forms',
     'Account.apps.AccountConfig'
+=======
+    'Home',
+    'store',
+    'Account',
+    'bootstrap4',
+    'crispy_forms',
+
+>>>>>>> 30a2ec9e1ea3663a0841d91595d1edda7cfaeee6
 ]
 
 MIDDLEWARE = [
@@ -60,7 +69,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(BASE_DIR,'templates')
+            os.path.join(BASE_DIR, 'templates')
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -85,7 +94,11 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'Gaaku',
         'USER': 'postgres',
+<<<<<<< HEAD
         'PASSWORD': '1234',
+=======
+        'PASSWORD': os.getenv('GaaKU'),
+>>>>>>> 30a2ec9e1ea3663a0841d91595d1edda7cfaeee6
         'HOST': 'localhost'
     }
 }
@@ -131,5 +144,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
-MEDIA_URL ='/media/'
-MEDIA_ROOT =os.path.join(BASE_DIR,'media')
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'

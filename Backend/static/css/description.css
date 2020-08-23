@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 body{
 	box-sizing: border-box;
 	margin: 0;
@@ -63,3 +64,15 @@ body{
 	max-width: 1300px;
 	margin: 30px auto 0 auto;
 }
+=======
+
+.produc-description{
+ background-color: greenyellow;
+  
+}
+.image-holder{
+  
+  border: 1px solid goldenrod;
+  float:left;
+}
+>>>>>>> 30a2ec9e1ea3663a0841d91595d1edda7cfaeee6

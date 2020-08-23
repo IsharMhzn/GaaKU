@@ -14,6 +14,7 @@ class Customer(models.Model):
         return self.name
 
 class Product(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     name = models.CharField(max_length=200,null=True)
     category = models.CharField(max_length=200)
     price = models.IntegerField()
@@ -21,15 +22,21 @@ class Product(models.Model):
     negotiation = models.BooleanField(default=False,null=True,blank=False)
     img = models.ImageField(upload_to='pics',null=True,blank=True)
     contact_info = models.TextField()
+<<<<<<< HEAD
     user=models.ForeignKey(User, on_delete=models.CASCADE,null=True)
     urgent = models.BooleanField(default=False,null=True,blank=False)
+=======
+>>>>>>> 30a2ec9e1ea3663a0841d91595d1edda7cfaeee6
    
     def  get_absolute_url(self):
         return reverse("Description",kwargs={"pk" : self.pk})
     
+<<<<<<< HEAD
     def get_add_to_whishlist_url(self):
          return reverse("add_to_whishlist",kwargs={"pk" : self.pk})
     
+=======
+>>>>>>> 30a2ec9e1ea3663a0841d91595d1edda7cfaeee6
     @property
     def imageUrl(self):
         try:
@@ -40,6 +47,7 @@ class Product(models.Model):
         return url
 
 
+<<<<<<< HEAD
 # class Whishlist(models.Model):
 #     user=models.ForeignKey(User, on_delete=models.CASCADE,null=True)
 #     product =models.ForeignKey(Product,on_delete=models.SET_NULL,blank=True,null=True)
@@ -71,3 +79,14 @@ class Order(models.Model):
     start_date = models.DateTimeField(auto_now_add=True)
     ordered_date = models.DateTimeField()
     ordered = models.BooleanField(default=False)
+=======
+class Comment(models.Model):
+    post = models.ForeignKey(Product,null=True, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
+    reply = models.ForeignKey('self', on_delete=models.CASCADE, null=True)
+    content = models.CharField(max_length=160)
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.content[:10]
+>>>>>>> 30a2ec9e1ea3663a0841d91595d1edda7cfaeee6
