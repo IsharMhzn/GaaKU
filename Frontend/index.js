@@ -25,6 +25,12 @@ const margin=30;
 var items=0;
 var totalItems=0;
 var jumpSlideWidth=0;
+
+const slides=document.querySelector('.test-slider').children;
+const indicatorImages=document.querySelector('.test-indicator').children;
+let test_index=0;
+
+
 // items setup per slide
 
 responsive=[
@@ -228,6 +234,20 @@ setInterval(function(){
 			content3.style.transitionDelay="0.3s";
 		break;
 	}
+
+	test_index++;
+	if(test_index>=indicatorImages.length){
+		test_index=0;
+	}
+	for(let j=0;j<indicatorImages.length;j++){
+			indicatorImages[j].classList.remove('active');
+		}
+	indicatorImages[test_index].classList.add('active');
+	for(let j=0;j<slides.length;j++){
+			slides[j].classList.remove('active');
+		}
+	slides[test_index].classList.add('active');
+
 },5000);
 
 

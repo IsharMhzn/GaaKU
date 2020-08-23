@@ -44,7 +44,8 @@ def Landingpage(request):
 
 def category(request,category):
     products=Product.objects.filter(category=category)
-    return render(request,'pmainpage.html',{'products':products})
+    print(products);
+    return render(request,'pmainpage.html',{'object_list':products})
 
 def search(request):
     try:
@@ -54,7 +55,7 @@ def search(request):
     if q:
         products=Product.objects.filter(name__icontains=q) | Product.objects.filter(category__icontains=q)   
         print(products)
-        return render(request,'pmainpage.html',{'products':products})
+        return render(request,'pmainpage.html',{'object_list':products})
     else:
         return HttpResponse('EMPTY')
     

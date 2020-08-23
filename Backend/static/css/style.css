@@ -657,7 +657,8 @@ a{
 .ad-wrapper{
 	background: rgb(251,251,251);
 	background: radial-gradient(circle, rgba(251,251,251,1) 0%, rgba(232,226,245,1) 100%);
-	overflow: hidden;
+	overflow-x: hidden;
+	box-shadow: 0 6px 6px rgba(0,0,0,16%);
 }
 
 .ad-container{
@@ -729,6 +730,222 @@ a{
 
 .ad-title{
 	color:black;
+}
+
+/* Top choices*/
+
+.small-container{
+	max-width: 1300px;
+	margin: auto auto 30px auto;
+	padding-left: 25px;
+	padding-right: 25px;
+	position: relative;
+}
+
+.ribbon{
+	position: absolute;
+	top: 0;
+	left: 0;
+	transform: translateY(-25%);
+	max-width: 75px;
+}
+
+.ribbon img{
+	width: 100%;
+}
+
+.choice-title{
+	text-align: center;
+	/*margin: 0 auto 80px;*/
+	font-family: "Open sans",sans-serif;
+	font-size: 2.5em;
+	position: relative;
+	line-height: 60px;
+	color: #555;
+}
+
+.choice-title::after{
+	content:'';
+	background: #592998;
+	width: 160px;
+	height: 5px;
+	border-radius: 5px;
+	position: absolute;
+	bottom: -50%;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+.thumbnail-slider{
+	width: 100%;
+	float : left;
+	overflow:hidden;
+}
+
+.thumbnail-slider .thumbnail-container{
+	width: 100%;
+	float: left;
+	transition: margin 1s ease;
+}
+
+.thumbnail-slider .thumbnail-items{
+	float : left;
+}
+
+.thumbnail-slider .controls{
+	width: 100%;
+	float: left;
+	padding: 15px
+}
+
+.thumbnail-slider .controls ul{
+	display: block;
+	text-align: center;
+	padding: 0;
+	margin: 0;
+}
+
+.thumbnail-slider .controls ul li{
+	height: 35px;
+	width: 35px;
+	border: 1px solid black;
+	border-radius: 50%;
+	margin: 4px;
+	display: inline-block;
+	line-height: 33px;
+	cursor: pointer;
+}
+
+.thumbnail-slider .controls ul li.active{
+	background: #592998;
+	color: white;
+
+
+}
+
+/* Speial Offer*/
+.looking-image{
+	margin-top:10px;
+	margin-bottom:10px;
+	margin-left: 40px;
+	margin-right: 80px;
+	width:3.5rem;
+}
+
+/*Testimonials*/
+.testimonials{
+	background: rgb(251,251,251);
+	background: radial-gradient(circle, rgba(251,251,251,1) 0%, rgba(232,226,245,1) 100%);
+	float: left;
+	width: 100%;
+	padding: 50px 0px;
+	font-family: 'Oswald',sans-serif;
+}
+.test-container{
+	max-width: 1300px;
+	margin: auto;
+	display:  flex;
+	align-items: center;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+.testimonials .test-title{
+	/*margin-right: : 60px;*/
+}
+
+.testimonials .test-title h1{
+	padding-top:10px;
+	text-align: left;
+	color: black;
+	text-transform: uppercase;
+	font-size: 47px;
+	margin:0;
+}
+
+.test-content{
+	display: flex;
+}
+
+.testimonials .test-slider{
+	border: 1px solid white;
+	border-right: 5px solid #A070D5;  
+	max-width: 600px;
+	margin-left:auto;
+	padding: 30px;
+	text-align: center;
+	background: rgba(255,255,255,0.5);
+	border-radius: 30px 0 0 30px;
+	box-shadow: 6px 6px 6px rgba(0,0,0,16%);
+}
+
+.testimonials .test-slider .slide{
+	display: none;
+}
+
+.testimonials .test-slider .slide.active{
+	display: block;
+	animation:  slide 1s ease;
+}
+
+@keyframes slide{
+	0%{
+		opacity: 0;
+		transform: translateX(-15px);
+	}
+	100%{
+		opacity: 1;
+		transform: translateX(0px);
+	}
+}
+.testimonials .test-slider p{
+	font-size: 18px;
+	color: black;
+	
+}
+
+.testimonials .test-slider p .fa-quote-left{
+	float: left;
+	font-size: 25px;
+	color: purple;
+}
+
+.testimonials .test-slider p .fa-quote-right{
+	float:right;
+	font-size: 25px;
+	color: purple;
+}
+
+.testimonials .test-slider .slide-info h3{
+	font-family: "Open sans",sans-serif;
+	font-weight: bold;
+	color: black;
+	font-size: 18px;
+	margin: 30px 0px 10px;
+}
+
+.testimonials .test-indicator{
+	text-align: center;
+	padding-top:20px;
+	display: flex;
+	flex-direction:column;
+}
+
+.testimonials .test-indicator img{
+	width: 60px;
+	height: 60px;
+	border-radius: 50%;
+	object-fit: cover;
+	margin: 0 15px;
+	opacity: 0;
+	cursor: pointer;
+	transition: opacity 1s ease;
+	box-shadow: 6px 6px 6px rgba(0,0,0,84%);
+	border: 6px solid #A070D5;
+}
+
+.testimonials .test-indicator img.active{
+	opacity: 1;
 }
 
 /* For Small Screens*/
