@@ -70,12 +70,13 @@ def logout_user(request):
 
 def forgot_password(request):
     if request.method == 'POST':
-        email = request.POST.get('email')
-        user = User.objects.get(email=email)
+        # email = request.POST.get('email')
+        username = request.POST.get('username')
+        user = User.objects.get(username=username)
         if user is not None:
             uid = (int(user.pk) + 945) * 556535
             mail.send(domain=get_current_site(request),
-                      userid=uid, email=user.email, type='reset')
+                      userid=uid, email=user.profile.email, type='reset')
             return HttpResponse('Please check your email to complete your registration. Kindly check your spam if needed.')
         else:
             messages.add_message(request, messages.INFO,

@@ -72,8 +72,15 @@ def Description(request,pk):
             n = Notification(user=request.user, post=product, comment=c)
             n.save()
 
-    comments = Comment.objects.filter(post=product, reply=None)
-    replies = Comment.objects.filter(post=product).exclude(reply=None)
+    if request.user == product.user:
+        comments = Comment.objects.filter(post=product, reply=None)
+    else:
+        comments = Comment.objects.filter(post=product, reply=None, user=request.user)
+    
+    if request.user == product.user:
+        replies = Comment.objects.filter(post=product).exclude(reply=None)
+    else:
+        replies = Comment.objects.filter(post=product).exclude(reply=None)
     return render(request, 'Description.html', {'comments':comments,'replies': replies, 'object':product})
         
     

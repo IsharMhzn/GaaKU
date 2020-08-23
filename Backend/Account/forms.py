@@ -29,7 +29,7 @@ class SignUpForm(UserCreationForm):
     first_name = forms.CharField(help_text='First name')
     last_name = forms.CharField(help_text='Last name')
     email = forms.EmailField(help_text='Email address')
-    dob = forms.DateField(help_text='Date of birth')
+    dob = forms.DateField(help_text='Date of birth', widget=forms.TextInput(attrs={'placeholder': 'Format: YYYY-MM-DD'}))
     batch = forms.IntegerField(widget=forms.Select(choices=batch_choices))
     department = forms.CharField(
         widget=forms.Select(choices=department_choices))
