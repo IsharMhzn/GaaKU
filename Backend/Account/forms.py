@@ -6,12 +6,12 @@ from .models import Profile
 
 batch_choices = [(i, i) for i in range(2012, 2021)]
 department_choices = [
-    ('chem', ('Department of Chemical Science and Engineering')),
-    ('civil', ('Department of Civil Engineering')),
-    ('comp', ('Department of Computer Science and Engineering')),
-    ('mech', ('Department of Mechanical Engineering')),
-    ('elec', ('Department of Electrical and Electronics Engineering')),
-    ('geo', ('Department of Geomatics Engineering')),
+    ('chem', 'Department of Chemical Science and Engineering'),
+    ('civil', 'Department of Civil Engineering'),
+    ('comp', 'Department of Computer Science and Engineering'),
+    ('mech', 'Department of Mechanical Engineering'),
+    ('elec', 'Department of Electrical and Electronics Engineering'),
+    ('geo', 'Department of Geomatics Engineering'),
 ]
 semester_choices = [
     (1, 'I'),

@@ -1,0 +1,27 @@
+{% if bought %}
+    Bought products<br>
+    {% for b in bought %}
+        You bought {{b.product.name}} from {{b.product.user}}<br>
+    {% endfor %}
+{% endif %}
+<br>
+{% if sold %}
+    Sold products<br>
+    {% for s in sold %}
+        You sold {{s.product.name}} to {{s.sold_to}}<br>
+    {% endfor %}
+{% endif %}
+<br><br>
+{% if products %}
+    Your products<br>
+    {% for p in products %}
+    <form action='' method="post">
+{% csrf_token %}
+        {{p.name}}: 
+        <input type='text' name='sold-to'></input>
+        <input type='hidden' value={{p.id}} name='product-id'></input>
+        <input type="submit" value="Sold to"></input>
+        </form>
+    {% endfor %}
+{% endif %}
+

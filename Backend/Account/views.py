@@ -7,9 +7,11 @@ from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.contrib.auth.hashers import make_password
 
-from .models import Profile
+from .models import Profile, History
 from .forms import SignUpForm, UserUpdateForm, ProfileUpdateForm
 from . import mail
+
+from store.models import Product
 
 # Create your views here.
 
@@ -42,8 +44,9 @@ def signup_view(request):
                 return HttpResponse('Please check your email to complete your registration. Kindly check your spam if needed.')
             else:
                 messages.add_message(
-                    request, messages.ERROR, 'You phone number is not valid.')
+                    request, messages.ERROR, 'Your phone number is not valid.')
     else:
+        messages.add_message(request, messages.INFO, 'Please try to keep your username as simple as possible.')
         form = SignUpForm()
     return render(request, 'accounts/signup.html', {'form': form})
 
@@ -140,3 +143,28 @@ def profile(request):
     }
 
     return render(request, 'accounts/profile.html', context)
+
+def historyview(request):
+    if request.method == 'POST':
+        sold_to = request.POST.get('sold-to')
+        productid = request.POST.get('product-id')
+        h = History()
+        h.product = Product.objects.get(id=productid)
+        h.sold_to = User.objects.get(username=sold_to)
+        h.save()
+    
+    bought = History.objects.filter(sold_to=request.user)
+    sold = list()
+    for p in Product.objects.filter(user=request.user):
+        print(p)
+        try:
+            s = History.objects.filter(product=p)
+        except:
+            s = None
+        if s is not None:
+            print(s)
+            sold += s
+    products = Product.objects.filter(user=request.user)
+
+    return render(request, 'accounts/history.html', {'bought': bought, 'sold': sold, 'products': products})
+

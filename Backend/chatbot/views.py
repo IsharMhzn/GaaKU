@@ -11,7 +11,7 @@ from .bot_logic import LOGIC_RESPONSES
 
 # change this to generated above
 VERIFY_TOKEN = os.getenv('verify_token')
-
+print(VERIFY_TOKEN)
 """
 
 FB_ENDPOINT & PAGE_ACCESS_TOKEN
@@ -19,9 +19,9 @@ Come from the next step.
 
 """
 
-FB_ENDPOINT = 'https://graph.facebook.com/v4.0/'
+FB_ENDPOINT = 'https://graph.facebook.com/v8.0/'
 
-PAGE_ACCESS_TOKEN = "LwRraIBAB6wNqmxZC2K2bA55GURfPNWDEFSfQNSUiRa3I49oVgZCxcuun6zTrsw0s4ZCUhXQ33kPb7zN3NSmGZAoJYZBw0ZB762DDnAp3TD9eqVN3yUwcrpyOsBldoFWZAxCmELsSUza8teXsZAYr07VodZAlFWlMttmqWv1"  
+PAGE_ACCESS_TOKEN = os.getenv('fb_access_token')  
 
 
 

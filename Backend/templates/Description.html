@@ -2,6 +2,7 @@
 {% load static %}
 {% block link %}
 	<link rel="stylesheet" type="text/css" href="{% static 'css/comment.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/profile.css' %}">
 {% endblock %}
 
 
@@ -65,12 +66,15 @@
         {% for c in comments %}
             <div class='cmnt-box'>
                 {% if c.reply is None %}
+                <img height="40px" width="40px" src={{c.user.profile.image.url}}>
                     {{c.content}} by {{c.user}} {{c.timestamp | timesince}} ago<br>
                     <br>
                 {% endif %}
                 {% for reply in replies %}
                     {% if reply.reply.id == c.id %}
                     <div class='reply-sec'>
+                        ----->
+                        <img height="40px" width="40px" src={{reply.user.profile.image.url}}>
                         <strong>{{reply.content}}</strong> by {{reply.user}} {{reply.timestamp | timesince}} ago<br><br>
                     </div>
                     {% endif %}
