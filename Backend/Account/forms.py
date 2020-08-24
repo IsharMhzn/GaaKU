@@ -2,6 +2,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
 from .models import Profile
+from store.models import Product
 
 
 batch_choices = [(i, i) for i in range(2012, 2021)]
@@ -22,6 +23,25 @@ semester_choices = [
     (6, 'VI'),
     (7, 'VII'),
     (8, 'VIII'),
+]
+
+category_choices = [
+    ('Electronics', 'Electronics'),
+    ('Homes and Furnitures', 'Homes and Furnitures'),
+    ('Sports', 'Sports'),
+    ('Education Materials', 'Education Materials'),
+    ('Other Accessories', 'Other Accessories'),
+]
+
+negotiation_choices = [
+    (1, 'Unknown'),
+    (2, 'Yes'),
+    (3, 'No')
+]
+
+urgent_choices = [
+    (1, 'Yes'),
+    (2, 'No')
 ]
 
 
@@ -54,3 +74,21 @@ class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ['image']
+
+
+class ProductForm(forms.ModelForm):
+    name = forms.CharField(help_text="Product name")
+    category = forms.CharField(widget=forms.Select(choices=category_choices))
+    price = forms.IntegerField(help_text="Price")
+    description = forms.CharField(help_text="Description")
+    # negotiation = forms.BooleanField(widget=forms.Select(choices=negotiation_choices
+
+    img = forms.ImageField(help_text="Product Image")
+    contact_info = forms.CharField(help_text="Contact Info.")
+    # urgent = forms.BooleanField(help_text="Urgent?", widget=forms.Select(choices=urgent_choices
+    #                                                                      ))
+
+    class Meta:
+        model = Product
+        fields = ['name', 'category', 'price',
+                  'description', 'negotiation', 'img', 'contact_info', 'urgent']
