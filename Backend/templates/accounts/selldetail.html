@@ -43,8 +43,17 @@
           </div>
           <div class="view-btn">
             <a href="{% url 'sell-delete' product.pk %}" class="button"> Delete <i class="fa fa-angle-right" aria-hidden="true"></i></a>
-            {% endif %}
+            
           </div>
+          <form action='{% url "trans-history" %}' method='post'>
+          {% csrf_token %}
+          <div class="view-btn">
+            <input type='text' name='sold-to'></input>
+            <input type='hidden' value={{product.id}} name='product-id'></input>
+            <input type="Submit" class="button" value="Sold to"></input>
+          </div>
+          </form>
+          {% endif %}
           </div>
           <div class="col2 image-scroll" style="flex-basis: 35%">
             <img src="{{object.img.url}}" alt="" class="cover-image firs"  > 

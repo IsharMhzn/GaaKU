@@ -247,17 +247,29 @@
 		</div>
 	</section>
 
-	<!---Subscription Section------------------------------->
-	<div class="subscribe-container">
-		<div class="sub-col1">
-			<h1>Keep Updated With Our Products</h1>
-			Subscribe Now To get Notify to Our Latest Entries.
+	{% if request.user.is_authenticated %}
+		<div class="subscribe-container">
+			<div class="sub-col1">
+				<h1>Keep Yourself Updated With Our Products</h1>
+				Subscribe Now To get Notify to Our Latest Entries.
+			</div>
+			<div class="sub-col2">
+				<input type="email" placeholder="Enter your email address" id="footer-email">
+				<input type="submit" value="Subscribe" id="footer-email-btn"> 
+			</div>
 		</div>
-		<div class="sub-col2">
-			<input type="email" placeholder="Enter your email address" id="footer-email">
-			<input type="submit" value="Subscribe" id="footer-email-btn"> 
+	{% else %}
+		<div class="subscribe-container">
+			<div class="sub-col1">
+				<h1>Want to buy or sell something?</h1>
+				Start by making an account first.
+			</div>
+			<div class="sub-col2">
+				<a href="{% url 'login' %}"><button type="submit" value="Login" id="footer-email-btn">Login</button></a>
+				<a href="{% url 'signup' %}"><button type="submit" value="Signup" id="footer-email-btn">Signup</button></a>
+			</div>
 		</div>
-	</div>
+	{% endif %}
 
 	<!-- footer -->
 	<footer class="footer-container">

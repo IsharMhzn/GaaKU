@@ -49,6 +49,12 @@ class Notification(models.Model):
     post = models.ForeignKey(Product, on_delete=models.CASCADE)
     comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
 
+class NotificationCount(models.Model):
+    old = models.IntegerField(default=0)
+    updated = models.IntegerField(default=0)
+    seen = models.BooleanField(default=False)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
 class History(models.Model):
     sold_to = models.ForeignKey(User, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)

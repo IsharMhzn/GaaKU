@@ -1,27 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block link %}
+	<link rel="stylesheet" type="text/css" href="{% static 'css/notification.css' %}">
+{% endblock %}
+
+{% block notification %}
 {% if bought %}
-    Bought products<br>
-    {% for b in bought %}
-        You bought {{b.product.name}} from {{b.product.user}}<br>
-    {% endfor %}
+   <h1 align="center" color="purple">Bought products</h1>
+    <div class='notif-container'>
+    <ul class="notif-list">
+        {% for b in bought %}
+            <li>
+            You bought {{b.product.name}} from {{b.product.user}}
+            </li>
+        {% endfor %}
+    <ul>
+    </div>
 {% endif %}
-<br>
+
 {% if sold %}
-    Sold products<br>
-    {% for s in sold %}
-        You sold {{s.product.name}} to {{s.sold_to}}<br>
-    {% endfor %}
+    <h1 align="center" color="purple">Sold products</h1>
+    <div class='notif-container'>
+    <ul class="notif-list">
+        {% for s in sold %}
+            <li>
+            You sold {{s.product.name}} to {{s.sold_to}}
+            </li>
+        {% endfor %}
+    <ul>
+    </div>
 {% endif %}
-<br><br>
-{% if products %}
-    Your products<br>
-    {% for p in products %}
-    <form action='' method="post">
-{% csrf_token %}
-        {{p.name}}: 
-        <input type='text' name='sold-to'></input>
-        <input type='hidden' value={{p.id}} name='product-id'></input>
-        <input type="submit" value="Sold to"></input>
-        </form>
-    {% endfor %}
-{% endif %}
+
+{% endblock %}
 

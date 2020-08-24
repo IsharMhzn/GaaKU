@@ -14,6 +14,7 @@ from .forms import SignUpForm, UserUpdateForm, ProfileUpdateForm, ProductForm
 from . import mail
 
 from store.models import Product
+from Account.models import NotificationCount
 
 # Create your views here.
 
@@ -126,49 +127,57 @@ def activate(request, userid):
 
 
 def profile(request):
-    if request.method == 'POST':
-        u_form = UserUpdateForm(request.POST, instance=request.user)
-        p_form = ProfileUpdateForm(
-            request.POST, request.FILES, instance=request.user.profile)
-        if u_form.is_valid() and p_form.is_valid():
-            u_form.save()
-            p_form.save()
-            messages.success(request, f'Your account has been updated!')
-            return redirect('profile')
+    if request.user.is_authenticated:
+        notifc = NotificationCount.objects.get_or_create(user=request.user)[0]
+        newNotif = not notifc.seen
+        if request.method == 'POST':
+            u_form = UserUpdateForm(request.POST, instance=request.user)
+            p_form = ProfileUpdateForm(
+                request.POST, request.FILES, instance=request.user.profile)
+            if u_form.is_valid() and p_form.is_valid():
+                u_form.save()
+                p_form.save()
+                messages.success(request, f'Your account has been updated!')
+                return redirect('profile')
+        else:
+            u_form = UserUpdateForm(instance=request.user)
+            p_form = ProfileUpdateForm(instance=request.user.profile)
+
+        context = {
+            'u_form': u_form,
+            'p_form': p_form,
+            'newNotif': newNotif,
+        }
+        return render(request, 'accounts/profile.html', context)
     else:
-        u_form = UserUpdateForm(instance=request.user)
-        p_form = ProfileUpdateForm(instance=request.user.profile)
+        return redirect('login')
 
-    context = {
-        'u_form': u_form,
-        'p_form': p_form
-    }
-
-    return render(request, 'accounts/profile.html', context)
 
 def historyview(request):
-    if request.method == 'POST':
-        sold_to = request.POST.get('sold-to')
-        productid = request.POST.get('product-id')
-        h = History()
-        h.product = Product.objects.get(id=productid)
-        h.sold_to = User.objects.get(username=sold_to)
-        h.save()
-    
-    bought = History.objects.filter(sold_to=request.user)
-    sold = list()
-    for p in Product.objects.filter(user=request.user):
-        print(p)
-        try:
-            s = History.objects.filter(product=p)
-        except:
-            s = None
-        if s is not None:
-            print(s)
-            sold += s
-    products = Product.objects.filter(user=request.user)
-
-    return render(request, 'accounts/history.html', {'bought': bought, 'sold': sold, 'products': products})
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            sold_to = request.POST.get('sold-to')
+            productid = request.POST.get('product-id')
+            h = History()
+            h.product = Product.objects.get(id=productid)
+            h.sold_to = User.objects.get(username=sold_to)
+            h.save()
+            messages.add_message(request, messages.INFO, 'Please delete the product you recently sold.')
+            return redirect('profile')
+        
+        bought = History.objects.filter(sold_to=request.user)
+        sold = list()
+        for p in Product.objects.filter(user=request.user):
+            try:
+                s = History.objects.filter(product=p)
+            except:
+                s = None
+            if s is not None:
+                sold += s
+        products = Product.objects.filter(user=request.user)
+        return render(request, 'accounts/history.html', {'bought': bought, 'sold': sold, 'products': products})
+    else:
+        return redirect('login')
 
 
 class SellListView(ListView):
