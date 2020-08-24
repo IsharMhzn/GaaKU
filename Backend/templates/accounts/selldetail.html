@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block link %}
+	<link rel="stylesheet" type="text/css" href="{% static 'css/comment.css' %}">
+{% endblock %}
+
+
+{% block Description %}
+
+<!-- <div class="right-column">
+    <div class="produc-description">
+        <div class="image-holder">
+            <img src="{{object.img.url}}" alt="" class="model" width="500" height="300" >
+        </div> -->
+        <!-- {% if user.is_authenticated%} -->
+       
+        <!-- <span><h1>Product Name :{{object.name}}</h1></span>
+        
+        <span>{{object.description}}</span>
+        <h1>hello {{user}}</h1>
+        <input type="submit" value="submit"  name="Wish" class="whilist">
+
+        {% endif %} -->
+    <!-- </div>
+</div> --> 
+<div class="cover-container">
+    <div class="flexbox padding">
+          <div class="col2 text-alignment" style="flex-basis: 55%">
+              <h1 class="cover-title">{{object.name}}</h1>
+              <p class="cover-text">
+              <h2><strong>Product-description</strong></h2>
+                <span>{{object.description}}</span>
+                <h3>Price :{{object.price}}</h3>
+                {% if user.is_authenticated%}
+                <h3>Seller name :{{user}}</h3>
+                <h3>Seller email :{{object.user.profile.email}}</h3>
+                <h3>Seller phone no : {{object.user.profile.phone_no}}</h3>
+                {% endif %}
+            </p>
+            {% if object.user == user %}
+            <div class="view-btn">
+              <a href="{% url 'sell-update' product.pk %}" class="button">Update <i class="fa fa-angle-right" aria-hidden="true"></i></a>
+          </div>
+          <div class="view-btn">
+            <a href="{% url 'sell-delete' product.pk %}" class="button"> Delete <i class="fa fa-angle-right" aria-hidden="true"></i></a>
+            {% endif %}
+          </div>
+          </div>
+          <div class="col2 image-scroll" style="flex-basis: 35%">
+            <img src="{{object.img.url}}" alt="" class="cover-image firs"  > 
+         
+        </div>
+    </div>
+</div>
+    
+{% endblock Description %}
