@@ -23,7 +23,8 @@ urlpatterns = [
     path('',include('Home.urls')),
     path('store/',include('store.urls')),
     path('chatbot', include('chatbot.urls')),
-    path('register/', include('Account.urls')), #for register section
+    path('account/', include('Account.urls')),  # for register section
 ]
 
-urlpatterns = urlpatterns + static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
+urlpatterns = urlpatterns + \
+    static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

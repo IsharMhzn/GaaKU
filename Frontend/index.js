@@ -30,6 +30,8 @@ const slides=document.querySelector('.test-slider').children;
 const indicatorImages=document.querySelector('.test-indicator').children;
 let test_index=0;
 
+const subscribe=document.querySelector("#footer-email-btn");
+const mail=document.querySelector("#footer-email")
 
 // items setup per slide
 
@@ -190,6 +192,11 @@ function element_resize(element1,element2){
 	height=element1.clientHeight.toString();
   	element2.style.height=height+"px";
 }
+
+
+subscribe.addEventListener('click',function(){
+	alert(mail.value + "has sucessfully subscribed");
+})
 
 
 right_scrolling_button.addEventListener('click',function(){

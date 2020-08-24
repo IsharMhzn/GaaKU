@@ -1,4 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import redirect
 from django.contrib.sites.shortcuts import get_current_site
@@ -8,7 +10,7 @@ from django.http import HttpResponse
 from django.contrib.auth.hashers import make_password
 
 from .models import Profile, History
-from .forms import SignUpForm, UserUpdateForm, ProfileUpdateForm
+from .forms import SignUpForm, UserUpdateForm, ProfileUpdateForm, ProductForm
 from . import mail
 
 from store.models import Product
@@ -168,3 +170,58 @@ def historyview(request):
 
     return render(request, 'accounts/history.html', {'bought': bought, 'sold': sold, 'products': products})
 
+
+class SellListView(ListView):
+    model = Product
+    template_name = 'accounts/myproducts.html'
+    context = {
+        'products': Product.objects.all()
+    }
+    context_object_name = 'products'
+
+    def get_queryset(self):
+        P_user = get_object_or_404(User, username=self.kwargs.get('username'))
+        return Product.objects.filter(user=P_user)
+
+
+class SellDetailView(DetailView):
+    model = Product
+    template_name = 'accounts/selldetail.html'
+
+
+class SellCreateView(LoginRequiredMixin, CreateView):
+    model = Product
+    form_class = ProductForm
+    template_name = 'accounts/sellcreate.html'
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
+
+class SellUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = Product
+    form_class = ProductForm
+    template_name = 'accounts/sellcreate.html'
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
+    def test_func(self):
+        product = self.get_object()
+        if self.request.user == product.user:
+            return True
+        False
+
+
+class SellDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Product
+    success_url = '/'
+    template_name = 'accounts/sell_confirm_delete.html'
+
+    def test_func(self):
+        product = self.get_object()
+        if self.request.user == product.user:
+            return True
+        False

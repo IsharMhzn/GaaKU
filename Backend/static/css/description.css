@@ -66,10 +66,9 @@ body{
 
 .produc-description{
  background-color: greenyellow;
-  
 }
-.image-holder{
-  
+
+.image-holder {
   border: 1px solid goldenrod;
-  float:left;
+  float: left;
 }
