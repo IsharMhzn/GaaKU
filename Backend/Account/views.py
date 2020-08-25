@@ -207,12 +207,11 @@ def subscribe(request):
 
 def updatesview(request):
     if request.user.is_authenticated:
-        u = Updates.objects.get(user=request.user)
-        if u is not None:
+        try:
+            u = Updates.objects.get(user=request.user)
             products = Product.objects.all()[::-1]
-        else:
+        except:
             products = None
-        
         return render(request, 'accounts/updates.html', {'products': products})
     return redirect('login')
 
