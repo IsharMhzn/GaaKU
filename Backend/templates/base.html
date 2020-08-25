@@ -80,6 +80,7 @@
                   <li class="nav-btn">
                     <a href="{% url 'logout' %}" class="login">Logout</a>
                   </li>
+                  <li class="menu-icon"><i class="fas fa-bars"></i></li>
                   {% else %}
                   <li class="nav-btn">
                     <a href="{% url 'login' %}" class="login">Login</a>
@@ -134,7 +135,99 @@
           </nav>
         </div>
       </div>
-
+      <!--Notification Section-->
+      <div class="notification-container">
+        <div class="button-box">
+          <div id="change-btn"></div>
+          <button type="button" class="toggle-btn notification-btn" style="color: white">Notifications</button>
+          <button type="button" class="toggle-btn update-btn">Updates</button>
+        </div>
+        <div id="notification" class="group">
+          <div class="group-section">
+            User Commented on your Post<br>
+            <span>Time ago</span>
+          </div>
+          <div class="group-section">
+            User Replied on your Post<br>
+            <span>Time ago</span>
+          </div>
+          <div class="group-section">
+            User Commented on your Post<br>
+            <span>Time ago</span>
+          </div>
+          <div class="group-section">
+            User Replied on your Post<br>
+            <span>Time ago</span>
+          </div>
+          <div class="group-section">
+            User Commented on your Post<br>
+            <span>Time ago</span>
+          </div>
+          <div class="group-section">
+            User Replied on your Post<br>
+            <span>Time ago</span>
+          </div>
+          <div class="group-section">
+            User Commented on your Post<br>
+            <span>Time ago</span>
+          </div>
+          <div class="group-section">
+            User Replied on your Post<br>
+            <span>Time ago</span>
+          </div>
+          <div class="group-section">
+            User Commented on your Post<br>
+            <span>Time ago</span>
+          </div>
+          <div class="group-section">
+            User Replied on your Post<br>
+            <span>Time ago</span>
+          </div>
+        </div>
+  
+        <div id="updates" class="group">
+          <div class="group-section">
+            User added Product.Check it Out!<br>
+            <span>Time ago</span>
+          </div>
+          <div class="group-section">
+            User added Product.Check it Out!<br>
+            <span>Time ago</span>
+          </div>
+          <div class="group-section">
+            User added Product.Check it Out!<br>
+            <span>Time ago</span>
+          </div>
+          <div class="group-section">
+            User added Product.Check it Out!<br>
+            <span>Time ago</span>
+          </div>
+          <div class="group-section">
+            User added Product.Check it Out!<br>
+            <span>Time ago</span>
+          </div>
+          <div class="group-section">
+            User added Product.Check it Out!<br>
+            <span>Time ago</span>
+          </div>
+          <div class="group-section">
+            User added Product.Check it Out!<br>
+            <span>Time ago</span>
+          </div>
+          <div class="group-section">
+            User added Product.Check it Out!<br>
+            <span>Time ago</span>
+          </div>
+          <div class="group-section">
+            User added Product.Check it Out!<br>
+            <span>Time ago</span>
+          </div>
+          <div class="group-section">
+            User added Product.Check it Out!<br>
+            <span>Time ago</span>
+          </div>
+        </div>
+      </div>
       <!-- Navigation Bar for small window -->
       <div class="head-wrapper">
         <div class="container">
@@ -201,9 +294,6 @@
     <!---->{%block products %} {% endblock %} {% block Description %}
     <!---->{% endblock %} {% block notification %} {% endblock %}
 
-    <script
-      type="text/javascript"
-      src="{% static 'javascript/index.js' %}"
-    ></script>
+    <script type="text/javascript" src="{% static 'javascript/basehtml.js' %}"></script>
   </body>
 </html>

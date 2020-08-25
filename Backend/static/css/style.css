@@ -223,6 +223,142 @@ a {
   box-shadow: 0 6px 6px rgba(0, 0, 0, 16%);
 }
 
+/*Notification Popup*/
+
+.notification-container{
+	width: 380px;
+	height: 480px;
+	position: relative;
+	margin: 6% auto;
+	background: white;
+	padding: 5px;
+	border-radius: 10px;
+	box-shadow: 6px 6px 6px rgba(0,0,0,16%);
+	overflow: hidden;
+	position: absolute;
+	top: -10px;
+  right: 0px;
+  transform: translateX(-30%);
+	transition:0.5s ease-in;
+	display: none;
+	z-index: 1000;
+}
+
+.notification-container-view{
+	display: block;
+}
+
+
+.menu-icon  .fa-bars{
+  margin-left: 25px;
+  font-size: 1em;
+}
+
+.menu-icon  .fa-times{
+  margin-left: 25px;
+  font-size: 1em;
+}
+
+.menu-icon:hover{
+	font-size: 1.2em;
+	cursor: pointer;
+}
+
+
+.button-box{
+	width: 270px;
+	margin: 35px auto;
+	position: relative;
+	box-shadow: 0 0 20px 9px #5929981f;
+	border-radius: 30px;
+}
+.toggle-btn{
+	font-family: "Oswald",sans-serif;
+	font-size: 1.1em;
+	padding: 10px 30px;
+	cursor: pointer;
+	background: transparent;
+	border:0;
+	outline: none;
+	position: relative;
+}
+
+#change-btn{
+	top: 0;
+	left: 0;
+	position: absolute;
+	width: 135px;
+	height: 100%;
+	background: rgb(76,246,230);
+	background: linear-gradient(345deg, rgba(76,246,230,1) 0%, rgba(85,102,212,1) 39%, rgba(91,66,193,1) 63%, rgba(186,31,172,1) 100%);
+	border-radius: 30px;
+	transition:.5s;
+}
+
+.group{
+	overflow-y: scroll;
+	width: 85%;
+	height: 365px;
+	position: absolute;
+	transition: .5s;
+	font-family: "Open sans",sans-serif;
+}
+
+.group-section{
+	padding: 20px;
+	margin: 8px 0;
+	position: relative;
+}
+
+.group .group-section:not(:last-child)::after{
+	content: "";
+	width: 100%;
+	height: 2px;
+	background: grey;
+	position: absolute;
+	bottom: -5px;
+	left: 0;
+}
+
+.group-section span{
+	margin-left: auto;
+	font-size:0.8rem;
+	color: grey;
+	text-align: right;
+}
+
+#notification{
+	left:32px;
+}
+
+#updates{
+	left:432px;
+}
+
+.group::-webkit-scrollbar {
+    width: 10px;
+}
+ 
+/* Track */
+.group::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+}
+
+/* Handle */
+.group::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  background: rgba(211,211,211,0.8); 
+  box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+}
+.group::-webkit-scrollbar-thumb:window-inactive {
+background: rgba(211,211,211,0.4); 
+}
+
 /*Small Screen Navigation Bar*/
 .head-wrapper {
   background: white;
@@ -975,8 +1111,8 @@ a {
 }
 
 #footer-email-btn{
-	width:100px;
-	height: 40px;
+	width:200px;
+	height: 50px;
 	border-radius: 4px;
 	background: #f9423d;
 	outline: none;
