@@ -72,14 +72,16 @@ def Description(request,pk):
             n = Notification(user=request.user, post=product, comment=c)
             n.save()
 
-            if not product.user == request.user:
-                notifc = NotificationCount.objects.get_or_create(user=product.user)[0]
-            else:
-                notifc = NotificationCount.objects.get_or_create(user=c.reply.user)[0]
-            notifc.old += 1
-            notifc.seen = False
-            notifc.save()
-            print(notifc.seen, notifc.user)
+            try:
+                if not product.user == request.user:
+                    notifc = NotificationCount.objects.get_or_create(user=product.user)[0]
+                else:
+                    notifc = NotificationCount.objects.get_or_create(user=c.reply.user)[0]
+                notifc.old += 1
+                notifc.seen = False
+                notifc.save()
+            except AttributeError:
+                print('ignore this')
 
     if request.user == product.user:
         comments = Comment.objects.filter(post=product, reply=None)

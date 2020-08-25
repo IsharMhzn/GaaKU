@@ -31,7 +31,6 @@ def notificationview(request):
         notifc.seen = True
         notifc.updated = notifc.old
         notifc.save()
-    print(notifc.seen, notifc.user)
     notifications = Notification.objects.all()[::-1]
     notifs = list()
     if request.user.is_authenticated:

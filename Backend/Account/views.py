@@ -159,23 +159,25 @@ def historyview(request):
             sold_to = request.POST.get('sold-to')
             productid = request.POST.get('product-id')
             h = History()
-            h.product = Product.objects.get(id=productid)
-            h.sold_to = User.objects.get(username=sold_to)
+            h.product = Product.objects.get(id=productid).name
+            h.productuser = Product.objects.get(id=productid).user.username
+            h.sold_to = User.objects.get(username=sold_to).username
             h.save()
             messages.add_message(request, messages.INFO, 'Please delete the product you recently sold.')
             return redirect('profile')
         
-        bought = History.objects.filter(sold_to=request.user)
-        sold = list()
-        for p in Product.objects.filter(user=request.user):
-            try:
-                s = History.objects.filter(product=p)
-            except:
-                s = None
-            if s is not None:
-                sold += s
-        products = Product.objects.filter(user=request.user)
-        return render(request, 'accounts/history.html', {'bought': bought, 'sold': sold, 'products': products})
+        bought = History.objects.filter(sold_to=request.user.username)
+        sold = History.objects.filter(productuser = request.user.username)
+
+        # sold = list()
+        # for p in Product.objects.filter(user=request.user):
+        #     try:
+        #         s = History.objects.filter(product=p)
+        #     except:
+        #         s = None
+        #     if s is not None:
+        #         sold += s
+        return render(request, 'accounts/history.html', {'bought': bought, 'sold': sold})
     else:
         return redirect('login')
 

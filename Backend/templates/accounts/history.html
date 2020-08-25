@@ -11,7 +11,7 @@
     <ul class="notif-list">
         {% for b in bought %}
             <li>
-            You bought {{b.product.name}} from {{b.product.user}}
+            You bought {{b.product}} from {{b.productuser}} on {{b.timestamp | date}}
             </li>
         {% endfor %}
     <ul>
@@ -24,7 +24,7 @@
     <ul class="notif-list">
         {% for s in sold %}
             <li>
-            You sold {{s.product.name}} to {{s.sold_to}}
+            You sold {{s.product}} to {{s.sold_to}} on {{s.timestamp | date}}
             </li>
         {% endfor %}
     <ul>
