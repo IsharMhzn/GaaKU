@@ -129,8 +129,6 @@ def activate(request, userid):
 
 def profile(request):
     if request.user.is_authenticated:
-        notifc = NotificationCount.objects.get_or_create(user=request.user)[0]
-        newNotif = not notifc.seen
         if request.method == 'POST':
             u_form = UserUpdateForm(request.POST, instance=request.user)
             p_form = ProfileUpdateForm(
@@ -147,7 +145,6 @@ def profile(request):
         context = {
             'u_form': u_form,
             'p_form': p_form,
-            'newNotif': newNotif,
         }
         return render(request, 'accounts/profile.html', context)
     else:
@@ -191,18 +188,7 @@ def notificationview(request):
             notifc.seen = True
             notifc.updated = notifc.old
             notifc.save()
-        notifications = Notification.objects.all()[::-1]
-        notifs = list()
-        for n in notifications:
-            if n.user != request.user:
-                if n.comment.reply:
-                    if n.comment.reply.user == request.user:
-                        notifs.append(n)
-                        continue
-                if n.post.user == request.user:
-                    notifs.append(n)
-        return render(request, 'accounts/notification.html', {'notifs': notifs})
-    return redirect('login')
+    return redirect('home')
 
 
 def subscribe(request):
@@ -210,15 +196,7 @@ def subscribe(request):
     return redirect('home')
 
 
-def updatesview(request):
-    if request.user.is_authenticated:
-        try:
-            u = Updates.objects.get(user=request.user)
-            products = Product.objects.all()[::-1]
-        except:
-            products = None
-        return render(request, 'accounts/updates.html', {'products': products})
-    return redirect('login')
+
 
 
 class SellListView(ListView):

@@ -9,13 +9,7 @@
     {% if products %}
     <div class='notif-container'>
     <ul class="notif-list">
-        {% for p in products %}
-            <li>
-            <a href='{% url "Description" p.id %}'>
-                {{ p.user }} posted a new product {{p.name}}. Check it out?
-            </a>
-            </li>
-        {% endfor %}
+        
     <ul>
     </div>
     {% endif %}
