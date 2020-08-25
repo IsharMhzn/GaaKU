@@ -22,7 +22,7 @@ def send(domain, userid, email, type):
 
     body = f"""
             Please follow the link below to confirm your account.
-            http://{domain}/account/{type}/{userid}
+           http:/{domain}/account/{type}/{userid}
             Thank you!
     """
     message.attach(MIMEText(body, 'html'))
