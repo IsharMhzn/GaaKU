@@ -13,7 +13,7 @@ from .models import Profile, History
 from .forms import SignUpForm, UserUpdateForm, ProfileUpdateForm, ProductForm
 from . import mail
 
-from store.models import Product
+from store.models import Product, WishlistItem
 from Account.models import NotificationCount, Notification, Updates
 
 # Create your views here.
@@ -49,7 +49,8 @@ def signup_view(request):
                 messages.add_message(
                     request, messages.ERROR, 'Your phone number is not valid.')
     else:
-        messages.add_message(request, messages.INFO, 'Please try to keep your username as simple as possible.')
+        messages.add_message(
+            request, messages.INFO, 'Please try to keep your username as simple as possible.')
         form = SignUpForm()
     return render(request, 'accounts/signup.html', {'form': form})
 
@@ -163,11 +164,12 @@ def historyview(request):
             h.productuser = Product.objects.get(id=productid).user.username
             h.sold_to = User.objects.get(username=sold_to).username
             h.save()
-            messages.add_message(request, messages.INFO, 'Please delete the product you recently sold.')
+            messages.add_message(request, messages.INFO,
+                                 'Please delete the product you recently sold.')
             return redirect('profile')
-        
+
         bought = History.objects.filter(sold_to=request.user.username)
-        sold = History.objects.filter(productuser = request.user.username)
+        sold = History.objects.filter(productuser=request.user.username)
 
         # sold = list()
         # for p in Product.objects.filter(user=request.user):
@@ -180,6 +182,7 @@ def historyview(request):
         return render(request, 'accounts/history.html', {'bought': bought, 'sold': sold})
     else:
         return redirect('login')
+
 
 def notificationview(request):
     if request.user.is_authenticated:
@@ -198,12 +201,14 @@ def notificationview(request):
                         continue
                 if n.post.user == request.user:
                     notifs.append(n)
-        return render(request, 'accounts/notification.html', {'notifs':notifs})
+        return render(request, 'accounts/notification.html', {'notifs': notifs})
     return redirect('login')
+
 
 def subscribe(request):
     u = Updates.objects.get_or_create(user=request.user)
     return redirect('home')
+
 
 def updatesview(request):
     if request.user.is_authenticated:
@@ -214,7 +219,6 @@ def updatesview(request):
             products = None
         return render(request, 'accounts/updates.html', {'products': products})
     return redirect('login')
-
 
 
 class SellListView(ListView):
@@ -271,3 +275,16 @@ class SellDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         if self.request.user == product.user:
             return True
         False
+
+
+class WishListView(ListView):
+    model = WishlistItem
+    template_name = 'accounts/wishlist.html'
+    context = {
+        'items': WishlistItem.objects.all()
+    }
+    context_object_name = 'items'
+
+    def get_queryset(self):
+        P_user = get_object_or_404(User, username=self.kwargs.get('username'))
+        return WishlistItem.objects.filter(user=P_user)

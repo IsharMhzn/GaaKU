@@ -9,6 +9,10 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- Linking Font -->
+  	<link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@300&family=Open+Sans:ital,wght@0,400;1,300;1,400&family=Oswald:wght@300;400&display=swap" rel="stylesheet">
+  	<!-- Linking to Font Awesome -->
+  	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
 
     <link rel="stylesheet" type="text/css" href="{% static 'css/profile.css' %}">
 
@@ -29,7 +33,7 @@
           <div class="collapse navbar-collapse" id="navbarToggle">
             <div class="navbar-nav mr-auto">
               <a class="nav-item nav-link" href="{% url 'home' %}">Home</a>
-              <a class="nav-item nav-link" href="{#">About</a>
+              <a class="nav-item nav-link" href="#">About</a>
             </div>
             <!-- Navbar Right Side -->
             <div class="navbar-nav">
@@ -75,7 +79,7 @@
                 <li class="list-group-item list-group-item-light"><a href = '{% url "notification" %}'>Notification</a></li>
                 {% endif %}
                 <li class="list-group-item list-group-item-light">
-                  <a href="{% url 'updates' %}">Updates</a>  
+                  <a href="{% url 'wishlist' user.username %}">Wishlist <i class="fa fa-heart"></i>  </a>  
                 </li>
               </ul>
             </p>
