@@ -4,7 +4,7 @@ from django.views.generic import ListView, DetailView, View
 from .models import Product , Customer ,WishlistItem,Wishlist,Comment
 from django.utils import timezone
 from django.shortcuts import redirect
-from Account.models import Notification
+from Account.models import Notification, NotificationCount
 
 # Create your views here.
 class pmainpage(ListView):
@@ -72,8 +72,26 @@ def Description(request,pk):
             n = Notification(user=request.user, post=product, comment=c)
             n.save()
 
-    comments = Comment.objects.filter(post=product, reply=None)
-    replies = Comment.objects.filter(post=product).exclude(reply=None)
+            try:
+                if not product.user == request.user:
+                    notifc = NotificationCount.objects.get_or_create(user=product.user)[0]
+                else:
+                    notifc = NotificationCount.objects.get_or_create(user=c.reply.user)[0]
+                notifc.old += 1
+                notifc.seen = False
+                notifc.save()
+            except AttributeError:
+                print('ignore this')
+
+    if request.user == product.user:
+        comments = Comment.objects.filter(post=product, reply=None)
+    else:
+        comments = Comment.objects.filter(post=product, reply=None, user=request.user)
+    
+    if request.user == product.user:
+        replies = Comment.objects.filter(post=product).exclude(reply=None)
+    else:
+        replies = Comment.objects.filter(post=product).exclude(reply=None)
     return render(request, 'Description.html', {'comments':comments,'replies': replies, 'object':product})
         
     

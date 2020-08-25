@@ -7,12 +7,12 @@ from store.models import Product
 
 batch_choices = [(i, i) for i in range(2012, 2021)]
 department_choices = [
-    ('chem', ('Department of Chemical Science and Engineering')),
-    ('civil', ('Department of Civil Engineering')),
-    ('comp', ('Department of Computer Science and Engineering')),
-    ('mech', ('Department of Mechanical Engineering')),
-    ('elec', ('Department of Electrical and Electronics Engineering')),
-    ('geo', ('Department of Geomatics Engineering')),
+    ('chem', 'Department of Chemical Science and Engineering'),
+    ('civil', 'Department of Civil Engineering'),
+    ('comp', 'Department of Computer Science and Engineering'),
+    ('mech', 'Department of Mechanical Engineering'),
+    ('elec', 'Department of Electrical and Electronics Engineering'),
+    ('geo', 'Department of Geomatics Engineering'),
 ]
 semester_choices = [
     (1, 'I'),
@@ -49,7 +49,7 @@ class SignUpForm(UserCreationForm):
     first_name = forms.CharField(help_text='First name')
     last_name = forms.CharField(help_text='Last name')
     email = forms.EmailField(help_text='Email address')
-    dob = forms.DateField(help_text='Date of birth')
+    dob = forms.DateField(help_text='Date of birth', widget=forms.TextInput(attrs={'placeholder': 'Format: YYYY-MM-DD'}))
     batch = forms.IntegerField(widget=forms.Select(choices=batch_choices))
     department = forms.CharField(
         widget=forms.Select(choices=department_choices))

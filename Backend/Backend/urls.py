@@ -20,8 +20,9 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('Home.urls')),
-    path('store/', include('store.urls')),
+    path('',include('Home.urls')),
+    path('store/',include('store.urls')),
+    path('chatbot', include('chatbot.urls')),
     path('account/', include('Account.urls')),  # for register section
 ]
 

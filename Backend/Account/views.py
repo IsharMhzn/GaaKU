@@ -9,10 +9,12 @@ from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.contrib.auth.hashers import make_password
 
-from .models import Profile
-from store.models import Product
+from .models import Profile, History
 from .forms import SignUpForm, UserUpdateForm, ProfileUpdateForm, ProductForm
 from . import mail
+
+from store.models import Product
+from Account.models import NotificationCount, Notification, Updates
 
 # Create your views here.
 
@@ -45,8 +47,9 @@ def signup_view(request):
                 return HttpResponse('Please check your email to complete your registration. Kindly check your spam if needed.')
             else:
                 messages.add_message(
-                    request, messages.ERROR, 'You phone number is not valid.')
+                    request, messages.ERROR, 'Your phone number is not valid.')
     else:
+        messages.add_message(request, messages.INFO, 'Please try to keep your username as simple as possible.')
         form = SignUpForm()
     return render(request, 'accounts/signup.html', {'form': form})
 
@@ -73,12 +76,13 @@ def logout_user(request):
 
 def forgot_password(request):
     if request.method == 'POST':
-        email = request.POST.get('email')
-        user = User.objects.get(email=email)
+        # email = request.POST.get('email')
+        username = request.POST.get('username')
+        user = User.objects.get(username=username)
         if user is not None:
             uid = (int(user.pk) + 945) * 556535
             mail.send(domain=get_current_site(request),
-                      userid=uid, email=user.email, type='reset')
+                      userid=uid, email=user.profile.email, type='reset')
             return HttpResponse('Please check your email to complete your registration. Kindly check your spam if needed.')
         else:
             messages.add_message(request, messages.INFO,
@@ -123,25 +127,95 @@ def activate(request, userid):
 
 
 def profile(request):
-    if request.method == 'POST':
-        u_form = UserUpdateForm(request.POST, instance=request.user)
-        p_form = ProfileUpdateForm(
-            request.POST, request.FILES, instance=request.user.profile)
-        if u_form.is_valid() and p_form.is_valid():
-            u_form.save()
-            p_form.save()
-            messages.success(request, f'Your account has been updated!')
-            return redirect('profile')
+    if request.user.is_authenticated:
+        notifc = NotificationCount.objects.get_or_create(user=request.user)[0]
+        newNotif = not notifc.seen
+        if request.method == 'POST':
+            u_form = UserUpdateForm(request.POST, instance=request.user)
+            p_form = ProfileUpdateForm(
+                request.POST, request.FILES, instance=request.user.profile)
+            if u_form.is_valid() and p_form.is_valid():
+                u_form.save()
+                p_form.save()
+                messages.success(request, f'Your account has been updated!')
+                return redirect('profile')
+        else:
+            u_form = UserUpdateForm(instance=request.user)
+            p_form = ProfileUpdateForm(instance=request.user.profile)
+
+        context = {
+            'u_form': u_form,
+            'p_form': p_form,
+            'newNotif': newNotif,
+        }
+        return render(request, 'accounts/profile.html', context)
     else:
-        u_form = UserUpdateForm(instance=request.user)
-        p_form = ProfileUpdateForm(instance=request.user.profile)
+        return redirect('login')
 
-    context = {
-        'u_form': u_form,
-        'p_form': p_form
-    }
 
-    return render(request, 'accounts/profile.html', context)
+def historyview(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            sold_to = request.POST.get('sold-to')
+            productid = request.POST.get('product-id')
+            h = History()
+            h.product = Product.objects.get(id=productid).name
+            h.productuser = Product.objects.get(id=productid).user.username
+            h.sold_to = User.objects.get(username=sold_to).username
+            h.save()
+            messages.add_message(request, messages.INFO, 'Please delete the product you recently sold.')
+            return redirect('profile')
+        
+        bought = History.objects.filter(sold_to=request.user.username)
+        sold = History.objects.filter(productuser = request.user.username)
+
+        # sold = list()
+        # for p in Product.objects.filter(user=request.user):
+        #     try:
+        #         s = History.objects.filter(product=p)
+        #     except:
+        #         s = None
+        #     if s is not None:
+        #         sold += s
+        return render(request, 'accounts/history.html', {'bought': bought, 'sold': sold})
+    else:
+        return redirect('login')
+
+def notificationview(request):
+    if request.user.is_authenticated:
+        notifc = NotificationCount.objects.get_or_create(user=request.user)[0]
+        if not notifc.seen:
+            notifc.seen = True
+            notifc.updated = notifc.old
+            notifc.save()
+        notifications = Notification.objects.all()[::-1]
+        notifs = list()
+        for n in notifications:
+            if n.user != request.user:
+                if n.comment.reply:
+                    if n.comment.reply.user == request.user:
+                        notifs.append(n)
+                        continue
+                if n.post.user == request.user:
+                    notifs.append(n)
+        return render(request, 'accounts/notification.html', {'notifs':notifs})
+    return redirect('login')
+
+def subscribe(request):
+    u = Updates.objects.get_or_create(user=request.user)
+    return redirect('home')
+
+def updatesview(request):
+    if request.user.is_authenticated:
+        u = Updates.objects.get(user=request.user)
+        if u is not None:
+            products = Product.objects.all()[::-1]
+        else:
+            products = None
+        
+        return render(request, 'accounts/updates.html', {'products': products})
+    return redirect('login')
+
 
 
 class SellListView(ListView):

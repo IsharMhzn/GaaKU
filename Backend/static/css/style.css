@@ -1135,9 +1135,12 @@ a {
 		width: 80%;
 	}*/
 
-	.image{
+.image{
 		width: 2rem;
 		margin-left: 10px;
 		margin-right: 30px;
 	}
+}
+.userheader {
+  text-align: center;
 }

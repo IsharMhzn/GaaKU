@@ -204,7 +204,7 @@
 	<section class="testimonials">
 		<div class="test-container">
 			<div class="test-title" style="flex-basis: 20%;">
-				<h1> See what our customers has to say...</h1>
+				<h1> See what our customers have to say...</h1>
 			</div>
 			<div class="test-content" style="flex-basis:70%">
 				<div class="test-slider">
@@ -247,17 +247,29 @@
 		</div>
 	</section>
 
-	<!---Subscription Section------------------------------->
-	<div class="subscribe-container">
-		<div class="sub-col1">
-			<h1>Keep Updated With Our Products</h1>
-			Subscribe Now To get Notify to Our Latest Entries.
+	{% if request.user.is_authenticated %}
+		<div class="subscribe-container">
+			<div class="sub-col1">
+				<h1>Keep Yourself Updated With Our Products</h1>
+				Subscribe Now To get Notify to Our Latest Entries.
+			</div>
+			<div class="sub-col2">
+				<input type="email" placeholder="Enter your email address" id="footer-email">
+				<a href="{% url 'subscribe-update' %}"><input type="submit" value="Subscribe" id="footer-email-btn"></a> 
+			</div>
 		</div>
-		<div class="sub-col2">
-			<input type="email" placeholder="Enter your email address" id="footer-email">
-			<input type="submit" value="Subscribe" id="footer-email-btn"> 
+	{% else %}
+		<div class="subscribe-container">
+			<div class="sub-col1">
+				<h1>Want to buy or sell something?</h1>
+				Start by making an account first.
+			</div>
+			<div class="sub-col2">
+				<a href="{% url 'login' %}"><button type="submit" value="Login" id="footer-email-btn">Login</button></a>
+				<a href="{% url 'signup' %}"><button type="submit" value="Signup" id="footer-email-btn">Signup</button></a>
+			</div>
 		</div>
-	</div>
+	{% endif %}
 
 	<!-- footer -->
 	<footer class="footer-container">
@@ -276,7 +288,7 @@
 				<a href="#"><i class="fas fa-map-marker-alt"></i> 28-Kilo, Kavre</a>
 				<a href="#"><i class="fas fa-phone-alt"></i> 011-432076</a>
 				<a href="#"><i class="fas fa-mobile"></i> +977-9843785412</a>
-				<a href="#"><i class="fas fa-envelope"></i> gaaku@gmail.com</a>
+				<a href="#"><i class="fas fa-envelope"></i> gaakuapp@gmail.com</a>
 			</div>
 			<div class="footer-heading footer-3">
 				<h2>Social Media</h2>
@@ -288,7 +300,7 @@
 			</div>
 			<div cLass="footer-email-form">
 				<div>
-					<img src="{% static 'image/logo white.png' %}" id="logo2">
+					<img src="{% static 'image/Logo white.png' %}" id="logo2">
 				</div>
 			</div>
 		</div>
