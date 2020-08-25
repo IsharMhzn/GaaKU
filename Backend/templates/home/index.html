@@ -5,10 +5,11 @@
     GaaKU - Get Anything at KU
 {% endblock %}
 
+{% block bar %}
+        <li class="menu-icon"><i class="fas fa-bars"></i></li>
+{% endblock %}
+
 {% block body %}
-	{% block bar %}
-                    <li class="menu-icon"><i class="fas fa-bars"></i></li>
-                  {% endblock %}
 	{% block notif-update %}
 	<!--Notification Section-->
       <div class="notification-container">
@@ -49,7 +50,6 @@
                 <a href='{% url "Description" u.id %}'>
                     {{ u.user }} added a new product {{u.name}}. Check it out!
                 </a><br>
-                <span>{{u.timestamp | timesince}} ago</span>
               </div>
             </li>
         {% endfor %}
