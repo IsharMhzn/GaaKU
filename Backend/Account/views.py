@@ -14,7 +14,7 @@ from .forms import SignUpForm, UserUpdateForm, ProfileUpdateForm, ProductForm
 from . import mail
 
 from store.models import Product
-from Account.models import NotificationCount
+from Account.models import NotificationCount, Notification, Updates
 
 # Create your views here.
 
@@ -180,6 +180,42 @@ def historyview(request):
         return render(request, 'accounts/history.html', {'bought': bought, 'sold': sold})
     else:
         return redirect('login')
+
+def notificationview(request):
+    if request.user.is_authenticated:
+        notifc = NotificationCount.objects.get_or_create(user=request.user)[0]
+        if not notifc.seen:
+            notifc.seen = True
+            notifc.updated = notifc.old
+            notifc.save()
+        notifications = Notification.objects.all()[::-1]
+        notifs = list()
+        for n in notifications:
+            if n.user != request.user:
+                if n.comment.reply:
+                    if n.comment.reply.user == request.user:
+                        notifs.append(n)
+                        continue
+                if n.post.user == request.user:
+                    notifs.append(n)
+        return render(request, 'accounts/notification.html', {'notifs':notifs})
+    return redirect('login')
+
+def subscribe(request):
+    u = Updates.objects.get_or_create(user=request.user)
+    return redirect('home')
+
+def updatesview(request):
+    if request.user.is_authenticated:
+        u = Updates.objects.get(user=request.user)
+        if u is not None:
+            products = Product.objects.all()[::-1]
+        else:
+            products = None
+        
+        return render(request, 'accounts/updates.html', {'products': products})
+    return redirect('login')
+
 
 
 class SellListView(ListView):

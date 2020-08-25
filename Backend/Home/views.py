@@ -25,22 +25,3 @@ def index(request):
 
     return render(request,'home/index.html',{'products':products, 'featuredProducts':resultFeatuedProducts,'negotiable':resultNegoitableProduct});
 
-def notificationview(request):
-    notifc = NotificationCount.objects.get_or_create(user=request.user)[0]
-    if not notifc.seen:
-        notifc.seen = True
-        notifc.updated = notifc.old
-        notifc.save()
-    notifications = Notification.objects.all()[::-1]
-    notifs = list()
-    if request.user.is_authenticated:
-        for n in notifications:
-            if n.user != request.user:
-                if n.comment.reply:
-                    if n.comment.reply.user == request.user:
-                        notifs.append(n)
-                        continue
-                if n.post.user == request.user:
-                    notifs.append(n)
-        return render(request, 'home/notification.html', {'notifs':notifs})
-    return redirect('login')

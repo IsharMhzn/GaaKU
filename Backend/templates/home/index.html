@@ -204,7 +204,7 @@
 	<section class="testimonials">
 		<div class="test-container">
 			<div class="test-title" style="flex-basis: 20%;">
-				<h1> See what our customers has to say...</h1>
+				<h1> See what our customers have to say...</h1>
 			</div>
 			<div class="test-content" style="flex-basis:70%">
 				<div class="test-slider">
@@ -255,7 +255,7 @@
 			</div>
 			<div class="sub-col2">
 				<input type="email" placeholder="Enter your email address" id="footer-email">
-				<input type="submit" value="Subscribe" id="footer-email-btn"> 
+				<a href="{% url 'subscribe-update' %}"><input type="submit" value="Subscribe" id="footer-email-btn"></a> 
 			</div>
 		</div>
 	{% else %}

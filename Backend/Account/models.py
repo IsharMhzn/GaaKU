@@ -63,5 +63,9 @@ class History(models.Model):
 
     def __str__(self):
         return f'{self.productuser} sold {self.product} to {self.sold_to}.'
-    
+
+class Updates(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    timestamp = models.DateTimeField(auto_now_add=True)
+        
     
