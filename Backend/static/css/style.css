@@ -310,7 +310,7 @@ a {
 	position: relative;
 }
 
-.group .group-section:not(:last-child)::after{
+ .group .group-section a:not(:last-child)::after{
 	content: "";
 	width: 100%;
 	height: 2px;
