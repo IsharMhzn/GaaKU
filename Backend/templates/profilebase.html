@@ -73,11 +73,6 @@
                   <a href="{% url 'myproducts' user.username %}">My Products</a>  
                 </li>
                 <li class="list-group-item list-group-item-light"><a href = "{% url 'trans-history' %}">History</a></li>
-                {% if newNotif %}
-                <li class="list-group-item list-group-item-light"><a href = '{% url "notification" %}'>Notification (New)</a></li>
-                {% else %}
-                <li class="list-group-item list-group-item-light"><a href = '{% url "notification" %}'>Notification</a></li>
-                {% endif %}
                 <li class="list-group-item list-group-item-light">
                   <a href="{% url 'wishlist' user.username %}">Wishlist <i class="fa fa-heart"></i>  </a>  
                 </li>

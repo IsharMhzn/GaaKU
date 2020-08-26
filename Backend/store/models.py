@@ -27,6 +27,7 @@ class Product(models.Model):
     img = models.ImageField(upload_to='pics', null=True, blank=True)
     contact_info = models.TextField()
     urgent = models.BooleanField(default=False, blank=True)
+    timestamp = models.DateTimeField(auto_now_add=True, null=True)
 
     def get_absolute_url(self):
         return reverse("Description", kwargs={"pk": self.pk})

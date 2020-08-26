@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import (login_view, logout_user, signup_view, activate, forgot_password, password_reset, historyview, notificationview, subscribe, updatesview,
+from .views import (login_view, logout_user, signup_view, activate, forgot_password, password_reset, historyview, notificationview, subscribe,
                     profile, SellListView, SellDetailView, SellCreateView, SellUpdateView, SellDeleteView, WishListView)
 
 urlpatterns = [
@@ -11,7 +11,6 @@ urlpatterns = [
     path('forgot/', forgot_password, name='forgot password'),
     path('reset/<userid>', password_reset, name='pasword_reset'),
     path('subscribe/', subscribe, name='subscribe-update'),
-    path('updates/', updatesview, name='updates'),
     path('profile/', profile, name='profile'),
     path('profile/history', historyview, name='trans-history'),
     path('profile/sell/<str:username>',

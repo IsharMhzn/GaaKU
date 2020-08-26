@@ -1,10 +1,38 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from store.models import Product
-from Account.models import Notification, NotificationCount
+from Account.models import Notification, NotificationCount, Updates
 import random
 # Create your views here.
 def index(request):
+    notifs = []
+    newNotif = None
+    allproducts = []
+    if request.user.is_authenticated:
+        notifc = NotificationCount.objects.get_or_create(user=request.user)[0]
+        newNotif = not notifc.seen
+        notifc = NotificationCount.objects.get_or_create(user=request.user)[0]
+        notifications = Notification.objects.all()[::-1]
+        notifs = list()
+        for n in notifications:
+            if n.user != request.user:
+                if n.comment.reply:
+                    if n.comment.reply.user == request.user:
+                        notifs.append(n)
+                        continue
+                if n.post.user == request.user:
+                    notifs.append(n)
+        
+        try:
+            u = Updates.objects.get(user=request.user)
+            allpros = Product.objects.all()[::-1]
+            for p in allpros:
+                if p.timestamp:
+                    if u.timestamp < p.timestamp:
+                        if p.user != request.user:
+                            allproducts.append(p)
+        except:
+            allproducts = None
     products=Product.objects.all()[::-1][:10]
     featuredProducts=Product.objects.all()
     negotiableProducts=Product.objects.filter(negotiation=True)
@@ -23,5 +51,11 @@ def index(request):
             resultNegoitableProduct.append(item)
     resultNegoitableProduct=resultNegoitableProduct[:10]
 
-    return render(request,'home/index.html',{'products':products, 'featuredProducts':resultFeatuedProducts,'negotiable':resultNegoitableProduct});
+    context = {'products':products, 
+               'featuredProducts':resultFeatuedProducts,
+               'negotiable':resultNegoitableProduct,
+               'notifs':notifs,
+               'updates':allproducts,
+               'newNotif': newNotif}
+    return render(request,'home/index.html', context)
 

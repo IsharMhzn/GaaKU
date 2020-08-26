@@ -80,6 +80,8 @@
                   <li class="nav-btn">
                     <a href="{% url 'logout' %}" class="login">Logout</a>
                   </li>
+                  {% block bar %}
+                  {% endblock %}
                   {% else %}
                   <li class="nav-btn">
                     <a href="{% url 'login' %}" class="login">Login</a>
@@ -134,7 +136,8 @@
           </nav>
         </div>
       </div>
-
+      {% block notif-update %}
+      {% endblock %}
       <!-- Navigation Bar for small window -->
       <div class="head-wrapper">
         <div class="container">
@@ -201,9 +204,6 @@
     <!---->{%block products %} {% endblock %} {% block Description %}
     <!---->{% endblock %} {% block notification %} {% endblock %}
 
-    <script
-      type="text/javascript"
-      src="{% static 'javascript/index.js' %}"
-    ></script>
+    <script type="text/javascript" src="{% static 'javascript/basehtml.js' %}"></script>
   </body>
 </html>
