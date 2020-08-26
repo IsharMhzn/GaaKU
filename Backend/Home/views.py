@@ -5,6 +5,9 @@ from Account.models import Notification, NotificationCount, Updates
 import random
 # Create your views here.
 def index(request):
+    notifs = []
+    newNotif = None
+    allproducts = []
     if request.user.is_authenticated:
         notifc = NotificationCount.objects.get_or_create(user=request.user)[0]
         newNotif = not notifc.seen
@@ -22,10 +25,14 @@ def index(request):
         
         try:
             u = Updates.objects.get(user=request.user)
-            allproducts = Product.objects.all()[::-1]
+            allpros = Product.objects.all()[::-1]
+            for p in allpros:
+                if p.timestamp:
+                    if u.timestamp < p.timestamp:
+                        if p.user != request.user:
+                            allproducts.append(p)
         except:
             allproducts = None
-
     products=Product.objects.all()[::-1][:10]
     featuredProducts=Product.objects.all()
     negotiableProducts=Product.objects.filter(negotiation=True)
