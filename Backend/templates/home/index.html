@@ -46,7 +46,6 @@
                 <a href='{% url "Description" u.id %}'>
                     {{ u.user }} added a new product {{u.name}}. Check it out!
                 </a><br>
-                <span>{{u.timestamp | timesince}} ago</span>
               </div>
         {% endfor %}
         {% endif %}
