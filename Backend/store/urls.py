@@ -5,7 +5,7 @@ from . import views
 
 urlpatterns = [
     path('',views.pmainpage.as_view(),name='pmainpage'),
-    path('Description/<int:pk>/',views.Description,name='Description'),
+    path('pdescription/<int:pk>/',views.pdescription,name='pdescription'),
     path('Landing/', views.Landingpage,name='Landingpage'),
     path('<category>',views.category,name='category'),
     path('search/',views.search,name='search'),

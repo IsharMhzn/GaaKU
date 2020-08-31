@@ -46,13 +46,13 @@ def add_to_whishlist(request, pk):
                     order_item.save()
                     messages.info(
                         request, "This item's quantity was updated in your wishlist. Please check your Profile.")
-                    return redirect("Description", pk=pk)
+                    return redirect("pdescription", pk=pk)
 
                 else:
                     order.items.add(order_item)
                     messages.info(
                         request, "This item was added to your wishlist. Please check your Profile.")
-                    return redirect("Description", pk=pk)
+                    return redirect("pdescription", pk=pk)
             else:
                 ordered_date = timezone.now()
                 order = Wishlist.objects.create(
@@ -60,15 +60,15 @@ def add_to_whishlist(request, pk):
                 order.items.add(order_item)
                 messages.info(
                     request, "This item was added to your wishlist. Please check your Profile.")
-                return redirect("Description", pk=pk)
+                return redirect("pdescription", pk=pk)
         except request.user.DoesNotExist:
-            return redirect("Description", pk=pk)
+            return redirect("pdescription", pk=pk)
 
     else:
         print("Your are not  allowed")
 
 
-def Description(request, pk):
+def pdescription(request, pk):
     product = Product.objects.get(id=pk)
     if request.method == 'POST':
         content = request.POST.get('comment-content')
@@ -106,7 +106,7 @@ def Description(request, pk):
         replies = Comment.objects.filter(post=product).exclude(reply=None)
     else:
         replies = Comment.objects.filter(post=product).exclude(reply=None)
-    return render(request, 'Description.html', {'comments': comments, 'replies': replies, 'object': product})
+    return render(request, 'pdescription.html', {'comments': comments, 'replies': replies, 'object': product})
 
 
 # def Description(request,id):

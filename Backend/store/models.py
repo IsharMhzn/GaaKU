@@ -30,7 +30,7 @@ class Product(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True, null=True)
 
     def get_absolute_url(self):
-        return reverse("Description", kwargs={"pk": self.pk})
+        return reverse("pdescription", kwargs={"pk": self.pk})
 
     def get_add_to_whishlist_url(self):
         return reverse("add_to_whishlist", kwargs={"pk": self.pk})
