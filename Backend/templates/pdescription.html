@@ -3,11 +3,22 @@
 
 {% block link %}
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
 {% endblock %}
 
 {% block link2 %} 
 <style>
+
+.alert{
+	position: relative;
+    padding: .75rem 1.25rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+	border-radius: .25rem;
+	color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb
+}
 /*Product Description*/
 .product-description-container{
 	min-width: 650px;
@@ -382,6 +393,7 @@
 
 
 {% block Description2 %}
+
 <div class="product-description-container">
 	{% if messages %}
 	{% for message in messages %}
