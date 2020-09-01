@@ -20,6 +20,7 @@
 	<link rel="stylesheet" type="text/css" href="{%  static 'css/description.css' %}" >
 
     {% block link %} {% endblock %}
+    {% block link2 %} {% endblock %}
   </head>
   <body>
     <header>
@@ -200,10 +201,13 @@
       </div>
     </header>
 
-    {% block body%} {% endblock %} {% block newarrivals %} {% endblock %}
-    <!---->{%block products %} {% endblock %} {% block Description %}
-    <!---->{% endblock %} {% block notification %} {% endblock %}
+    {% block body%} {% endblock %} 
+    {% block newarrivals %} {% endblock %}
+    {%block products %} {% endblock %} 
+    {% block Description %}{% endblock %} 
+    {% block Description2 %}{% endblock %}
+    {% block notification %} {% endblock %}
 
-    <script type="text/javascript" src="{% static 'javascript/basehtml.js' %}"></script>
+    
   </body>
 </html>

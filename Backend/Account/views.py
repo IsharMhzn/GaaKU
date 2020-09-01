@@ -163,7 +163,7 @@ def historyview(request):
             h.save()
             messages.add_message(request, messages.INFO,
                                  'Please delete the product you recently sold.')
-            return redirect('profile')
+            return redirect('sell-detail', pk=productid)
 
         bought = History.objects.filter(sold_to=request.user.username)
         sold = History.objects.filter(productuser=request.user.username)
@@ -194,9 +194,6 @@ def notificationview(request):
 def subscribe(request):
     u = Updates.objects.get_or_create(user=request.user)
     return redirect('home')
-
-
-
 
 
 class SellListView(ListView):

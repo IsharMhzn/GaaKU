@@ -8,6 +8,9 @@ const change_bar=document.querySelector('.menu-icon i');
 const notification_container=document.querySelector('.notification-container')
 let visible=false;
 
+
+
+
 //Notification
 
 notify_btn.addEventListener('click',function(){
@@ -42,6 +45,3 @@ bar.addEventListener('click',function(){
 	}
 })
 
-document.querySelector('.menu-icons').addEventListener('click',()=>{
-	document.querySelector('.container-nav').classList.toggle('active');
-});

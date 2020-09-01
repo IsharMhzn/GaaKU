@@ -9,12 +9,12 @@ ul {
   list-style: none;
 }
 /* Navigation Bar */
-/*.fixed-nav{
+.fixed-nav{
 	position: fixed;
+	top: 0;
 	width: 100%;
-	top:0;
-	left: 0;
-}*/
+	z-index: 1000;
+}
 .firt-nav {
   background: white;
   padding: 4px;
@@ -556,7 +556,7 @@ background: rgba(211,211,211,0.4);
 
 .cover-container{
 	max-width: 1300px;
-	margin: 30px auto 0 auto;
+	margin: 150px auto 0 auto;
 }
 
 
