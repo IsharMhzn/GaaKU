@@ -1,7 +1,0 @@
-{
-  "extends": ["prettier", "prettier/@typescript-eslint", "prettier/babel"],
-  "parserOptions": {
-    "sourceType": "module",
-    "ecmaVersion": 2015
-  }
-}
