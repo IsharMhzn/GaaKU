@@ -21,6 +21,7 @@
 
     {% block link %} {% endblock %}
     {% block link2 %} {% endblock %}
+    {% block link3 %} {% endblock %}
   </head>
   <body>
     <header>
@@ -73,7 +74,7 @@
                   <li>
                     <a href='{% url "pmainpage" %}' class="links">Products</a>
                   </li>
-                  <li><a href="#" class="links">About</a></li>
+                  <li><a href='{% url "about" %}' class="links">About</a></li>
                   {% if request.user.is_authenticated %}
                   <li>
                     <a href='{% url "profile" %}'>Profile</a>
@@ -186,7 +187,7 @@
                 </ul>
               </li>
               <li>
-                <a href="#">About</a>
+                <a href='{% url "about" %}'>About</a>
               </li>
               <li>
                 <a href='{% url "profile" %}'>Profile</a>
@@ -207,7 +208,47 @@
     {% block Description %}{% endblock %} 
     {% block Description2 %}{% endblock %}
     {% block notification %} {% endblock %}
+    {% block about %} {% endblock %}
 
-    
+    <!-- footer -->
+	<footer class="footer-container">
+		<div class="footer">
+			<div class="footer-heading footer-1">
+				<h2>Quick Links</h2>
+				<a href="#">Home</a>
+				<a href="#">Products</a>
+				<a href="#">Profile</a>
+				<a href="#">Wishlists</a>
+				<a href="#">About us</a>
+				<a href="#">Terms of Use</a>
+			</div>
+			<div class="footer-heading footer-2">
+				<h2>Contact Us</h2>
+				<a href="#"><i class="fas fa-map-marker-alt"></i> 28-Kilo, Kavre</a>
+				<a href="#"><i class="fas fa-phone-alt"></i> 011-432076</a>
+				<a href="#"><i class="fas fa-mobile"></i> +977-9843785412</a>
+				<a href="#"><i class="fas fa-envelope"></i> gaakuapp@gmail.com</a>
+			</div>
+			<div class="footer-heading footer-3">
+				<h2>Social Media</h2>
+				<a href="#"><i class="fab fa-instagram"></i>Instagram</a>
+				<a href="#"><i class="fab fa-facebook"></i>Facebook</a>
+				<a href="#"><i class="fab fa-youtube"></i>YouTube</a>
+				<a href="#"><i class="fab fa-twitter"></i>Twitter</a>
+				<a href="#"><i class="fab fa-discord"></i></i>Discord</a>
+			</div>
+			<div cLass="footer-email-form">
+				<div>
+					<img src="{% static 'image/Logo white.png' %}" id="logo2">
+				</div>
+			</div>
+		</div>
+		
+	</footer>
+	<footer>
+		<div class="copyright-container">
+			@Copyright 2020 gaaku.com. All Rights are Preserved. Developed by GaaKU Team
+		</div>
+	</footer>
   </body>
 </html>

@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block link3 %}
+    <link rel="stylesheet" type="text/css" href="{%  static 'css/about.css' %}" >
+{% endblock %}
+{% block about %}
+
+<section class="about">
+    <div class = "about-image" style='background: url(../static/image/11.jpg) center/cover no-repeat '>
+        <!-- image here -->
+    </div>
+
+    <div class = "about-content">
+        <h2>About Us</h2>
+        <span><!-- line here --></span>
+
+        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nobis aspernatur voluptas inventore ab voluptates nostrum minus illo laborum harum laudantium earum ut, temporibus fugiat sequi explicabo facilis unde quos corporis!</p>
+    </div>
+</section>
+<div class="wrapper">
+    <h1>Our Team</h1>
+    <div class="our_team">
+        <div class="team_member">
+          <div class="member_img">
+             <img src="{%static 'image/a.jpg'%}" alt="our_team">
+            <div class="social_media">
+               <div class="facebook item"><i class="fab fa-facebook-f"></i></div>
+               <div class="twitter item"><i class="fab fa-twitter"></i></div>
+               <div class="instagram item"><i class="fab fa-instagram"></i></div>
+             </div>
+          </div>
+          <h3>Aron Shrestha</h3>
+          <span>Student</span>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione perspiciatis, error deleniti quaerat beatae doloribus incidunt excepturi. Fugit deleniti accusantium neque hic quidem voluptatibus cumque.</p>
+        </div>
+        <div class="team_member">
+           <div class="member_img">
+             <img src="{%static 'image/h.jpg'%}" alt="our_team">
+             <div class="social_media">
+               <div class="facebook item"><i class="fab fa-facebook-f"></i></div>
+               <div class="twitter item"><i class="fab fa-twitter"></i></div>
+               <div class="instagram item"><i class="fab fa-instagram"></i></div>
+             </div>
+          </div>
+          <h3>Hritik Thapa</h3>
+          <span>Student</span>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione perspiciatis, error deleniti quaerat beatae doloribus incidunt excepturi. Fugit deleniti accusantium neque hic quidem voluptatibus cumque.</p>
+      </div>
+        <div class="team_member">
+           <div class="member_img">
+             <img src="{%static 'image/it.jpg'%}" alt="our_team">
+             <div class="social_media">
+               <div class="facebook item"><i class="fab fa-facebook-f"></i></div>
+               <div class="twitter item"><i class="fab fa-twitter"></i></div>
+               <div class="instagram item"><i class="fab fa-instagram"></i></div>
+             </div>
+          </div>
+          <h3>Ishar Maharjan</h3>
+          <span>Student</span>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione perspiciatis, error deleniti quaerat beatae doloribus incidunt excepturi. Fugit deleniti accusantium neque hic quidem voluptatibus cumque.</p>
+      </div>
+        <div class="team_member">
+           <div class="member_img">
+             <img src="{%static 'image/k.jpg'%}" alt="our_team">
+             <div class="social_media">
+               <div class="facebook item"><i class="fab fa-facebook-f"></i></div>
+               <div class="twitter item"><i class="fab fa-twitter"></i></div>
+               <div class="instagram item"><i class="fab fa-instagram"></i></div>
+             </div>
+          </div>
+          <h3>Kushal Manandhar</h3>
+          <span>Student</span>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione perspiciatis, error deleniti quaerat beatae doloribus incidunt excepturi. Fugit deleniti accusantium neque hic quidem voluptatibus cumque.</p>
+      </div>  
+    </div>
+</div>
+<div class="subscribe-container">
+    <div class="sub-col1">
+        <h1>Keep Updated With Our Terms</h1>
+        View in Order to Know Our Terms and Services
+    </div>
+    <div class="sub-col2">
+        <input type="submit" value="View" id="footer-email-btn"> 
+    </div>
+</div>
+{% endblock %}

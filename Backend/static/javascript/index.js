@@ -42,6 +42,8 @@ responsive=[
 ]
 
 function load(){
+	let height=content2.clientHeight.toString();
+	ad_wrapper.style.height=height+"px";
 	for(let i=0; i<responsive.length;i++){
 		if(window.innerWidth>responsive[i].breakPoint.width){
 			items=responsive[i].breakPoint.item;
@@ -189,8 +191,7 @@ function image_resize(){
 }
 
 function element_resize(element1,element2){
-	height=element1.clientHeight.toString();
-  	element2.style.height=height+"px";
+	
 }
 
 
@@ -258,8 +259,9 @@ setInterval(function(){
 },5000);
 
 
-element_resize(content,ad_wrapper);
+
 
 $(window).resize(function() {
-  element_resize(content,ad_wrapper)
+  	let height=content2.clientHeight.toString();
+	ad_wrapper.style.height=height+"px";
 });
