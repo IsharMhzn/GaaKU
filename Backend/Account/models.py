@@ -67,5 +67,10 @@ class History(models.Model):
 class Updates(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     timestamp = models.DateTimeField(auto_now_add=True)
+
+class Testimony(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    content = models.CharField(max_length=250,default='OK')
+    timestamp = models.DateTimeField(auto_now_add=True)
         
     
