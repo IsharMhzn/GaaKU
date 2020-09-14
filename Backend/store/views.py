@@ -6,6 +6,8 @@ from django.utils import timezone
 from django.shortcuts import redirect
 from Account.models import Notification, NotificationCount
 from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+
 
 
 # Create your views here.
@@ -69,6 +71,9 @@ def add_to_whishlist(request, pk):
 
 
 def pdescription(request, pk):
+    comments = dict()
+    replies = dict()
+    showcommentbox = False
     product = Product.objects.get(id=pk)
     if request.method == 'POST':
         content = request.POST.get('comment-content')
@@ -85,28 +90,29 @@ def pdescription(request, pk):
 
             try:
                 if not product.user == request.user:
-                    notifc = NotificationCount.objects.get_or_create(user=product.user)[
-                        0]
+                    notifc = NotificationCount.objects.get_or_create(user=product.user)[0]
                 else:
-                    notifc = NotificationCount.objects.get_or_create(user=c.reply.user)[
-                        0]
+                    notifc = NotificationCount.objects.get_or_create(user=c.reply.user)[0]
                 notifc.old += 1
                 notifc.seen = False
                 notifc.save()
             except AttributeError:
                 print('ignore this')
 
-    if request.user == product.user:
-        comments = Comment.objects.filter(post=product, reply=None)
-    else:
-        comments = Comment.objects.filter(
-            post=product, reply=None, user=request.user)
+    if request.user.is_authenticated:
+        if request.user == product.user:
+            comments = Comment.objects.filter(post=product, reply=None)
+        else:
+            comments = Comment.objects.filter(post=product, reply=None, user=request.user)
+        comments = comments[::-1]
 
-    if request.user == product.user:
-        replies = Comment.objects.filter(post=product).exclude(reply=None)
-    else:
-        replies = Comment.objects.filter(post=product).exclude(reply=None)
-    return render(request, 'pdescription.html', {'comments': comments, 'replies': replies, 'object': product})
+        if request.user == product.user:
+            replies = Comment.objects.filter(post=product).exclude(reply=None)
+        else:
+            replies = Comment.objects.filter(post=product).exclude(reply=None)
+        showcommentbox = True  
+    
+    return render(request, 'pdescription.html', {'comments': comments, 'replies': replies, 'object': product, 'showcommentbox': showcommentbox})
 
 
 # def Description(request,id):

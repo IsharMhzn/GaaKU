@@ -257,37 +257,37 @@
 				<div class="test-slider">
 					<div class="slide active">
 						<p>
-							<i class="fas fa-quote-left"></i><br>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.<br>
+							<i class="fas fa-quote-left"></i><br>{{testimonials.0.content}}<br>
 							<i class="fas fa-quote-right"></i> 
 						</p>
 						<div class="slide-info">
-							<h3>Aron Ashesh Shrestha</h3>
+							<h3>{{testimonials.0.user.first_name}} {{testimonials.0.user.last_name}}</h3>
 						</div>
 					</div>
 					<div class="slide">
 						<p>
-							<i class="fas fa-quote-left"></i><br>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.<br>
+							<i class="fas fa-quote-left"></i><br>{{testimonials.1.content}}<br>
 							<i class="fas fa-quote-right"></i> 
 						</p>
 						<div class="slide-info">
-							<h3>Hritik Thapa</h3>
+							<h3>{{testimonials.1.user.first_name}} {{testimonials.1.user.last_name}}</h3>
 						</div>
 					</div>
 					<div class="slide">
 						<p>
-							<i class="fas fa-quote-left"></i><br>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.<br>
+							<i class="fas fa-quote-left"></i><br>{{testimonials.2.content}}<br>
 							<i class="fas fa-quote-right"></i> 
 						</p>
 						<div class="slide-info">
-							<h3>Ishar Maharjan</h3>
+							<h3>{{testimonials.2.user.first_name}} {{testimonials.2.user.last_name}}</h3>
 						</div>
 					</div>
 
 				</div>
 				<div class="test-indicator">
-					<img src="{% static 'image/a.jpg' %}"  class="active" data-id="0">
-					<img src="{% static 'image/h.jpg' %}"data-id="1">
-					<img src="{% static 'image/it.jpg' %}" data-id="2">
+					<img src="{{testimonials.0.user.profile.image.url}}"  class="active" data-id="0">
+					<img src="{{testimonials.1.user.profile.image.url}}"data-id="1">
+					<img src="{{testimonials.2.user.profile.image.url}}" data-id="2">
 				</div>
 			</div>
 			
@@ -295,6 +295,7 @@
 	</section>
 
 	{% if request.user.is_authenticated %}
+		{% if not subscribed %}
 		<div class="subscribe-container">
 			<div class="sub-col1">
 				<h1>Keep Yourself Updated With Our Products</h1>
@@ -304,6 +305,17 @@
 				<a href="{% url 'subscribe-update' %}"><input type="submit" value="Subscribe" id="footer-email-btn"></a> 
 			</div>
 		</div>
+		{% else %}
+		<div class="subscribe-container">
+			<div class="sub-col1">
+				<h1>Dont want to get updates?</h1>
+				Unsubscribe to stop getting notifications
+			</div>
+			<div class="sub-col2">
+				<a href="{% url 'subscribe-update' %}"><input type="submit" value="Unsubscribe" id="footer-email-btn"></a> 
+			</div>
+		</div>
+		{% endif %}
 	{% else %}
 		<div class="subscribe-container">
 			<div class="sub-col1">
@@ -311,8 +323,8 @@
 				Start by making an account first.
 			</div>
 			<div class="sub-col2">
-				<a href="{% url 'login' %}"><button type="submit" value="Login" id="footer-email-btn">Login</button></a>
-				<a href="{% url 'signup' %}"><button type="submit" value="Signup" id="footer-email-btn">Signup</button></a>
+				<a href="{% url 'login' %}"><button type="submit" value="Login">Login</button></a>
+				<a href="{% url 'signup' %}"><button type="submit" value="Signup">Signup</button></a>
 			</div>
 		</div>
 	{% endif %}

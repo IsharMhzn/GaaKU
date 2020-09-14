@@ -3,8 +3,8 @@ import os
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
-sender = 'gaakuapp@gmail.com'
-password = 'gaaku4admins'
+sender = os.getenv('GAAKU_EMAIL')
+password = os.getenv('GAAKU_PWD')
 
 
 def send(domain, userid, email, type):

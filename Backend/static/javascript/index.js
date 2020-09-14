@@ -195,9 +195,9 @@ function element_resize(element1,element2){
 }
 
 
-subscribe.addEventListener('click',function(){
-	alert(mail.value + "has sucessfully subscribed");
-})
+// subscribe.addEventListener('click',function(){
+// 	alert("You have sucessfully subscribed");
+// })
 
 
 right_scrolling_button.addEventListener('click',function(){
