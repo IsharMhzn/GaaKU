@@ -1,34 +1,19 @@
-{% extends 'base.html' %} {% load static %} {% block products %}
-<div style="margin: auto">
-  <h2 class="userheader" style="font-size: 50px; font-style: italic">
-    {{view.kwargs.username}}'s Products
-  </h2>
-</div>
+{% extends 'accounts/profile.html' %} {% load static %} {% block products %} \
+{%for product in object_list %}
 
-<div class="product-container">
-  {% for product in object_list %}
-  <div class="product-card">
-    {% if product.negotiation %}
-    <div class="badge">Negotiable</div>
-    {% else %}
-    <div class="badge">Non-Negotiable</div>
-    {% endif %}
-    <div class="product-tumb">
-      <img src="{{product.img.url}}" alt="" class="model" />
-    </div>
-    <div class="product-details">
-      <span class="product-catagory">{{product.category}}</span>
-      <h4><a href="{% url 'sell-detail' product.pk %}">{{product.name}}</a></h4>
-      <div class="product-bottom-details">
-        <div class="product-price">Rs.{{product.price}}</div>
-        <div class="product-links">
-          <a href="{% url 'sell-detail' product.pk %}"
-            ><button type="button">View</button></a
-          >
-        </div>
+<li class="project__item">
+  <a href="#" class="project__link focus--box-shadow">
+    <div class="project__wrapper">
+      <div class="product-image">
+        <img src="{{product.img.url}}"/>
+      <div class="product-name product-text">{{product.name}}</div>
+      <div class="product-price product-text">Rs.{{product.price}}</div>
+      <div class="product-date product-text">{{product.category}}</div>
+      <div class="product-negotiable product-text">Negoitaible</div>
+      <div class="product-info">
+        <i class="fas fa-ellipsis-h"></i>
       </div>
     </div>
-  </div>
-  {% endfor %}
-</div>
-{% endblock products %}
+  </a>
+</li>
+{% endfor %} {% endblock products %}

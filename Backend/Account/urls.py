@@ -14,7 +14,7 @@ urlpatterns = [
     path('profile/', profile, name='profile'),
     path('profile/history', historyview, name='trans-history'),
     path('profile/sell/<str:username>',
-         SellListView.as_view(), name='myproducts'),
+         SellListView, name='myproducts'),
     path('profile/wishlist/<str:username>',
          WishListView.as_view(), name='wishlist'),
     path('profile/sell/<int:pk>/', SellDetailView.as_view(), name='sell-detail'),
