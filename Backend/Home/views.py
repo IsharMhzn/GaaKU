@@ -1,14 +1,20 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from store.models import Product
-from Account.models import Notification, NotificationCount, Updates
+from Account.models import Notification, NotificationCount, Updates, Testimony
 import random
 # Create your views here.
 def index(request):
+    
+    subscribed = False
     notifs = []
     newNotif = None
     allproducts = []
     if request.user.is_authenticated:
+        try:
+            subscribed = Updates.objects.get(user=request.user)
+        except: 
+            pass
         notifc = NotificationCount.objects.get_or_create(user=request.user)[0]
         newNotif = not notifc.seen
         notifc = NotificationCount.objects.get_or_create(user=request.user)[0]
@@ -47,11 +53,19 @@ def index(request):
         if not item in resultNegoitableProduct:
             resultNegoitableProduct.append(item)
     resultNegoitableProduct=resultNegoitableProduct[:10]
+    try:
+        testimonials = [random.choice(Testimony.objects.all()) for i in range(3)]
+        print(testimonials)
+    except:
+        testimonials=[1,2,3]
+
     context = {'products':products, 
                'featuredProducts':resultFeatuedProducts,
                'negotiable':resultNegoitableProduct,
                'notifs':notifs,
                'updates':allproducts,
-               'newNotif': newNotif}
+               'newNotif': newNotif,
+               'subscribed': subscribed,
+               'testimonials': testimonials}
     return render(request,'home/index.html', context)
 

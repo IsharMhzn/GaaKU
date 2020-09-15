@@ -249,7 +249,7 @@
               <a class="statistics__entry-description" href="#MyHistory">History</a>
             </li>
           </ul>
-          <div class="banner" style="background-image: url('{% static "image/bg-01.jpg" %}';"
+          <div class="banner" style="background-image: url('{% static "image/81744.jpg" %}')">
             <h3 class="banner__title">Subscribe to Get Updates</h3>
             <p class="banner__description">Get Updated with GaaKU</p>
             <button class="banner__button" type="button">
@@ -270,10 +270,14 @@
 			<form class="form" action="{% url "profile" %}" method="POST" enctype="multipart/form-data">
 				{% csrf_token %}
 				 <div class="input-field">
-					<label>Your Username</label>
-				    {{u_form.username}}
+					<label>First Name</label>
+				    {{u_form.first_name}}
 				</div>
-					
+          
+        <div class="input-field">
+					<label>Last Name</label>
+				    {{u_form.last_name}}
+				</div>
 				<div class="input-field">
 					<label>Phone Number</label>
 					{{p_form.phone_no}}

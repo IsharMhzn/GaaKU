@@ -24,6 +24,7 @@ urlpatterns = [
     path('store/',include('store.urls')),
     path('chatbot', include('chatbot.urls')),
     path('account/', include('Account.urls')),  # for register section
+    path('about/',include('about.urls')),
 ]
 
 urlpatterns = urlpatterns + \

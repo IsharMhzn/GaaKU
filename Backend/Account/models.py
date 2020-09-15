@@ -57,7 +57,7 @@ class NotificationCount(models.Model):
 
 class History(models.Model):
     sold_to = models.CharField(max_length=20, default='user')
-    product = models.CharField(max_length=20, default='product')
+    product = models.CharField(max_length=50, default='product')
     productuser = models.CharField(max_length=20, default='user')
     timestamp = models.DateTimeField(auto_now_add=True)
 
@@ -66,6 +66,11 @@ class History(models.Model):
 
 class Updates(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+class Testimony(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    content = models.CharField(max_length=250,default='OK')
     timestamp = models.DateTimeField(auto_now_add=True)
         
     

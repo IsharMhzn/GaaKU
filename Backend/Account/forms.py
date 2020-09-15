@@ -67,8 +67,8 @@ class SignUpForm(UserCreationForm):
 class UserUpdateForm(forms.ModelForm):
 
     class Meta:
-        model = User
-        fields = ['username', 'email']
+        model = Profile
+        fields = ['first_name', 'last_name', 'email']
         widgets = {
             "username": forms.TextInput(attrs={'class': 'input-field', 'help_text': 'Your Username'},),
             "email": forms.EmailInput(attrs={'class': 'input-field'}),

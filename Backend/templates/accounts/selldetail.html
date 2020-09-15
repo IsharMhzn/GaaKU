@@ -387,7 +387,7 @@
 
 {% endblock %} {% block Description2 %}
 <div class="product-description-container">
-  {% if messages %} {% for message in messages %}
+     {% if messages %} {% for message in messages %}
   <div class="alert alert-{{ message.tags }}">{{ message }}</div>
   {% endfor %} {% endif %}
   <div class="product-row">

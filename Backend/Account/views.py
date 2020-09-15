@@ -14,7 +14,7 @@ from .forms import SignUpForm, UserUpdateForm, ProfileUpdateForm, ProductForm
 from . import mail
 
 from store.models import Product, WishlistItem
-from Account.models import NotificationCount, Notification, Updates
+from Account.models import NotificationCount, Notification, Updates, Testimony
 
 # Create your views here.
 
@@ -131,7 +131,8 @@ def profile(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
             # Profile update part
-            u_form = UserUpdateForm(request.POST, instance=request.user)
+            u_form = UserUpdateForm(
+                request.POST, instance=request.user.profile)
             p_form = ProfileUpdateForm(
                 request.POST, request.FILES, instance=request.user.profile)
             if u_form.is_valid() and p_form.is_valid():
@@ -171,6 +172,22 @@ def profile(request):
         return redirect('login')
 
 
+def testimony(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+
+            user = request.user
+            content = request.POST.get('content')
+            if len(content) < 25:
+                messages.add_message(request, messages.INFO,
+                                     'Please enter at least 25 words.')
+                return redirect("testimony")
+            u = Testimony.objects.create(user=user, content=content)
+            u.save()
+        return render(request, 'accounts/testimony.html', {})
+    return redirect('home')
+
+
 def historyview(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
@@ -179,23 +196,20 @@ def historyview(request):
             h = History()
             h.product = Product.objects.get(id=productid).name
             h.productuser = Product.objects.get(id=productid).user.username
-            h.sold_to = User.objects.get(username=sold_to).username
+            try:
+                h.sold_to = User.objects.get(username=sold_to).username
+            except:
+                messages.add_message(request, messages.INFO,
+                                     'Please enter a valid username')
+                return redirect('sell-detail', pk=productid)
             h.save()
             messages.add_message(request, messages.INFO,
                                  'Please delete the product you recently sold.')
-            return redirect('sell-detail', pk=productid)
+            return redirect('testimony')
 
         bought = History.objects.filter(sold_to=request.user.username)
         sold = History.objects.filter(productuser=request.user.username)
 
-        # sold = list()
-        # for p in Product.objects.filter(user=request.user):
-        #     try:
-        #         s = History.objects.filter(product=p)
-        #     except:
-        #         s = None
-        #     if s is not None:
-        #         sold += s
         return render(request, 'accounts/history.html', {'bought': bought, 'sold': sold})
     else:
         return redirect('login')
@@ -212,7 +226,13 @@ def notificationview(request):
 
 
 def subscribe(request):
-    u = Updates.objects.get_or_create(user=request.user)
+    try:
+        u = Updates.objects.get(user=request.user)
+    except:
+        u = Updates.objects.create(user=request.user)
+    else:
+        u.delete()
+
     return redirect('home')
 
 
