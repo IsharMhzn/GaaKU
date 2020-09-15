@@ -8,7 +8,7 @@
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" href="{% static 'css/product.css' %}">
 </head>
-<body style="background: url('{% static "image/bg-01.jpg" %}') center/cover no-repeat">
+<body style="background: url('{% static "image/bg-01.jpg" %}') center/cover no-repeat" >
 	<div class="wrapper">
 			<div class="registration-title">
 				Give Your Product Information
@@ -62,7 +62,7 @@
       </div>
 	</div>
 
-	<a href="{% url "profile" %}"><button class="back-btn"> <- Back</button></a>
+	<a href="{% url 'sell-detail' product.pk %}"><button class="back-btn"> <- Back</button></a>
 
 	<script type="text/javascript" src="{% static 'javascript/product.js' %}"></script>
 </body>
