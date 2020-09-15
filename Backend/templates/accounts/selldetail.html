@@ -132,7 +132,7 @@
     align-items: center;
   }
 
-  .buttons button {
+  .buttons button, .sold-to button {
     width: 150px;
     height: 50px;
     border-radius: 40px;
@@ -140,6 +140,7 @@
     border: 3px solid #592998;
     font-size: 15px;
     transition: 0.2s;
+    outline: none;
   }
 
   .buttons > button > .fas {
@@ -383,6 +384,22 @@
       display: none;
     }
   }
+
+  .sold-to{
+	  margin: 30px;
+    padding-top: 30px;
+    border-top: 1px solid black;
+    text-align: center;
+  }
+
+  .sold-to input[type=text]{
+    height: 30px;
+    margin: auto 30px auto 0px;
+    width: 350px;
+    border-radius: 30px;
+    padding-left: 5px;
+    outline: none;
+  }
 </style>
 
 {% endblock %} {% block Description2 %}
@@ -435,15 +452,6 @@
           </button></a
         > -->
         {% if object.user == user %}
-
-        <form action='{% url "trans-history" %}' method='post'>
-          {% csrf_token %}
-          <div class="view-btn">
-            <input type='text' placeholder="Buyer's username" name='sold-to'></input>
-            <input type='hidden' value={{product.id}} name='product-id'></input>
-            <button><i class="fas fa-edit"></i> &nbsp;&nbsp; Sold to</button>
-          </div>
-        </form>
         <a href="{% url 'sell-update' object.pk %}"
           ><button><i class="fas fa-edit"></i> &nbsp;&nbsp; Update</button></a
         >
@@ -453,6 +461,17 @@
           </button></a
         >
         {%endif%}
+      </div>
+      <div class="sold-to">
+        <h1 class="product-h1">Who is your Buyer?</h1>
+        <form action='{% url "trans-history" %}' method='post'>
+          {% csrf_token %}
+          <div class="view-btn">
+            <input type='text' placeholder="Buyer's username" name='sold-to'></input>
+            <input type='hidden' value={{product.id}} name='product-id'></input>
+            <button><i class="fas fa-edit"></i> &nbsp;&nbsp; Sold to</button>
+          </div>
+        </form>
       </div>
     </div>
   </div>

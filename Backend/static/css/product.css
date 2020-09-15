@@ -2,7 +2,7 @@
 
 .product-container {
   max-width: 1300px;
-  margin: 25px auto 50px ;
+  margin: 150px auto 50px ;
   display: grid;
   grid-gap: 20px;
   grid-template-columns: repeat(auto-fill, 300px);
@@ -206,7 +206,7 @@ a{
 	display: block;
 }
 
-.wrapper .form .input-field .reg-btn{
+.wrapper .form .input-field .reg-btn,.input-field  a .reg-btn{
 	width:100%;
 	padding: 8px 10px;
 	font-size: 15px;
@@ -217,15 +217,18 @@ a{
 	border-radius: 3px;
 	outline: none;
 	transition: transform 0.2s ease;
+	margin: 10px auto;
 }
 
 .wrapper .form .input-field:last-child{
 	margin-bottom: 0;
 }
 
-.wrapper .form .input-field .reg-btn:hover, 
+.wrapper .form .input-field .reg-btn:hover,
+.input-field  a .reg-btn:hover, 
 .wrapper .form .input-field .alt-btn:hover,
 .back-btn:hover{
+
 	transform: scale(1.01);
 	background: #ffd658;
 }
@@ -282,3 +285,4 @@ a{
 		flex-direction: row;
 	}
 }
+
