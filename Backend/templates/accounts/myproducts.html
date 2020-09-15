@@ -1,5 +1,5 @@
 {% extends 'base.html' %} {% load static %} {% block products %}
-<div style="margin: auto">
+<div style="margin: 150px auto 25px ">
   <h2 class="userheader" style="font-size: 50px; font-style: italic">
     {{view.kwargs.username}}'s Products
   </h2>
@@ -22,9 +22,6 @@
       <div class="product-bottom-details">
         <div class="product-price">Rs.{{product.price}}</div>
         <div class="product-links">
-          <a href="{% url 'sell-detail' product.pk %}"
-            ><button type="button">View</button></a
-          >
         </div>
       </div>
     </div>
