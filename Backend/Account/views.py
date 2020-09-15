@@ -16,6 +16,7 @@ from . import mail
 from store.models import Product, WishlistItem
 from Account.models import NotificationCount, Notification, Updates, Testimony
 
+
 # Create your views here.
 
 
@@ -128,7 +129,12 @@ def activate(request, userid):
 
 
 def profile(request):
+    subscribed=False
     if request.user.is_authenticated:
+        try:
+            subscribed = Updates.objects.get(user=request.user)
+        except: 
+            pass
         if request.method == 'POST':
             # Profile update part
             u_form = UserUpdateForm(
@@ -165,7 +171,8 @@ def profile(request):
             'products': Product.objects.filter(user=request.user),
             'items': WishlistItem.objects.filter(user=request.user),
             'bought': History.objects.filter(sold_to=request.user.username),
-            'sold': History.objects.filter(productuser=request.user.username)
+            'sold': History.objects.filter(productuser=request.user.username),
+            'subscribed':subscribed
         }
         return render(request, 'accounts/profile.html', context)
     else:
@@ -274,8 +281,9 @@ class SellUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
 class SellDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Product
+    form_class = ProductForm
     success_url = '/'
-    template_name = 'accounts/sell_confirm_delete.html'
+    template_name = 'accounts/selldetail.html'
 
     def test_func(self):
         product = self.get_object()

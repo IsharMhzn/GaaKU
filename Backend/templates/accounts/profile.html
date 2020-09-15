@@ -49,7 +49,7 @@
           <li class="nav__item nav__item--isActive">
             <div class="tool-tip">
             	<a
-	              href="#"
+	              href="{% url "about" %}"
 	              class="nav__link focus--box-shadow"
 	              role="menuitem"
 	            >
@@ -73,6 +73,13 @@
       </ul>
   </nav>
   <main class="main">
+    {% if messages %}
+	  {% for message in messages %}
+	    <div class="alert alert-{{ message.tags }}">
+		  {{ message }}
+	    </div>
+	  {% endfor %}
+ 	  {% endif %}
     <header class="header">
       <div class="header__wrapper">
         <form action="" class="search">
@@ -250,11 +257,19 @@
             </li>
           </ul>
           <div class="banner" style="background-image: url('{% static "image/81744.jpg" %}')">
-            <h3 class="banner__title">Subscribe to Get Updates</h3>
-            <p class="banner__description">Get Updated with GaaKU</p>
-            <button class="banner__button" type="button">
-              Subscribe
-            </button>
+            {% if not subscribed %}
+                  <h3 class="banner__title">Subscribe to Get Updates</h3>
+                  <p class="banner__description">Get Updated with GaaKU</p>
+                  <a href="{% url 'subscribe-update' %}"><button class="banner__button" type="button">
+                    Subscribe
+                  </button></a>
+                {% else %}
+                <h3 class="banner__title">Unsubscribe  with GaaKU</h3>
+                  <p class="banner__description">If you don't want to recieve updates in future, please Unsubscribe.</p>
+                  <a href="{% url 'subscribe-update' %}"><button class="banner__button" type="button">
+                    Unsubscribe
+                  </button></a>
+                {% endif %}
           </div>
         </section>
       </aside>

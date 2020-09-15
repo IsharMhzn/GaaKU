@@ -4,6 +4,7 @@ const selectElement =(element)=> document.querySelector(element);
 const h_scrolling=document.querySelectorAll(".circle");
 const left_scrolling_button=document.querySelector(".left");
 const right_scrolling_button=document.querySelector(".right");
+const view=document.querySelector("#view");
 
 const cover_title=document.querySelector('.cover-title');
 const cover_text=document.querySelector('.cover-text');
@@ -132,36 +133,42 @@ function change_template(index){
 		cover_title.innerHTML="Focused on First Years";
 		cover_text.innerHTML="Get good qualtity drafters straight from the hands from your trusty 		seniors and make your drawing classes easy and interesting.";
 		cover_image_first.style.marginLeft="0%";
+		view.href="/store/search/?q=drafter";
 		break;
 
 		case 1:
-		cover_title.innerHTML="Focused on Second Years";
-		cover_text.innerHTML="Get good qualtity Electronics straight from the hands from your trusty 		seniors and make your drawing classes easy and interesting.";
+		cover_title.innerHTML="Sell It Out!";
+		cover_text.innerHTML="What is point in keeping something that you dont use? Someone might need it. Sell it Out! and get the value";
 		cover_image_first.style.marginLeft="-111.3%";
+		view.href="/account/profile/sell/new/";
 		break;
 
 		case 2:
-		cover_title.innerHTML="Focused on Third Years";
-		cover_text.innerHTML="Get good qualtity Furniture straight from the hands from your trusty 		seniors and make your drawing classes easy and interesting.";
+		cover_title.innerHTML="Wanna Buy or Sell Furnitures";
+		cover_text.innerHTML="Need some Furnitures. Check it Out. Watch it out and choose a best one suitable for you.";
 		cover_image_first.style.marginLeft="-222.4%";
+		view.href="/store/Homes%20and%20Furnitures";
 		break;
 
 		case 3:
-		cover_title.innerHTML="Focused on Fourth Years";
-		cover_text.innerHTML="Get good qualtity Musical Instrument straight from the hands from your trusty 		seniors and make your drawing classes easy and interesting.";
+		cover_title.innerHTML="Get Electric With GaaKU";
+		cover_text.innerHTML="Buy electronics, gadgets and electric devices in GaaKU at lowest price. Experience satisfying and hassle-free online shopping.";
 		cover_image_first.style.marginLeft="-333.4%";
+		view.href="/store/Electronics";
 		break;
 
 		case 4:
-		cover_title.innerHTML="Focused on All Years";
-		cover_text.innerHTML="Get good qualtity Musical Instrument straight from the hands from your trusty 		seniors and make your drawing classes easy and interesting.";
+		cover_title.innerHTML="Looking for Books and Notes...";
+		cover_text.innerHTML="Come on this the fountain to drink the knowledge. Make difficult subjects easier. Look for your particular notes.";
 		cover_image_first.style.marginLeft="-444.4%";
+		
 		break;
 
 		case 5:
-		cover_title.innerHTML="Focused on Not All Years";
-		cover_text.innerHTML="Get good qualtity Musical Instrument straight from the hands from your trusty 		seniors and make your drawing classes easy and interesting.";
+		cover_title.innerHTML="Checking Out For Spares";
+		cover_text.innerHTML="GaaKU is the right place for you to find what you want. Go GaaKU!!!";
 		cover_image_first.style.marginLeft="-555.4%";
+		view.href="	/store/Other%20Accessories";
 		break;
 		default:
 		break;

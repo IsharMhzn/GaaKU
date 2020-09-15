@@ -24,5 +24,5 @@ urlpatterns = [
          SellUpdateView.as_view(), name='sell-update'),
     path('profile/sell/<int:pk>/delete',
          SellDeleteView.as_view(), name='sell-delete'),
-    path('profile/notification', notificationview, name="notification")
+    path('profile/notification', notificationview, name="notification"),
 ]
