@@ -26,5 +26,11 @@
     </div>
   </div>
   {% endfor %}
+  Looking for something but isn't available right now? You can enter the product's name and get notified if someone posts that product.
+  <form method='post' action=" {% url 'lookingfor' %} ">
+  {% csrf_token %}
+    <input name='product-name' type='text' placeholder='Eg. drafter'>
+    <input type='submit' value='Submit'>
+  </form>
 </div>
 {% endblock products %}

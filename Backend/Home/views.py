@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from store.models import Product
-from Account.models import Notification, NotificationCount, Updates, Testimony
+from Account.models import Notification, NotificationCount, Updates, Testimony, LookingFor
 import random
 # Create your views here.
 def index(request):
@@ -10,6 +10,7 @@ def index(request):
     notifs = []
     newNotif = None
     allproducts = []
+    lookforpros = []
     if request.user.is_authenticated:
         try:
             subscribed = Updates.objects.get(user=request.user)
@@ -28,6 +29,8 @@ def index(request):
                         continue
                 if n.post.user == request.user:
                     notifs.append(n)
+
+        lf = LookingFor.objects.filter(user=request.user)
         try:
             u = Updates.objects.get(user=request.user)
             allpros = Product.objects.all()[::-1]
@@ -35,9 +38,22 @@ def index(request):
                 if p.timestamp:
                     if u.timestamp < p.timestamp:
                         if p.user != request.user:
-                            allproducts.append(p)
+                            allproducts.append(p) 
         except:
-            allproducts = None
+            print("Unsubscribed")
+
+        try:
+            allpros = Product.objects.all()[::-1]       
+            if lf:
+                for p in allpros:
+                    if p.timestamp:
+                        for l in lf:
+                            if l.timestamp<p.timestamp:
+                                if p.user != request.user and p.name.__contains__(l.product):
+                                    lookforpros.append(p)
+        except:
+            print("Exception occured in looking for products")
+    
     products=Product.objects.all()[::-1][:10]
     featuredProducts=Product.objects.all()
     negotiableProducts=Product.objects.filter(negotiation=True,urgent=True)
@@ -55,7 +71,6 @@ def index(request):
     resultNegoitableProduct=resultNegoitableProduct[:10]
     try:
         testimonials = [random.choice(Testimony.objects.all()) for i in range(3)]
-        print(testimonials)
     except:
         testimonials=[1,2,3]
 
@@ -66,6 +81,7 @@ def index(request):
                'updates':allproducts,
                'newNotif': newNotif,
                'subscribed': subscribed,
-               'testimonials': testimonials}
+               'testimonials': testimonials,
+               'lookfors': lookforpros}
     return render(request,'home/index.html', context)
 

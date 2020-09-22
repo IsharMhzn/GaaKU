@@ -4,7 +4,7 @@ from django.views.generic import ListView, DetailView, View
 from .models import Product, Customer, WishlistItem, Wishlist, Comment
 from django.utils import timezone
 from django.shortcuts import redirect
-from Account.models import Notification, NotificationCount
+from Account.models import Notification, NotificationCount, LookingFor
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
@@ -67,7 +67,7 @@ def add_to_whishlist(request, pk):
             return redirect("pdescription", pk=pk)
 
     else:
-        print("Your are not  allowed")
+        return "Your are not  allowed"
 
 
 def pdescription(request, pk):
@@ -176,3 +176,13 @@ def commentview(request):
         c.save()
     comments = Comment.objects.all()
     return render(request, 'comment.html', {'comments': comments})
+
+def lookingfor(request):
+    if request.method == 'POST' and request.user.is_authenticated:
+        print('huhhhs')
+        p = request.POST.get('product-name')
+        lf = LookingFor(user=request.user, product=p)
+        lf.save()
+        messages.add_message(request, messages.INFO, 'You will get notified when someone posts the product you\'re looking for', )
+    return redirect('profile')
+
