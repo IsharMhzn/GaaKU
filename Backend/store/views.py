@@ -145,6 +145,15 @@ def category(request, category):
     print(products)
     return render(request, 'pmainpage.html', {'object_list': products})
 
+def subcategory1(request, category1,category2):
+    products = Product.objects.filter(category=category1,sub_category1=category2)
+    print(products)
+    return render(request, 'pmainpage.html', {'object_list': products})
+
+def subcategory2(request, category1,category2,category3):
+    products = Product.objects.filter(category=category1,sub_category1=category2,sub_category2=category3)
+    print(products)
+    return render(request, 'pmainpage.html', {'object_list': products})
 
 def search(request):
     try:

@@ -416,8 +416,10 @@
             <div class="product-more-info">
                 <div class="tab-container">
                     <div class="button-box2">
-                        <button id="btn1" onclick="openDes()"><i class="fas fa-sticky-note tab"></i> Description</button>
-                        <button id="btn2" onclick="openInfo()"><i class="fas fa-info-circle tab"></i>Seller-Informations</button>
+						<button id="btn1" onclick="openDes()"><i class="fas fa-sticky-note tab"></i> Description</button>
+						{% if request.user.is_authenticated %}
+						<button id="btn2" onclick="openInfo()"><i class="fas fa-info-circle tab"></i>Seller-Informations</button>
+						{% endif %}
                     </div>
                     <div id="tab-content1" class="tab-content">
                         <p>{{object.description}}</p>

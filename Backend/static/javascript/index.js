@@ -1,5 +1,4 @@
 //DOM ELEMENTS
-
 const selectElement =(element)=> document.querySelector(element);
 const h_scrolling=document.querySelectorAll(".circle");
 const left_scrolling_button=document.querySelector(".left");
@@ -272,3 +271,4 @@ $(window).resize(function() {
   	let height=content2.clientHeight.toString();
 	ad_wrapper.style.height=height+"px";
 });
+

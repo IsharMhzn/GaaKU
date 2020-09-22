@@ -40,7 +40,7 @@ def index(request):
             allproducts = None
     products=Product.objects.all()[::-1][:10]
     featuredProducts=Product.objects.all()
-    negotiableProducts=Product.objects.filter(negotiation=True)
+    negotiableProducts=Product.objects.filter(negotiation=True,urgent=True)
     randomFeaturedProducts=([random.choice(featuredProducts) for i in range(len(featuredProducts))])
     resultFeatuedProducts= []
     for item in randomFeaturedProducts:

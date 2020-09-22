@@ -302,20 +302,16 @@
 					{{u_form.email}}
 				</div>
 				<div class="input-field">
-					<label>Your Image Currently</label>
-					<img src="{{ user.profile.image.url }}" id="product-image" alt="Image" height=200 width=150>
-				</div>
-				<div class="input-field">
 					<label>Upload new Image</label>
 					<input type="file" id="file" accept="" name="image"></input>
 					<label for="file" class="alt-btn"> <i class="far fa-image"></i>Choose a Photo</label><br>
 					 <!-- <img src="{{ user.profile.image.url }}" id="product-image" alt="Image" height=200 width=100>  -->
 				</div>
 				<div class="input-field">
-					<img src="https://omegamma.com.au/wp-content/uploads/2017/04/default-image-720x530.jpg" alt="p-image" id="p-image">
+					<img src="{{ user.profile.image.url }}" alt="p-image" id="p-image">
 				</div>
 				<div class="input-field">
-					<label id="p-name">Image</label>
+					<label id="p-name">Your Current Profile Image</label>
 				</div> 
 				<div class="input-field">
 					<input type="submit"  value="Update" class="reg-btn"></input>

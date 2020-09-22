@@ -16,6 +16,8 @@ from . import mail
 from store.models import Product, WishlistItem
 from Account.models import NotificationCount, Notification, Updates, Testimony
 
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 
 # Create your views here.
 
@@ -253,10 +255,14 @@ class SellDetailView(DetailView):
     template_name = 'accounts/selldetail.html'
 
 
-class SellCreateView(LoginRequiredMixin, CreateView):
+class SellCreateView(CreateView):
     model = Product
     form_class = ProductForm
     template_name = 'accounts/sellcreate.html'
+
+    @method_decorator(login_required(login_url='login'))
+    def dispatch(self, *args, **kwargs):
+        return super(SellCreateView, self).dispatch(*args, **kwargs)
 
     def form_valid(self, form):
         form.instance.user = self.request.user
