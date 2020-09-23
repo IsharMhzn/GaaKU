@@ -193,6 +193,7 @@ def testimony(request):
                 return redirect("testimony")
             u = Testimony.objects.create(user=user, content=content)
             u.save()
+            return redirect("home")
         return render(request, 'accounts/testimony.html', {})
     return redirect('home')
 

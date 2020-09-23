@@ -178,11 +178,14 @@ def commentview(request):
     return render(request, 'comment.html', {'comments': comments})
 
 def lookingfor(request):
-    if request.method == 'POST' and request.user.is_authenticated:
-        print('huhhhs')
-        p = request.POST.get('product-name')
-        lf = LookingFor(user=request.user, product=p)
-        lf.save()
-        messages.add_message(request, messages.INFO, 'You will get notified when someone posts the product you\'re looking for', )
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            p = request.POST.get('product-name')
+            lf = LookingFor(user=request.user, product=p)
+            lf.save()
+            messages.add_message(request, messages.INFO, 'You will get notified when someone posts the product you\'re looking for', )
+    else:
+        messages.add_message(request, messages.INFO, 'You have to be logged in to use this feature. Sorry.', )
+        return redirect('login')
     return redirect('profile')
 

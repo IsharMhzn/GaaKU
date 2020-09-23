@@ -132,6 +132,7 @@ function change_template(index){
 		cover_title.innerHTML="Focused on First Years";
 		cover_text.innerHTML="Get good qualtity drafters straight from the hands from your trusty 		seniors and make your drawing classes easy and interesting.";
 		cover_image_first.style.marginLeft="0%";
+		view.innerHTML="View Now";
 		view.href="/store/search/?q=drafter";
 		break;
 
@@ -139,6 +140,7 @@ function change_template(index){
 		cover_title.innerHTML="Sell It Out!";
 		cover_text.innerHTML="What is point in keeping something that you dont use? Someone might need it. Sell it Out! and get the value";
 		cover_image_first.style.marginLeft="-111.3%";
+		view.innerHTML="Sell Now";
 		view.href="/account/profile/sell/new/";
 		break;
 
@@ -147,6 +149,7 @@ function change_template(index){
 		cover_text.innerHTML="Need some Furnitures. Check it Out. Watch it out and choose a best one suitable for you.";
 		cover_image_first.style.marginLeft="-222.4%";
 		view.href="/store/Homes%20and%20Furnitures";
+		view.innerHTML="View Now";
 		break;
 
 		case 3:
@@ -154,13 +157,15 @@ function change_template(index){
 		cover_text.innerHTML="Buy electronics, gadgets and electric devices in GaaKU at lowest price. Experience satisfying and hassle-free online shopping.";
 		cover_image_first.style.marginLeft="-333.4%";
 		view.href="/store/Electronics";
+		view.innerHTML="View Now";
 		break;
 
 		case 4:
 		cover_title.innerHTML="Looking for Books and Notes...";
 		cover_text.innerHTML="Come on this the fountain to drink the knowledge. Make difficult subjects easier. Look for your particular notes.";
 		cover_image_first.style.marginLeft="-444.4%";
-		
+		view.href="/store/Education%20Materials";
+		view.innerHTML="View Now";
 		break;
 
 		case 5:
@@ -168,6 +173,7 @@ function change_template(index){
 		cover_text.innerHTML="GaaKU is the right place for you to find what you want. Go GaaKU!!!";
 		cover_image_first.style.marginLeft="-555.4%";
 		view.href="	/store/Other%20Accessories";
+		view.innerHTML="View Now";
 		break;
 		default:
 		break;
