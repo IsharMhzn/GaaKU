@@ -50,4 +50,16 @@
   </div>
   {% endfor %}
 </div>
+<div class="subscribe-container">
+  <div class="sub-col1">
+    <h1>Looking for something but isn't available right now?</h1> You can enter the product's name and get notified if someone posts that product.
+  </div>
+  <div class="sub-col2">
+    <form method='post' action=" {% url 'lookingfor' %} ">
+      {% csrf_token %}
+        <input name='product-name' type='text' placeholder='Eg. drafter' id="footer-email">
+        <input type='submit' value='Submit' id="footer-email-btn">
+      </form>
+  </div>
+</div>
 {% endblock products %}

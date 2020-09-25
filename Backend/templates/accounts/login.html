@@ -28,6 +28,26 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'css/util.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'css/main_login.css' %}">
 <!--===============================================================================================-->
+<style>
+	.back-btn{
+	width: 100px;
+	margin: 20px;
+	padding: 8px 10px;
+	font-size: 15px;
+	border: 0;
+	background: #592998;
+	color: white;
+	cursor:pointer;
+	border-radius: 3px;
+	outline: none;
+	transition: transform 0.2s ease;
+	position: absolute;
+	top:0;
+	left: 0;
+	line-height: initial;
+}
+</style>
+
 </head>
 <body>
 	
@@ -83,7 +103,7 @@
 	
 
 	<div id="dropDownSelect1"></div>
-	
+	<a href="{% url "home" %}"><button class="back-btn">Home</button></a>
 <!--===============================================================================================-->
 	<script src="{% static 'vendor/jquery/jquery-3.2.1.min.js' %}"></script>
 <!--===============================================================================================-->

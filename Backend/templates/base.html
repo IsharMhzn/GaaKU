@@ -110,7 +110,7 @@
               <li>|</li>
               <li class="category">
                 <a href='{% url "category" "Homes and Furnitures" %}'
-                  >Homes and Furniture
+                  >Furnitures
                   <i class="fa fa-angle-right" aria-hidden="true"></i>
                 </a>
               </li>
@@ -126,6 +126,42 @@
                   >Education Materials
                   <i class="fa fa-angle-right" aria-hidden="true"></i>
                 </a>
+                <ul class="category-sub-menu">
+                  <li><a href="{% url 'subcategory1' 'Education Materials' '1st Year' %}">1st Years <i class="fas fa-chevron-right" style="margin-left: 15px"></i></a>
+                    <ul class="category-sub-menu">
+                      <li><a href="{% url 'subcategory2' 'Education Materials' '1st Year' 'Books' %}">Books</a></li>
+                      <li><a href="{% url 'subcategory2' 'Education Materials' '1st Year' 'Notes' %}">Notes</a></li>
+                    </ul>
+                  </li>
+                    
+                  <li><a href="{% url 'subcategory1' 'Education Materials' '2nd Year' %}">2nd Years <i class="fas fa-chevron-right" style="margin-left: 15px"></i></a>
+                    <ul class="category-sub-menu">
+                      <li><a href="{% url 'subcategory2' 'Education Materials' '2nd Year' 'Books' %}">Books</a></li>
+                      <li><a href="{% url 'subcategory2' 'Education Materials' '2nd Year' 'Notes' %}">Notes</a></li>
+                    </ul>
+                  </li>
+                    
+                  <li><a href="{% url 'subcategory1' 'Education Materials' '3rd Year' %}">3rd Years <i class="fas fa-chevron-right" style="margin-left: 15px"></i></a>
+                    <ul class="category-sub-menu">
+                      <li><a href="{% url 'subcategory2' 'Education Materials' '3rd Year' 'Books' %}">Books</a></li>
+                      <li><a href="{% url 'subcategory2' 'Education Materials' '3rd Year' 'Notes' %}">Notes</a></li>
+                    </ul>
+                  </li>
+                    
+                  <li><a href="{% url 'subcategory1' 'Education Materials' '4th Year' %}">4th Years <i class="fas fa-chevron-right" style="margin-left: 15px"></i></a>
+                    <ul class="category-sub-menu">
+                      <li><a href="{% url 'subcategory2' 'Education Materials' '4th Year' 'Books' %}">Books</a></li>
+                      <li><a href="{% url 'subcategory2' 'Education Materials' '4th Year' 'Notes' %}">Notes</a></li>
+                    </ul>
+                  </li>
+                    
+                  <li><a href="{% url 'subcategory1' 'Education Materials' 'Labcoats' %}"> Labcoats</a>
+                  </li>
+
+                  <li><a href="{% url 'subcategory1' 'Education Materials' 'Drafters' %}"> Drafter</a>
+                  </li>
+                    
+                </ul>
               </li>
               <li>|</li>
               <li class="category">
@@ -180,7 +216,7 @@
                     <a href='{% url "category" "Education Materials"%}'
                       >Education Materials <i class="fa fa-angle-down"></i
                     ></a>
-                  </li>
+
                   <li>
                     <a href='{% url "category" "Other Accessories" %}'
                       >Other Accessories <i class="fa fa-angle-down"></i

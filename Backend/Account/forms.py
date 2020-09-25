@@ -27,21 +27,34 @@ semester_choices = [
 
 category_choices = [
     ('Electronics', 'Electronics'),
-    ('Homes and Furnitures', 'Homes and Furnitures'),
+    ('Homes and Furnitures', 'Furnitures'),
     ('Sports', 'Sports'),
     ('Education Materials', 'Education Materials'),
     ('Other Accessories', 'Other Accessories'),
 ]
 
+subcategory1_choices = [
+    ('1st Year', '1st Year'),
+    ('2nd Year', '2nd Year'),
+    ('3rd Year', '3rd Year'),
+    ('4th Year', '4th Year'),
+    ('Labcoats', 'Labcoats'),
+    ('Drafters', 'Drafters'),
+]
+
+subcategory2_choices = [
+    ('Books', 'Books'),
+    ('Notes', 'Notes'),
+]
+
 negotiation_choices = [
-    (1, 'Unknown'),
-    (2, 'Yes'),
-    (3, 'No')
+    (True, "Yes"),
+    (False, "No")
 ]
 
 urgent_choices = [
-    (1, 'Yes'),
-    (2, 'No')
+    (True, 'Yes'),
+    (False, 'No')
 ]
 
 
@@ -65,7 +78,6 @@ class SignUpForm(UserCreationForm):
 
 
 class UserUpdateForm(forms.ModelForm):
-
     class Meta:
         model = Profile
         fields = ['first_name', 'last_name', 'email']
@@ -82,22 +94,26 @@ class ProfileUpdateForm(forms.ModelForm):
 
 
 class ProductForm(forms.ModelForm):
-    name = forms.CharField(help_text="Product name")
+    name = forms.CharField()
     category = forms.CharField(widget=forms.Select(choices=category_choices))
-    price = forms.IntegerField(help_text="Price")
-    description = forms.CharField(help_text="Description")
-    negotiation = forms.BooleanField(
-        widget=forms.Select(choices=negotiation_choices))
+    sub_category1 = forms.CharField(
+        widget=forms.Select(choices=subcategory1_choices))
+    sub_category2 = forms.CharField(
+        widget=forms.Select(choices=subcategory2_choices))
+    price = forms.IntegerField()
+    description = forms.CharField(widget=forms.Textarea)
+    negotiation = forms.ChoiceField(choices=negotiation_choices,
+                                    widget=forms.Select())
 
-    img = forms.ImageField(help_text="Product Image")
-    contact_info = forms.CharField(help_text="Contact Info.")
-    # urgent = forms.BooleanField(help_text="Urgent?", widget=forms.Select(choices=urgent_choices
-    #                                                                      ))
+    img = forms.ImageField()
+    contact_info = forms.CharField()
+    urgent = forms.ChoiceField(choices=urgent_choices, widget=forms.Select(
+    ))
 
     class Meta:
         model = Product
-        fields = ['name', 'category', 'price',
+        fields = ['name', 'category', 'sub_category1', 'sub_category2', 'price',
                   'description', 'negotiation', 'img', 'contact_info', 'urgent']
         widgets = {
-            "name": forms.TextInput(attrs={'class': 'input-field', 'help_text': 'Your Username'}),
+            "name": forms.TextInput(attrs={'class': 'Hello', 'help_text': 'Your Username'}),
         }

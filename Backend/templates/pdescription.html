@@ -416,8 +416,10 @@
             <div class="product-more-info">
                 <div class="tab-container">
                     <div class="button-box2">
-                        <button id="btn1" onclick="openDes()"><i class="fas fa-sticky-note tab"></i> Description</button>
-                        <button id="btn2" onclick="openInfo()"><i class="fas fa-info-circle tab"></i>Seller-Informations</button>
+						<button id="btn1" onclick="openDes()"><i class="fas fa-sticky-note tab"></i> Description</button>
+						{% if request.user.is_authenticated %}
+						<button id="btn2" onclick="openInfo()"><i class="fas fa-info-circle tab"></i>Seller-Informations</button>
+						{% endif %}
                     </div>
                     <div id="tab-content1" class="tab-content">
                         <p>{{object.description}}</p>
@@ -433,11 +435,12 @@
                     </div>
                 </div>
             </div>
-            <div class="buttons">
+            <div class="buttons">{% if request.user.is_authenticated %}
 				<a href="{{object.get_add_to_whishlist_url}}"><button><i class="fas fa-heart"></i> &nbsp;&nbsp; Add to WishList</button></a>
 					{% if object.user == user %}
                 <a href="{% url 'sell-detail' object.pk %}"><button><i class="fas fa-edit"></i>  &nbsp;&nbsp; Update</button></a>
 				<a href="{% url 'sell-detail' object.pk %}"><button><i class="fas fa-trash-alt"></i>  &nbsp;&nbsp;Delete</button></a>
+					{%endif%}
 					{%endif%}
             </div>
         </div>

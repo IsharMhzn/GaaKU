@@ -19,6 +19,8 @@ from . import mail
 from store.models import Product, WishlistItem
 from Account.models import NotificationCount, Notification, Updates, Testimony
 
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 
 # Create your views here.
 
@@ -213,6 +215,7 @@ def testimony(request):
                 return redirect("testimony")
             u = Testimony.objects.create(user=user, content=content)
             u.save()
+            return redirect("home")
         return render(request, 'accounts/testimony.html', {})
     return redirect('home')
 
@@ -277,6 +280,8 @@ def subscribe(request):
 
     return redirect('home')
 
+    return redirect('home')
+
 
 def SellListView(request):
     products = Product.objects.all()
@@ -289,6 +294,7 @@ class SellDetailView(DetailView):
 
 
 class SellCreateView(CreateView):
+    model = Product
     form_class = ProductForm
     template_name = 'accounts/sellcreate.html'
 

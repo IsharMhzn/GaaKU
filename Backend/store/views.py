@@ -4,7 +4,7 @@ from django.views.generic import ListView, DetailView, View
 from .models import Product, Customer, WishlistItem, Wishlist, Comment
 from django.utils import timezone
 from django.shortcuts import redirect
-from Account.models import Notification, NotificationCount
+from Account.models import Notification, NotificationCount, LookingFor
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.db.models import Q
@@ -78,7 +78,7 @@ def add_to_whishlist(request, pk):
             return redirect("pdescription", pk=pk)
 
     else:
-        print("Your are not  allowed")
+        return "Your are not  allowed"
 
 
 def pdescription(request, pk):
@@ -157,7 +157,27 @@ def Landingpage(request):
 def category(request, category):
     products = Product.objects.filter(category=category)
     print(products)
-    return render(request, 'pmainpage.html', {'object_list': products})
+    return render(request, 'pmainpage.html', {'products': products})
+
+
+def subcategory1(request, category1, category2):
+    productsa = Product.objects.filter(
+        category=category1, sub_category1=category2)
+    print(productsa)
+    context = {
+        'products': productsa
+    }
+    return render(request, 'pmainpage.html', context)
+
+
+def subcategory2(request, category1, category2, category3):
+    productsa = Product.objects.filter(
+        category=category1, sub_category1=category2, sub_category2=category3)
+    print(productsa)
+    context = {
+        'products': productsa
+    }
+    return render(request, 'pmainpage.html', context)
 
 
 def search(request):
@@ -166,10 +186,13 @@ def search(request):
     except:
         q = None
     if q:
-        products = Product.objects.filter(
+        productsa = Product.objects.filter(
             name__icontains=q) | Product.objects.filter(category__icontains=q)
-        print(products)
-        return render(request, 'pmainpage.html', {'object_list': products})
+        print(productsa)
+        context = {
+            'products': productsa
+        }
+        return render(request, 'pmainpage.html', context)
     else:
         return HttpResponse('EMPTY')
 
@@ -181,3 +204,18 @@ def commentview(request):
         c.save()
     comments = Comment.objects.all()
     return render(request, 'comment.html', {'comments': comments})
+
+
+def lookingfor(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            p = request.POST.get('product-name')
+            lf = LookingFor(user=request.user, product=p)
+            lf.save()
+            messages.add_message(
+                request, messages.INFO, 'You will get notified when someone posts the product you\'re looking for', )
+    else:
+        messages.add_message(
+            request, messages.INFO, 'You have to be logged in to use this feature. Sorry.', )
+        return redirect('login')
+    return redirect('profile')
