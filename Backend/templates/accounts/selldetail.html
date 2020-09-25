@@ -132,7 +132,7 @@
     align-items: center;
   }
 
-  .buttons button {
+  .buttons button, .sold-to button {
     width: 150px;
     height: 50px;
     border-radius: 40px;
@@ -140,6 +140,7 @@
     border: 3px solid #592998;
     font-size: 15px;
     transition: 0.2s;
+    outline: none;
   }
 
   .buttons > button > .fas {
@@ -383,11 +384,96 @@
       display: none;
     }
   }
+
+  .sold-to{
+	  margin: 30px;
+    padding-top: 30px;
+    border-top: 1px solid black;
+    text-align: center;
+  }
+
+  .sold-to input[type=text]{
+    height: 30px;
+    margin: auto 30px auto 0px;
+    width: 350px;
+    border-radius: 30px;
+    padding-left: 5px;
+    outline: none;
+  }
+
+.dialog-wrapper{
+    max-width: 500px;
+	width: 100%;
+	background: white;
+	margin: 20px auto;
+	padding: 30px;
+	box-shadow: 6px 6px 6px rgba(0,0,0,0.5);
+    border-radius: 30px;
+    font-family: "Open sans",sans-serif;
+}
+.dialog-wrapper .fa-times{
+	float: right;
+	transition: .2s;
+}
+
+.dialog-wrapper .fa-times:hover{
+	transform: scale(1.15);
+}
+
+.dialog-wrapper .dialog-title{
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.dialog-wrapper .dialog-content{
+    margin: 25px auto;
+    max-height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.dialog-wrapper .dialog-content button{
+  width: 150px;
+  height: 40px;
+  border-radius: 10px;
+  border: none;
+  font-size: 15px;
+  font-weight: bold;
+  color: white;
+}
+
+.dialog-wrapper .dialog-content button:hover{
+  transform: scale(1.05);
+}
+
+#Cancel{
+  background: #592998;
+  
+}
+
+#Delete{
+  background:#8c1515;
+}
+.modal {
+    display: none; /*Hidden by default*/
+    position: fixed; /* Stay in place */
+    z-index: 1000; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
 </style>
 
 {% endblock %} {% block Description2 %}
 <div class="product-description-container">
-  {% if messages %} {% for message in messages %}
+     {% if messages %} {% for message in messages %}
   <div class="alert alert-{{ message.tags }}">{{ message }}</div>
   {% endfor %} {% endif %}
   <div class="product-row">
@@ -435,7 +521,19 @@
           </button></a
         > -->
         {% if object.user == user %}
-
+        <a href="{% url 'sell-update' object.pk %}"
+          ><button><i class="fas fa-edit"></i> &nbsp;&nbsp; Update</button></a
+        >
+        <!-- {% url 'sell-delete' object.pk %} -->
+        <a href="#"
+          ><button class="view">
+            <i class="fas fa-trash-alt" ></i> &nbsp;&nbsp; Delete
+          </button></a
+        >
+        {%endif%}
+      </div>
+      <div class="sold-to">
+        <h1 class="product-h1">Who is your Buyer?</h1>
         <form action='{% url "trans-history" %}' method='post'>
           {% csrf_token %}
           <div class="view-btn">
@@ -444,15 +542,6 @@
             <button><i class="fas fa-edit"></i> &nbsp;&nbsp; Sold to</button>
           </div>
         </form>
-        <a href="{% url 'sell-update' object.pk %}"
-          ><button><i class="fas fa-edit"></i> &nbsp;&nbsp; Update</button></a
-        >
-        <a href="{% url 'sell-delete' object.pk %}"
-          ><button>
-            <i class="fas fa-trash-alt"></i> &nbsp;&nbsp; Delete
-          </button></a
-        >
-        {%endif%}
       </div>
     </div>
   </div>
@@ -512,6 +601,21 @@
         </div> -->
   <!-- </div> -->
 </div>
+<div class="modal">
+    <div class="dialog-wrapper">
+      <i class="fas fa-times"></i>
+      <div class="dialog-title">
+        Are you Sure You Want To Delete Your Product?
+      </div>
+      <form class="dialog-content" action="{% url 'sell-delete' object.pk %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <button id="Cancel" class="cancel">Cancel</button>
+        <button id="Delete" type="submit">Delete</button>
+      </form>
+    </div>
+</div>
+
+
 
 <script type="text/javascript">
   var t_content1 = document.getElementById("tab-content1");
@@ -536,6 +640,23 @@
     t_content1.style.transitionDelay = "0s";
     t_content2.style.transitionDelay = "0.3s";
   }
+
+    let modal=document.querySelector(".modal");
+    let view=document.querySelector('.view');
+    let close=document.querySelector(".dialog-wrapper .fa-times");
+    let cancel=document.querySelector('.dialog-content .cancel');
+
+    view.addEventListener("click",function(){
+      modal.style.display="block";
+    });
+
+    close.addEventListener("click",function(){
+      modal.style.display="none";
+    })
+
+    cancel.addEventListener("click",function(){
+      modal.style.display="none";
+    })
 </script>
 
 

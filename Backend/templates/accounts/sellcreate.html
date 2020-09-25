@@ -1,15 +1,71 @@
-{% extends "profilebase.html" %} {% load crispy_forms_tags %}
-<!--------->
-{% block content %}
+{%  load static %} {% load crispy_forms_tags %}
 
-<form method="POST" enctype="multipart/form-data">
-  {% csrf_token %}
-  <fieldset class="form-group">
-    <legend class="border-bottom mb-4">Product Info</legend>
-    {{ form|crispy }}
-  </fieldset>
-  <div class="form-group">
-    <button class="btn btn-outline-info" type="submit">Update</button>
-  </div>
-</form>
-{% endblock content %}
+<html>
+<head>
+	<meta charset="utf-8" name="viewport" 
+        content= "width=device-width, initial-scale=1.0"> 
+	<title>Prdouct Additon | GaaKU</title>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/product.css' %}">
+</head>
+<body style="background: url('{% static "image/bg-01.jpg" %}') center/cover no-repeat">
+	<div class="wrapper">
+			<div class="registration-title">
+				Give Your Product Information
+			</div>
+			<div class="form">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+              <div class="input-field">
+                {{ form.name|as_crispy_field }}
+              </div>
+              <br>
+              <div class="input-field">
+                <div class="custom-select">
+                  {{ form.category|as_crispy_field }}
+                </div>
+              </div>
+              <br>
+              <div class="input-field">
+                {{ form.price|as_crispy_field }}
+              </div>
+              <br>
+              <div class="input-field">
+                  {{ form.description|as_crispy_field }}
+              </div>
+              <br>
+              <div>
+                {{ form.img|as_crispy_field }}
+              </div>
+               <br>
+              <div class="input-field">
+  
+                {{ form.negotiation|as_crispy_field }}
+
+              </div>
+              <br>
+              <div class="input-field">
+                {{ form.contact_info|as_crispy_field }}
+              </div>
+              <br>
+              <div class="input-field terms">
+                <p>
+                  Is It Urgent to Sell Your Product?
+                </p>
+                {{ form.urgent|as_crispy_field }}
+              </div>
+              <br>
+              <div class="input-field">
+                <input type="submit"  value="Update" class="reg-btn"></input>
+            </div>
+          </form>
+      </div>
+	</div>
+
+	<a href="{% url "profile" %}"><button class="back-btn"> <- Back</button></a>
+
+	<script type="text/javascript" src="{% static 'javascript/product.js' %}"></script>
+</body>
+</html>
+
+

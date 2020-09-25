@@ -56,7 +56,7 @@
 	<!-- Cover Section -->
 	<div class="cover-container">
 		<div class="flexbox padding">
-  			<div class="col2 text-alignment" style="flex-basis: 20%">
+  			<div class="col2 text-alignment">
   				<h1 class="cover-title">Focused for the First Years</h1>
   				<p class="cover-text">
 					Get good qualtity drafters
@@ -66,10 +66,10 @@
 					and interesting.
 				</p>
 				<div class="view-btn">
-					<a href="#" class="button">View More <i class="fa fa-angle-right" aria-hidden="true"></i></a>
+					<a href="/store/search/?q=drafter" class="button" id="view">View More <i class="fa fa-angle-right" aria-hidden="true"></i></a>
 				</div>
   			</div>
-  			<div class="col2 image-scroll" style="flex-basis: 70%">
+  			<div class="col2 image-scroll">
 				<img src="{% static 'image/Drafter.png' %}" class="cover-image first">
 				<img src="{% static 'image/Electronics.png' %}" class="cover-image">
 				<img src="{% static 'image/Homes and Furniture.png' %}" class="cover-image">
@@ -126,7 +126,7 @@
 					</div>
 					<div class="product-details">
 						<span class="product-catagory">{{product.category}}</span>
-						<h4><a href="">{{product.name}}</a></h4>
+						<h4><a href="{{ product.get_absolute_url }}">{{product.name}}</a></h4>
 						<div class="product-bottom-details">
 							<div class="product-price">Rs.{{product.price}}</div>
 							<div class="product-links">
@@ -148,7 +148,7 @@
 					<div class="ad-col2">
 						<h1 class="ad-title">In The Need Of Any Luggages</h1>
 						<p>Your Semester Trip in coming soon and out of luggages. Choose from variety of different options and get you desired luggage now in a favourable price.</p>
-						<a href="" class="ad-btn">Explore Now<i class="fas fa-arrow-right"></i></a>
+						<a href="{% url "category" "Other Accessories" %}" class="ad-btn">Explore Now<i class="fas fa-arrow-right"></i></a>
 					</div>
 					<div class="ad-col2">
 						<img src="{% static 'image/4.png' %}">
@@ -160,7 +160,7 @@
 					<div class="ad-col2">
 						<h1 class="ad-title">Need To Furnish Your New Room Or Sell Your Furnitures</h1>
 						<p>Have you recently rented a room or are you leaving a room annd both of you are looking for buyer or seller. Then find your perfect buyer or perfect seller here. View products now.</p>
-						<a href="" class="ad-btn">Explore Now<i class="fas fa-arrow-right"></i></a>
+						<a href="{% url "category" "Homes and Furnitures" %}" class="ad-btn">Explore Now<i class="fas fa-arrow-right"></i></a>
 					</div>
 					<div class="ad-col2">
 						<img src="{% static 'image/5.png' %}">
@@ -172,7 +172,7 @@
 					<div class="ad-col2">
 						<h1 class="ad-title">Searching for Electrical Appliances</h1>
 						<p>Searching for any electrical appliances like Boiler or Heater. Find your desired items here in a favourable price. Shop now.</p>
-						<a href="" class="ad-btn">Explore Now<i class="fas fa-arrow-right"></i></a>
+						<a href="{% url "category" "Electronics" %}" class="ad-btn">Explore Now<i class="fas fa-arrow-right"></i></a>
 					</div>
 					<div class="ad-col2">
 						<img src="{% static 'image/6.png' %}">
@@ -200,7 +200,7 @@
 					  </div>
 					  <div class="product-details">
 						  <span class="product-catagory">{{product.category}}</span>
-						  <h4><a href="">{{product.name}}</a></h4>
+						  <h4><a href="{{ product.get_absolute_url }}">{{product.name}}</a></h4>
 						  <div class="product-bottom-details">
 							  <div class="product-price">Rs.{{product.price}}</div>
 							  <div class="product-links">
@@ -233,7 +233,7 @@
 					</div>
 					<div class="product-details">
 						<span class="product-catagory">{{product.category}}</span>
-						<h4><a href="">{{product.name}}</a></h4>
+						<h4><a href="{{ product.get_absolute_url }}">{{product.name}}</a></h4>
 						<div class="product-bottom-details">
 							<div class="product-price">Rs.{{product.price}}</div>
 							<div class="product-links">
@@ -250,44 +250,44 @@
 	<!----Testimonials-->
 	<section class="testimonials">
 		<div class="test-container">
-			<div class="test-title" style="flex-basis: 20%;">
+			<div class="test-title">
 				<h1> See what our customers have to say...</h1>
 			</div>
-			<div class="test-content" style="flex-basis:70%">
+			<div class="test-content">
 				<div class="test-slider">
 					<div class="slide active">
 						<p>
-							<i class="fas fa-quote-left"></i><br>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.<br>
+							<i class="fas fa-quote-left"></i><br>{{testimonials.0.content}}<br>
 							<i class="fas fa-quote-right"></i> 
 						</p>
 						<div class="slide-info">
-							<h3>Aron Ashesh Shrestha</h3>
+							<h3>{{testimonials.0.user.first_name}} {{testimonials.0.user.last_name}}</h3>
 						</div>
 					</div>
 					<div class="slide">
 						<p>
-							<i class="fas fa-quote-left"></i><br>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.<br>
+							<i class="fas fa-quote-left"></i><br>{{testimonials.1.content}}<br>
 							<i class="fas fa-quote-right"></i> 
 						</p>
 						<div class="slide-info">
-							<h3>Hritik Thapa</h3>
+							<h3>{{testimonials.1.user.first_name}} {{testimonials.1.user.last_name}}</h3>
 						</div>
 					</div>
 					<div class="slide">
 						<p>
-							<i class="fas fa-quote-left"></i><br>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.<br>
+							<i class="fas fa-quote-left"></i><br>{{testimonials.2.content}}<br>
 							<i class="fas fa-quote-right"></i> 
 						</p>
 						<div class="slide-info">
-							<h3>Ishar Maharjan</h3>
+							<h3>{{testimonials.2.user.first_name}} {{testimonials.2.user.last_name}}</h3>
 						</div>
 					</div>
 
 				</div>
 				<div class="test-indicator">
-					<img src="{% static 'image/a.jpg' %}"  class="active" data-id="0">
-					<img src="{% static 'image/h.jpg' %}"data-id="1">
-					<img src="{% static 'image/it.jpg' %}" data-id="2">
+					<img src="{{testimonials.0.user.profile.image.url}}"  class="active" data-id="0">
+					<img src="{{testimonials.1.user.profile.image.url}}"data-id="1">
+					<img src="{{testimonials.2.user.profile.image.url}}" data-id="2">
 				</div>
 			</div>
 			
@@ -295,6 +295,7 @@
 	</section>
 
 	{% if request.user.is_authenticated %}
+		{% if not subscribed %}
 		<div class="subscribe-container">
 			<div class="sub-col1">
 				<h1>Keep Yourself Updated With Our Products</h1>
@@ -304,6 +305,17 @@
 				<a href="{% url 'subscribe-update' %}"><input type="submit" value="Subscribe" id="footer-email-btn"></a> 
 			</div>
 		</div>
+		{% else %}
+		<div class="subscribe-container">
+			<div class="sub-col1">
+				<h1>Dont want to get updates?</h1>
+				Unsubscribe to stop getting notifications
+			</div>
+			<div class="sub-col2">
+				<a href="{% url 'subscribe-update' %}"><input type="submit" value="Unsubscribe" id="footer-email-btn"></a> 
+			</div>
+		</div>
+		{% endif %}
 	{% else %}
 		<div class="subscribe-container">
 			<div class="sub-col1">
@@ -317,46 +329,7 @@
 		</div>
 	{% endif %}
 
-	<!-- footer -->
-	<footer class="footer-container">
-		<div class="footer">
-			<div class="footer-heading footer-1">
-				<h2>Quick Links</h2>
-				<a href="#">Home</a>
-				<a href="#">Products</a>
-				<a href="#">Profile</a>
-				<a href="#">Wishlists</a>
-				<a href="#">About us</a>
-				<a href="#">Terms of Use</a>
-			</div>
-			<div class="footer-heading footer-2">
-				<h2>Contact Us</h2>
-				<a href="#"><i class="fas fa-map-marker-alt"></i> 28-Kilo, Kavre</a>
-				<a href="#"><i class="fas fa-phone-alt"></i> 011-432076</a>
-				<a href="#"><i class="fas fa-mobile"></i> +977-9843785412</a>
-				<a href="#"><i class="fas fa-envelope"></i> gaakuapp@gmail.com</a>
-			</div>
-			<div class="footer-heading footer-3">
-				<h2>Social Media</h2>
-				<a href="#"><i class="fab fa-instagram"></i>Instagram</a>
-				<a href="#"><i class="fab fa-facebook"></i>Facebook</a>
-				<a href="#"><i class="fab fa-youtube"></i>YouTube</a>
-				<a href="#"><i class="fab fa-twitter"></i>Twitter</a>
-				<a href="#"><i class="fab fa-discord"></i></i>Discord</a>
-			</div>
-			<div cLass="footer-email-form">
-				<div>
-					<img src="{% static 'image/Logo white.png' %}" id="logo2">
-				</div>
-			</div>
-		</div>
-		
-	</footer>
-	<footer>
-		<div class="copyright-container">
-			@Copyright 2020 gaaku.com. All Rights are Preserved. Developed by GaaKU Team
-		</div>
-	</footer>
+	
 
 	<script type="text/javascript" src="{% static 'javascript/JQuery3.3.1.js' %}"></script>	
 	<script type="text/javascript" src="{% static 'javascript/lightslider.js' %}"></script>

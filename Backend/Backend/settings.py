@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'Account',
     'bootstrap4',
     'crispy_forms',
-
+    'about',
 ]
 
 MIDDLEWARE = [
@@ -85,7 +85,7 @@ WSGI_APPLICATION = 'Backend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'Test3',
+        'NAME': 'Test7',
         'USER': 'postgres',
         'PASSWORD': '4265063h',
         'HOST': 'localhost'

@@ -10,19 +10,22 @@
 	<!-- Linking to Font Awesome -->
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
 	<!-- Linking CSS -->
-	<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+
 	<link rel="stylesheet" type="text/css" href="{% static 'css/product.css' %}">
 	<!--Linking Light Slider-->
 	<link rel="stylesheet" type="text/css" href="{% static 'css/lightslider.css' %}">
 	<!--Linking to Product css-->
 	<link rel="stylesheet" type="text/css" href="{%  static 'css/main.css' %}" >
 		<!--Linking to Product css-->
-	<link rel="stylesheet" type="text/css" href="{%  static 'css/description.css' %}" >
+  <link rel="stylesheet" type="text/css" href="{%  static 'css/description.css' %}" >
+  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
 
     {% block link %} {% endblock %}
     {% block link2 %} {% endblock %}
+    {% block link3 %} {% endblock %}
   </head>
   <body>
+  
     <header>
       <div class="fixed-nav">
         <div class="firt-nav">
@@ -73,7 +76,7 @@
                   <li>
                     <a href='{% url "pmainpage" %}' class="links">Products</a>
                   </li>
-                  <li><a href="#" class="links">About</a></li>
+                  <li><a href='{% url "about" %}' class="links">About</a></li>
                   {% if request.user.is_authenticated %}
                   <li>
                     <a href='{% url "profile" %}'>Profile</a>
@@ -186,7 +189,7 @@
                 </ul>
               </li>
               <li>
-                <a href="#">About</a>
+                <a href='{% url "about" %}'>About</a>
               </li>
               <li>
                 <a href='{% url "profile" %}'>Profile</a>
@@ -207,7 +210,52 @@
     {% block Description %}{% endblock %} 
     {% block Description2 %}{% endblock %}
     {% block notification %} {% endblock %}
+    {% block about %} {% endblock %}
 
-    
+    <!-- footer -->
+	<footer class="footer-container">
+		<div class="footer">
+			<div class="footer-heading footer-1">
+				<h2>Quick Links</h2>
+				<a href="{% url "home" %}">Home</a>
+				<a href="{% url "pmainpage" %}">Products</a>
+				<a href="{% url "profile" %}">Profile</a>
+				<a href="{% url "profile" %}">Wishlists</a>
+				<a href="{% url "about" %}">About us</a>
+				<a href="{% url "about" %}">Terms of Use</a>
+			</div>
+			<div class="footer-heading footer-2">
+				<h2>Contact Us</h2>
+				<a href="#"><i class="fas fa-map-marker-alt"></i> 28-Kilo, Kavre</a>
+				<a href="#"><i class="fas fa-phone-alt"></i> 011-432076</a>
+				<a href="#"><i class="fas fa-mobile"></i> +977-9843785412</a>
+				<a href="#"><i class="fas fa-envelope"></i> gaakuapp@gmail.com</a>
+			</div>
+			<div class="footer-heading footer-3">
+				<h2>Social Media</h2>
+				<a href="#"><i class="fab fa-instagram"></i>Instagram</a>
+				<a href="https://www.facebook.com/Gaaku-109224970900497"><i class="fab fa-facebook"></i>Facebook</a>
+				<a href="#"><i class="fab fa-youtube"></i>YouTube</a>
+				<a href="#"><i class="fab fa-twitter"></i>Twitter</a>
+				<a href="#"><i class="fab fa-discord"></i></i>Discord</a>
+			</div>
+			<div cLass="footer-email-form">
+				<div>
+					<img src="{% static 'image/Logo white.png' %}" id="logo2">
+				</div>
+			</div>
+		</div>
+		
+	</footer>
+	<footer>
+		<div class="copyright-container">
+			@Copyright 2020 gaaku.com. All Rights are Preserved. Developed by GaaKU Team
+		</div>
+  </footer>
+  <script>
+      document.querySelector('.menu-icons').addEventListener('click',()=>{
+	    document.querySelector('.container-nav').classList.toggle('active');
+      });
+  </script>
   </body>
 </html>

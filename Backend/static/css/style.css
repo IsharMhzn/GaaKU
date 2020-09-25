@@ -482,9 +482,14 @@ background: rgba(211,211,211,0.4);
 }
 
 .flexbox .col2:nth-child(1) {
+  flex-basis: 20%;
   background: white;
   border-radius: 30px 0 0 30px;
   box-shadow: 1px 6px 6px rgba(0,0,0,16%);
+}
+
+.flexbox .col2:nth-child(2){
+  flex-basis: 70%;
 }
 
 .col2{
@@ -941,8 +946,13 @@ a {
 	margin:0;
 }
 
+.test-title{
+  flex-basis: 20%;
+}
+
 .test-content{
-	display: flex;
+  display: flex;
+  flex-basis: 70%;
 }
 
 .testimonials .test-slider{
@@ -1238,16 +1248,61 @@ a {
 	.subscribe-container{
 		height: auto;
 		flex-direction: column;
-	}
+  }
+  
+  .test-title{
+    flex-basis: 100%;
+    margin-bottom: 50px;
+    padding: 20px;
+  }
+
+  .test-content{
+    flex-basis: 100%;
+    padding: 20px;
+  }
 }
 
 @media screen and (max-width: 820px){
+  .cover-container{
+    margin: 20px auto;
+  }
+
+  .flexbox{
+    flex-direction: column;
+  }
+  .flexbox .col2:nth-child(1){
+    border-radius: 0 0 30px 30px;
+    flex-basis: 100%;
+    order:2;
+    min-height: 400px;
+  }
+  .flexbox .col2:nth-child(2){
+    border-radius: 30px 30px 0 0;
+    flex-basis: 100%;
+    order:1;
+  }
+  .scrolling-container{
+    display: none;
+  }
+
 	 .footer{
 	 	padding-top: 2rem;
 	 }
 	 .footer-email-form{
 	 	margin-top:4rem;
-	 }
+   }
+   
+   .ad-row{
+     flex-direction: column;
+   }
+
+   .ad-col2{
+     flex-basis: 100%;
+   }
+
+   .ad-col2 img{
+    padding: 0px;
+   }
 }
 
 @media screen and (max-width: 720px){
@@ -1263,7 +1318,10 @@ a {
 	.test-col{
 		flex: 100%;
 		max-width: 80%;
-	}
+  }
+  .ribbon{
+    display: none;
+  }
 }
 
 @media (max-width: 720px){
@@ -1275,8 +1333,19 @@ a {
 		width: 2rem;
 		margin-left: 10px;
 		margin-right: 30px;
-	}
+  }
+  
+  .looking-image{
+    width: 2rem;
+		margin-left: 10px;
+		margin-right: 30px;
+  }
 }
 .userheader {
   text-align: center;
+}
+@media (max-width: 450px){
+  .ad-col2 img{
+    height: 350px;
+  }
 }

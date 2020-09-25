@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import (login_view, logout_user, signup_view, activate, forgot_password, password_reset, historyview, notificationview, subscribe,
+from .views import (login_view, logout_user, signup_view, activate, forgot_password, password_reset, historyview, notificationview, subscribe, testimony,
                     profile, SellListView, SellDetailView, SellCreateView, SellUpdateView, SellDeleteView, WishListView)
 
 urlpatterns = [
@@ -11,10 +11,11 @@ urlpatterns = [
     path('forgot/', forgot_password, name='forgot password'),
     path('reset/<userid>', password_reset, name='pasword_reset'),
     path('subscribe/', subscribe, name='subscribe-update'),
+    path('testimony/', testimony, name='testimony'),
     path('profile/', profile, name='profile'),
     path('profile/history', historyview, name='trans-history'),
     path('profile/sell/<str:username>',
-         SellListView.as_view(), name='myproducts'),
+         SellListView, name='myproducts'),
     path('profile/wishlist/<str:username>',
          WishListView.as_view(), name='wishlist'),
     path('profile/sell/<int:pk>/', SellDetailView.as_view(), name='sell-detail'),
@@ -23,5 +24,5 @@ urlpatterns = [
          SellUpdateView.as_view(), name='sell-update'),
     path('profile/sell/<int:pk>/delete',
          SellDeleteView.as_view(), name='sell-delete'),
-    path('profile/notification', notificationview, name="notification")
+    path('profile/notification', notificationview, name="notification"),
 ]

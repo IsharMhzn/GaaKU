@@ -67,14 +67,18 @@ class SignUpForm(UserCreationForm):
 class UserUpdateForm(forms.ModelForm):
 
     class Meta:
-        model = User
-        fields = ['username']
+        model = Profile
+        fields = ['first_name', 'last_name', 'email']
+        widgets = {
+            "username": forms.TextInput(attrs={'class': 'input-field', 'help_text': 'Your Username'},),
+            "email": forms.EmailInput(attrs={'class': 'input-field'}),
+        }
 
 
 class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ['image']
+        fields = ['phone_no', 'image']
 
 
 class ProductForm(forms.ModelForm):
@@ -82,7 +86,8 @@ class ProductForm(forms.ModelForm):
     category = forms.CharField(widget=forms.Select(choices=category_choices))
     price = forms.IntegerField(help_text="Price")
     description = forms.CharField(help_text="Description")
-    # negotiation = forms.BooleanField(widget=forms.Select(choices=negotiation_choices
+    negotiation = forms.BooleanField(
+        widget=forms.Select(choices=negotiation_choices))
 
     img = forms.ImageField(help_text="Product Image")
     contact_info = forms.CharField(help_text="Contact Info.")
@@ -93,3 +98,6 @@ class ProductForm(forms.ModelForm):
         model = Product
         fields = ['name', 'category', 'price',
                   'description', 'negotiation', 'img', 'contact_info', 'urgent']
+        widgets = {
+            "name": forms.TextInput(attrs={'class': 'input-field', 'help_text': 'Your Username'}),
+        }

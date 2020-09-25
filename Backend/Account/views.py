@@ -8,13 +8,17 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.contrib.auth.hashers import make_password
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+from django.db.models import Q
 
-from .models import Profile, History
+from .models import Profile, History, Sold_out
 from .forms import SignUpForm, UserUpdateForm, ProfileUpdateForm, ProductForm
 from . import mail
 
 from store.models import Product, WishlistItem
-from Account.models import NotificationCount, Notification, Updates
+from Account.models import NotificationCount, Notification, Updates, Testimony
+
 
 # Create your views here.
 
@@ -128,16 +132,57 @@ def activate(request, userid):
 
 
 def profile(request):
+    subscribed = False
     if request.user.is_authenticated:
+        his = Sold_out.objects.all()
+        ids = []
+        for h in his:
+            hid = h.product
+            ids.append(hid)
+            print(ids)
+
+        try:
+            subscribed = Updates.objects.get(user=request.user)
+        except:
+            pass
         if request.method == 'POST':
-            u_form = UserUpdateForm(request.POST, instance=request.user)
+            # Profile update part
+            u_form = UserUpdateForm(
+                request.POST, instance=request.user.profile)
             p_form = ProfileUpdateForm(
                 request.POST, request.FILES, instance=request.user.profile)
             if u_form.is_valid() and p_form.is_valid():
+                profile = Profile()
+                profile.image = p_form.cleaned_data['image']
                 u_form.save()
                 p_form.save()
                 messages.success(request, f'Your account has been updated!')
                 return redirect('profile')
+
+            # History view part
+            sold_to = request.POST.get('sold-to')
+            productid = request.POST.get('product-id')
+            h = History()
+            s = Sold_out()
+            h.product = Product.objects.get(id=productid).pk
+            s.product = Product.objects.get(id=productid).pk
+            h.productname = Product.objects.get(id=productid).name
+            s.productname = Product.objects.get(id=productid).name
+            h.productuser = Product.objects.get(id=productid).user.username
+            s.productuser = Product.objects.get(id=productid).user.username
+            h.productcategory = Product.objects.get(id=productid).category
+            s.productcategory = Product.objects.get(id=productid).category
+            h.productprice = Product.objects.get(id=productid).price
+            s.productprice = Product.objects.get(id=productid).price
+            h.productimg = Product.objects.get(id=productid).img
+            s.productimg = Product.objects.get(id=productid).img
+            h.sold_to = User.objects.get(username=sold_to).username
+            h.save()
+            s.save()
+            messages.add_message(request, messages.INFO,
+                                 'Please delete the product you recently sold.')
+            return redirect('sell-detail', pk=productid)
+
         else:
             u_form = UserUpdateForm(instance=request.user)
             p_form = ProfileUpdateForm(instance=request.user.profile)
@@ -145,10 +190,31 @@ def profile(request):
         context = {
             'u_form': u_form,
             'p_form': p_form,
+            'products': Product.objects.filter(user=request.user),
+            'items': WishlistItem.objects.filter(user=request.user),
+            'bought': History.objects.filter(sold_to=request.user.username),
+            'sold': History.objects.filter(productuser=request.user.username),
+            'subscribed': subscribed
         }
         return render(request, 'accounts/profile.html', context)
     else:
         return redirect('login')
+
+
+def testimony(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+
+            user = request.user
+            content = request.POST.get('content')
+            if len(content) < 25:
+                messages.add_message(request, messages.INFO,
+                                     'Please enter at least 25 words.')
+                return redirect("testimony")
+            u = Testimony.objects.create(user=user, content=content)
+            u.save()
+        return render(request, 'accounts/testimony.html', {})
+    return redirect('home')
 
 
 def historyview(request):
@@ -157,25 +223,35 @@ def historyview(request):
             sold_to = request.POST.get('sold-to')
             productid = request.POST.get('product-id')
             h = History()
-            h.product = Product.objects.get(id=productid).name
+            s = Sold_out()
+            h.product = Product.objects.get(id=productid).pk
+            s.product = Product.objects.get(id=productid).pk
+            h.productname = Product.objects.get(id=productid).name
+            s.productname = Product.objects.get(id=productid).name
             h.productuser = Product.objects.get(id=productid).user.username
-            h.sold_to = User.objects.get(username=sold_to).username
+            s.productuser = Product.objects.get(id=productid).user.username
+            h.productcategory = Product.objects.get(id=productid).category
+            s.productcategory = Product.objects.get(id=productid).category
+            h.productprice = Product.objects.get(id=productid).price
+            s.productprice = Product.objects.get(id=productid).price
+            h.productimg = Product.objects.get(id=productid).img
+            s.productimg = Product.objects.get(id=productid).img
+            try:
+                h.sold_to = User.objects.get(username=sold_to).username
+                h.sold_to = User.objects.get(username=sold_to).username
+            except:
+                messages.add_message(request, messages.INFO,
+                                     'Please enter a valid username')
+                return redirect('sell-detail', pk=productid)
             h.save()
+            s.save()
             messages.add_message(request, messages.INFO,
-                                 'Please delete the product you recently sold.')
-            return redirect('sell-detail', pk=productid)
+                                 'The Product you recently sold will be deleted automatically after two days. Still If you want to delete it manually, you can always delete this product by visiting your profile')
+            return redirect('testimony')
 
         bought = History.objects.filter(sold_to=request.user.username)
         sold = History.objects.filter(productuser=request.user.username)
 
-        # sold = list()
-        # for p in Product.objects.filter(user=request.user):
-        #     try:
-        #         s = History.objects.filter(product=p)
-        #     except:
-        #         s = None
-        #     if s is not None:
-        #         sold += s
         return render(request, 'accounts/history.html', {'bought': bought, 'sold': sold})
     else:
         return redirect('login')
@@ -192,21 +268,19 @@ def notificationview(request):
 
 
 def subscribe(request):
-    u = Updates.objects.get_or_create(user=request.user)
+    try:
+        u = Updates.objects.get(user=request.user)
+    except:
+        u = Updates.objects.create(user=request.user)
+    else:
+        u.delete()
+
     return redirect('home')
 
 
-class SellListView(ListView):
-    model = Product
-    template_name = 'accounts/myproducts.html'
-    context = {
-        'products': Product.objects.all()
-    }
-    context_object_name = 'products'
-
-    def get_queryset(self):
-        P_user = get_object_or_404(User, username=self.kwargs.get('username'))
-        return Product.objects.filter(user=P_user)
+def SellListView(request):
+    products = Product.objects.all()
+    return render(request, 'profile.html', {'object_list': products})
 
 
 class SellDetailView(DetailView):
@@ -214,20 +288,31 @@ class SellDetailView(DetailView):
     template_name = 'accounts/selldetail.html'
 
 
-class SellCreateView(LoginRequiredMixin, CreateView):
-    model = Product
+class SellCreateView(CreateView):
     form_class = ProductForm
     template_name = 'accounts/sellcreate.html'
+
+    @method_decorator(login_required(login_url='login'))
+    def dispatch(self, *args, **kwargs):
+        return super(SellCreateView, self).dispatch(*args, **kwargs)
 
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
 
+    # model = Product
+    # form_class = ProductForm
+    # template_name = 'accounts/sellcreate.html'
+
+    # def form_valid(self, form):
+    #     form.instance.user = self.request.user
+    #     return super().form_valid(form)
+
 
 class SellUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Product
     form_class = ProductForm
-    template_name = 'accounts/sellcreate.html'
+    template_name = 'accounts/sellupdate.html'
 
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -242,8 +327,9 @@ class SellUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
 class SellDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Product
+    form_class = ProductForm
     success_url = '/'
-    template_name = 'accounts/sell_confirm_delete.html'
+    template_name = 'accounts/selldetail.html'
 
     def test_func(self):
         product = self.get_object()
