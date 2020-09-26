@@ -49,32 +49,51 @@ class Notification(models.Model):
     post = models.ForeignKey(Product, on_delete=models.CASCADE)
     comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
 
+
 class NotificationCount(models.Model):
     old = models.IntegerField(default=0)
     updated = models.IntegerField(default=0)
     seen = models.BooleanField(default=False)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
+
 class History(models.Model):
     sold_to = models.CharField(max_length=20, default='user')
-    product = models.CharField(max_length=50, default='product')
+    product = models.CharField(max_length=20, default='product')
+    productname = models.CharField(max_length=50, default='product')
+    productcategory = models.CharField(max_length=50, default='product')
+    productprice = models.IntegerField(default=0)
+    productimg = models.ImageField(upload_to='pics', null=True, blank=True)
     productuser = models.CharField(max_length=20, default='user')
     timestamp = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f'{self.productuser} sold {self.product} to {self.sold_to}.'
+        return f'{self.productuser} sold {self.productname} to {self.sold_to}.'
+
+
+class Sold_out(models.Model):
+    sold_to = models.CharField(max_length=20, default='user')
+    product = models.CharField(max_length=20, default='product')
+    productname = models.CharField(max_length=50, default='product')
+    productcategory = models.CharField(max_length=50, default='product')
+    productprice = models.IntegerField(default=0)
+    productimg = models.ImageField(upload_to='pics', null=True, blank=True)
+    productuser = models.CharField(max_length=20, default='user')
+    timestamp = models.DateTimeField(auto_now_add=True)
+
 
 class Updates(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     timestamp = models.DateTimeField(auto_now_add=True)
 
+
 class Testimony(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    content = models.CharField(max_length=250,default='OK')
+    content = models.CharField(max_length=250, default='OK')
     timestamp = models.DateTimeField(auto_now_add=True)
+
 
 class LookingFor(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     product = models.CharField(max_length=50)
     timestamp = models.DateTimeField(auto_now_add=True)
-    

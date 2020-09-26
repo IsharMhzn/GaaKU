@@ -21,8 +21,8 @@ def send(domain, userid, email, type):
         message['Subject'] = "GaaKU - Password Reset for your account"
 
     body = f"""
-            Please follow the link below to confirm your account.
-           http:/{domain}/account/{type}/{userid}
+            Please follow the link below to confirm your account.<br>
+           <a href='http://{domain}/account/{type}/{userid}'>Click here to confirm your email.</a><br>
             Thank you!
     """
     message.attach(MIMEText(body, 'html'))

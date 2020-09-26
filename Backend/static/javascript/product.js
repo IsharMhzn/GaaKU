@@ -1,6 +1,6 @@
-const category=document.querySelector("#id_category");
-const sub1=document.querySelector("#id_sub_category1");
-const sub2=document.querySelector("#id_sub_category2");
+const category = document.querySelector("#id_category");
+const sub1 = document.querySelector("#id_sub_category1");
+const sub2 = document.querySelector("#id_sub_category2");
 
 window.addEventListener("load", function () {
   document
@@ -16,22 +16,20 @@ window.addEventListener("load", function () {
     });
 });
 
-category.addEventListener("change",function(){
-    if(category.value=="Education Materials"){
-      sub1.style.display="block";
-      sub2.style.display="block";
-    }
-    else{
-      sub1.style.display="none";
-      sub2.style.display="none";
-    }
-})
+category.addEventListener("change", function () {
+  if (category.value == "Education Materials") {
+    sub1.style.display = "block";
+    sub2.style.display = "block";
+  } else {
+    sub1.style.display = "none";
+    sub2.style.display = "none";
+  }
+});
 
-sub1.addEventListener("change",function(){
-  if(sub1.value=="Labcoats" || sub1.value=="Drafters"){
-    sub2.style.display="none";
+sub1.addEventListener("change", function () {
+  if (sub1.value == "Labcoats" || sub1.value == "Drafters") {
+    sub2.style.display = "none";
+  } else {
+    sub2.style.display = "block";
   }
-  else{
-    sub2.style.display="block";
-  }
-})
+});

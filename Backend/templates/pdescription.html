@@ -435,11 +435,12 @@
                     </div>
                 </div>
             </div>
-            <div class="buttons">
+            <div class="buttons">{% if request.user.is_authenticated %}
 				<a href="{{object.get_add_to_whishlist_url}}"><button><i class="fas fa-heart"></i> &nbsp;&nbsp; Add to WishList</button></a>
 					{% if object.user == user %}
                 <a href="{% url 'sell-detail' object.pk %}"><button><i class="fas fa-edit"></i>  &nbsp;&nbsp; Update</button></a>
 				<a href="{% url 'sell-detail' object.pk %}"><button><i class="fas fa-trash-alt"></i>  &nbsp;&nbsp;Delete</button></a>
+					{%endif%}
 					{%endif%}
             </div>
         </div>

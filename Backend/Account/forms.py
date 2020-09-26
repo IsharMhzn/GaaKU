@@ -27,7 +27,7 @@ semester_choices = [
 
 category_choices = [
     ('Electronics', 'Electronics'),
-    ('Homes and Furnitures', 'Homes and Furnitures'),
+    ('Homes and Furnitures', 'Furnitures'),
     ('Sports', 'Sports'),
     ('Education Materials', 'Education Materials'),
     ('Other Accessories', 'Other Accessories'),
@@ -96,17 +96,19 @@ class ProfileUpdateForm(forms.ModelForm):
 class ProductForm(forms.ModelForm):
     name = forms.CharField()
     category = forms.CharField(widget=forms.Select(choices=category_choices))
-    sub_category1 = forms.CharField(widget=forms.Select(choices=subcategory1_choices))
-    sub_category2 = forms.CharField(widget=forms.Select(choices=subcategory2_choices))
+    sub_category1 = forms.CharField(
+        widget=forms.Select(choices=subcategory1_choices))
+    sub_category2 = forms.CharField(
+        widget=forms.Select(choices=subcategory2_choices))
     price = forms.IntegerField()
     description = forms.CharField(widget=forms.Textarea)
     negotiation = forms.ChoiceField(choices=negotiation_choices,
-        widget=forms.Select())
+                                    widget=forms.Select())
 
     img = forms.ImageField()
     contact_info = forms.CharField()
-    urgent = forms.ChoiceField(choices=urgent_choices,widget=forms.Select(
-                                                                         ))
+    urgent = forms.ChoiceField(choices=urgent_choices, widget=forms.Select(
+    ))
 
     class Meta:
         model = Product

@@ -7,16 +7,27 @@ from django.shortcuts import redirect
 from Account.models import Notification, NotificationCount, LookingFor
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.db.models import Q
 
+
+from Account.models import History, Sold_out
 
 
 # Create your views here.
 
 
-class pmainpage(ListView):
-    model = Product
-    template_name = 'pmainpage.html'
-
+def pmainpage(request):
+    his = Sold_out.objects.all()
+    ids = []
+    for h in his:
+        hid = h.product
+        ids.append(hid)
+        print(ids)
+    context = {
+        'products': Product.objects.filter(~Q(pk__in=ids)),
+        'bought': Sold_out.objects.all(),
+    }
+    return render(request, 'pmainpage.html', context)
 # def pmainpage(request):
 #     products = Product.objects.all()
 #     context = {'products':products}
@@ -90,9 +101,11 @@ def pdescription(request, pk):
 
             try:
                 if not product.user == request.user:
-                    notifc = NotificationCount.objects.get_or_create(user=product.user)[0]
+                    notifc = NotificationCount.objects.get_or_create(user=product.user)[
+                        0]
                 else:
-                    notifc = NotificationCount.objects.get_or_create(user=c.reply.user)[0]
+                    notifc = NotificationCount.objects.get_or_create(user=c.reply.user)[
+                        0]
                 notifc.old += 1
                 notifc.seen = False
                 notifc.save()
@@ -103,15 +116,16 @@ def pdescription(request, pk):
         if request.user == product.user:
             comments = Comment.objects.filter(post=product, reply=None)
         else:
-            comments = Comment.objects.filter(post=product, reply=None, user=request.user)
+            comments = Comment.objects.filter(
+                post=product, reply=None, user=request.user)
         comments = comments[::-1]
 
         if request.user == product.user:
             replies = Comment.objects.filter(post=product).exclude(reply=None)
         else:
             replies = Comment.objects.filter(post=product).exclude(reply=None)
-        showcommentbox = True  
-    
+        showcommentbox = True
+
     return render(request, 'pdescription.html', {'comments': comments, 'replies': replies, 'object': product, 'showcommentbox': showcommentbox})
 
 
@@ -143,17 +157,28 @@ def Landingpage(request):
 def category(request, category):
     products = Product.objects.filter(category=category)
     print(products)
-    return render(request, 'pmainpage.html', {'object_list': products})
+    return render(request, 'pmainpage.html', {'products': products})
 
-def subcategory1(request, category1,category2):
-    products = Product.objects.filter(category=category1,sub_category1=category2)
-    print(products)
-    return render(request, 'pmainpage.html', {'object_list': products})
 
-def subcategory2(request, category1,category2,category3):
-    products = Product.objects.filter(category=category1,sub_category1=category2,sub_category2=category3)
-    print(products)
-    return render(request, 'pmainpage.html', {'object_list': products})
+def subcategory1(request, category1, category2):
+    productsa = Product.objects.filter(
+        category=category1, sub_category1=category2)
+    print(productsa)
+    context = {
+        'products': productsa
+    }
+    return render(request, 'pmainpage.html', context)
+
+
+def subcategory2(request, category1, category2, category3):
+    productsa = Product.objects.filter(
+        category=category1, sub_category1=category2, sub_category2=category3)
+    print(productsa)
+    context = {
+        'products': productsa
+    }
+    return render(request, 'pmainpage.html', context)
+
 
 def search(request):
     try:
@@ -161,10 +186,13 @@ def search(request):
     except:
         q = None
     if q:
-        products = Product.objects.filter(
+        productsa = Product.objects.filter(
             name__icontains=q) | Product.objects.filter(category__icontains=q)
-        print(products)
-        return render(request, 'pmainpage.html', {'object_list': products})
+        print(productsa)
+        context = {
+            'products': productsa
+        }
+        return render(request, 'pmainpage.html', context)
     else:
         return HttpResponse('EMPTY')
 
@@ -177,15 +205,17 @@ def commentview(request):
     comments = Comment.objects.all()
     return render(request, 'comment.html', {'comments': comments})
 
+
 def lookingfor(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
             p = request.POST.get('product-name')
             lf = LookingFor(user=request.user, product=p)
             lf.save()
-            messages.add_message(request, messages.INFO, 'You will get notified when someone posts the product you\'re looking for', )
+            messages.add_message(
+                request, messages.INFO, 'You will get notified when someone posts the product you\'re looking for', )
     else:
-        messages.add_message(request, messages.INFO, 'You have to be logged in to use this feature. Sorry.', )
+        messages.add_message(
+            request, messages.INFO, 'You have to be logged in to use this feature. Sorry.', )
         return redirect('login')
     return redirect('profile')
-

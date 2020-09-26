@@ -186,7 +186,7 @@
                 {% for b in bought %}
                 <a href="#" class="project__link focus--box-shadow">
                   <div class="project__wrapper history-section">
-                    <p>You bought {{b.product}} from {{b.productuser}} on {{b.timestamp | date}}</p>
+                    <p>You bought {{b.productname}} from {{b.productuser}} on {{b.timestamp | date}}</p>
                   </div>
                 </a>
                 {% endfor %}
@@ -198,7 +198,7 @@
                 {% for s in sold %}
                 <a href="#" class="project__link focus--box-shadow">
                   <div class="project__wrapper history-section">
-                    <p>You sold {{s.product}} to {{s.sold_to}} on {{s.timestamp | date}}</p>
+                    <p>You sold {{s.productname}} to {{s.sold_to}} on {{s.timestamp | date}}</p>
                   </div>
                 </a>
                 {% endfor %}

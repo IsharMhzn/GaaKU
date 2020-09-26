@@ -8,8 +8,11 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.contrib.auth.hashers import make_password
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+from django.db.models import Q
 
-from .models import Profile, History
+from .models import Profile, History, Sold_out
 from .forms import SignUpForm, UserUpdateForm, ProfileUpdateForm, ProductForm
 from . import mail
 
@@ -26,36 +29,41 @@ def signup_view(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
-            if isinstance(int(form.cleaned_data.get('phone_no')), int) and len(form.cleaned_data.get('phone_no')) >= 10:
-                user = form.save()
-                user.refresh_from_db()
-                user.is_active = False
-                user.first_name = form.cleaned_data.get('first_name')
-                user.last_name = form.cleaned_data.get('last_name')
-                user.email = form.cleaned_data.get('email')
-                user.profile.first_name = form.cleaned_data.get('first_name')
-                user.profile.last_name = form.cleaned_data.get('last_name')
-                user.profile.email = form.cleaned_data.get('email')
-                user.profile.dob = form.cleaned_data.get('dob')
-                user.profile.batch = form.cleaned_data.get('batch')
-                user.profile.department = form.cleaned_data.get('department')
-                user.profile.group = form.cleaned_data.get('group')
-                user.profile.semester = form.cleaned_data.get('semester')
-                user.profile.phone_no = form.cleaned_data.get('phone_no')
-                user.save()
-                domain = get_current_site(request)
-                uid = (int(user.pk) + 325) * 556535
-                mail.send(domain=domain, userid=uid,
-                          email=user.email, type='confirm')
-                return HttpResponse('Please check your email to complete your registration. Kindly check your spam if needed.')
+            if form.cleaned_data.get('email').endswith('ku.edu.np'):
+                if isinstance(int(form.cleaned_data.get('phone_no')), int) and len(form.cleaned_data.get('phone_no')) >= 10:
+                    user = form.save()
+                    user.refresh_from_db()
+                    user.is_active = False
+                    user.first_name = form.cleaned_data.get('first_name')
+                    user.last_name = form.cleaned_data.get('last_name')
+                    user.email = form.cleaned_data.get('email')
+                    user.profile.first_name = form.cleaned_data.get('first_name')
+                    user.profile.last_name = form.cleaned_data.get('last_name')
+                    user.profile.email = form.cleaned_data.get('email')
+                    user.profile.dob = form.cleaned_data.get('dob')
+                    user.profile.batch = form.cleaned_data.get('batch')
+                    user.profile.department = form.cleaned_data.get('department')
+                    user.profile.group = form.cleaned_data.get('group')
+                    user.profile.semester = form.cleaned_data.get('semester')
+                    user.profile.phone_no = form.cleaned_data.get('phone_no')
+                    user.save()
+                    domain = get_current_site(request)
+                    uid = (int(user.pk) + 325) * 556535
+                    mail.send(domain=domain, userid=uid,
+                            email=user.email, type='confirm')
+                    return HttpResponse('Please check your email to complete your registration. Kindly check your spam if needed.')
+                else:
+                    messages.add_message(
+                        request, messages.ERROR, 'Your phone number is not valid.')
             else:
                 messages.add_message(
-                    request, messages.ERROR, 'Your phone number is not valid.')
+                        request, messages.ERROR, 'Your email must be a valid registered email in ku. If you don\'t have a ku email yet then you can send a photo of your ku\'s id card with your number to our email (gaakuapp@gmail.com) and we\'ll send you an email with all your gaaku account credentials.')
     else:
         messages.add_message(
             request, messages.INFO, 'Please try to keep your username as simple as possible.')
         form = SignUpForm()
     return render(request, 'accounts/signup.html', {'form': form})
+
 
 
 def login_view(request):
@@ -131,11 +139,18 @@ def activate(request, userid):
 
 
 def profile(request):
-    subscribed=False
+    subscribed = False
     if request.user.is_authenticated:
+        his = Sold_out.objects.all()
+        ids = []
+        for h in his:
+            hid = h.product
+            ids.append(hid)
+            print(ids)
+
         try:
             subscribed = Updates.objects.get(user=request.user)
-        except: 
+        except:
             pass
         if request.method == 'POST':
             # Profile update part
@@ -155,10 +170,22 @@ def profile(request):
             sold_to = request.POST.get('sold-to')
             productid = request.POST.get('product-id')
             h = History()
-            h.product = Product.objects.get(id=productid).name
+            s = Sold_out()
+            h.product = Product.objects.get(id=productid).pk
+            s.product = Product.objects.get(id=productid).pk
+            h.productname = Product.objects.get(id=productid).name
+            s.productname = Product.objects.get(id=productid).name
             h.productuser = Product.objects.get(id=productid).user.username
+            s.productuser = Product.objects.get(id=productid).user.username
+            h.productcategory = Product.objects.get(id=productid).category
+            s.productcategory = Product.objects.get(id=productid).category
+            h.productprice = Product.objects.get(id=productid).price
+            s.productprice = Product.objects.get(id=productid).price
+            h.productimg = Product.objects.get(id=productid).img
+            s.productimg = Product.objects.get(id=productid).img
             h.sold_to = User.objects.get(username=sold_to).username
             h.save()
+            s.save()
             messages.add_message(request, messages.INFO,
                                  'Please delete the product you recently sold.')
             return redirect('sell-detail', pk=productid)
@@ -174,7 +201,7 @@ def profile(request):
             'items': WishlistItem.objects.filter(user=request.user),
             'bought': History.objects.filter(sold_to=request.user.username),
             'sold': History.objects.filter(productuser=request.user.username),
-            'subscribed':subscribed
+            'subscribed': subscribed
         }
         return render(request, 'accounts/profile.html', context)
     else:
@@ -204,17 +231,30 @@ def historyview(request):
             sold_to = request.POST.get('sold-to')
             productid = request.POST.get('product-id')
             h = History()
-            h.product = Product.objects.get(id=productid).name
+            s = Sold_out()
+            h.product = Product.objects.get(id=productid).pk
+            s.product = Product.objects.get(id=productid).pk
+            h.productname = Product.objects.get(id=productid).name
+            s.productname = Product.objects.get(id=productid).name
             h.productuser = Product.objects.get(id=productid).user.username
+            s.productuser = Product.objects.get(id=productid).user.username
+            h.productcategory = Product.objects.get(id=productid).category
+            s.productcategory = Product.objects.get(id=productid).category
+            h.productprice = Product.objects.get(id=productid).price
+            s.productprice = Product.objects.get(id=productid).price
+            h.productimg = Product.objects.get(id=productid).img
+            s.productimg = Product.objects.get(id=productid).img
             try:
+                h.sold_to = User.objects.get(username=sold_to).username
                 h.sold_to = User.objects.get(username=sold_to).username
             except:
                 messages.add_message(request, messages.INFO,
                                      'Please enter a valid username')
                 return redirect('sell-detail', pk=productid)
             h.save()
+            s.save()
             messages.add_message(request, messages.INFO,
-                                 'Please delete the product you recently sold.')
+                                 'The Product you recently sold will be deleted automatically after two days. Still If you want to delete it manually, you can always delete this product by visiting your profile')
             return redirect('testimony')
 
         bought = History.objects.filter(sold_to=request.user.username)
@@ -245,6 +285,8 @@ def subscribe(request):
 
     return redirect('home')
 
+    return redirect('home')
+
 
 def SellListView(request):
     products = Product.objects.all()
@@ -268,6 +310,14 @@ class SellCreateView(CreateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
+
+    # model = Product
+    # form_class = ProductForm
+    # template_name = 'accounts/sellcreate.html'
+
+    # def form_valid(self, form):
+    #     form.instance.user = self.request.user
+    #     return super().form_valid(form)
 
 
 class SellUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
