@@ -29,36 +29,41 @@ def signup_view(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
-            if isinstance(int(form.cleaned_data.get('phone_no')), int) and len(form.cleaned_data.get('phone_no')) >= 10:
-                user = form.save()
-                user.refresh_from_db()
-                user.is_active = False
-                user.first_name = form.cleaned_data.get('first_name')
-                user.last_name = form.cleaned_data.get('last_name')
-                user.email = form.cleaned_data.get('email')
-                user.profile.first_name = form.cleaned_data.get('first_name')
-                user.profile.last_name = form.cleaned_data.get('last_name')
-                user.profile.email = form.cleaned_data.get('email')
-                user.profile.dob = form.cleaned_data.get('dob')
-                user.profile.batch = form.cleaned_data.get('batch')
-                user.profile.department = form.cleaned_data.get('department')
-                user.profile.group = form.cleaned_data.get('group')
-                user.profile.semester = form.cleaned_data.get('semester')
-                user.profile.phone_no = form.cleaned_data.get('phone_no')
-                user.save()
-                domain = get_current_site(request)
-                uid = (int(user.pk) + 325) * 556535
-                mail.send(domain=domain, userid=uid,
-                          email=user.email, type='confirm')
-                return HttpResponse('Please check your email to complete your registration. Kindly check your spam if needed.')
+            if form.cleaned_data.get('email').endswith('ku.edu.np'):
+                if isinstance(int(form.cleaned_data.get('phone_no')), int) and len(form.cleaned_data.get('phone_no')) >= 10:
+                    user = form.save()
+                    user.refresh_from_db()
+                    user.is_active = False
+                    user.first_name = form.cleaned_data.get('first_name')
+                    user.last_name = form.cleaned_data.get('last_name')
+                    user.email = form.cleaned_data.get('email')
+                    user.profile.first_name = form.cleaned_data.get('first_name')
+                    user.profile.last_name = form.cleaned_data.get('last_name')
+                    user.profile.email = form.cleaned_data.get('email')
+                    user.profile.dob = form.cleaned_data.get('dob')
+                    user.profile.batch = form.cleaned_data.get('batch')
+                    user.profile.department = form.cleaned_data.get('department')
+                    user.profile.group = form.cleaned_data.get('group')
+                    user.profile.semester = form.cleaned_data.get('semester')
+                    user.profile.phone_no = form.cleaned_data.get('phone_no')
+                    user.save()
+                    domain = get_current_site(request)
+                    uid = (int(user.pk) + 325) * 556535
+                    mail.send(domain=domain, userid=uid,
+                            email=user.email, type='confirm')
+                    return HttpResponse('Please check your email to complete your registration. Kindly check your spam if needed.')
+                else:
+                    messages.add_message(
+                        request, messages.ERROR, 'Your phone number is not valid.')
             else:
                 messages.add_message(
-                    request, messages.ERROR, 'Your phone number is not valid.')
+                        request, messages.ERROR, 'Your email must be a valid registered email in ku. If you don\'t have a ku email yet then you can send a photo of your ku\'s id card with your number to our email (gaakuapp@gmail.com) and we\'ll send you an email with all your gaaku account credentials.')
     else:
         messages.add_message(
             request, messages.INFO, 'Please try to keep your username as simple as possible.')
         form = SignUpForm()
     return render(request, 'accounts/signup.html', {'form': form})
+
 
 
 def login_view(request):
