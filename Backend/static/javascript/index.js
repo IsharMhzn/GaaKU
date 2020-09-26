@@ -105,9 +105,9 @@ function controlSlides(event){
 window.onload=load();
 
 
-selectElement('.menu-icons').addEventListener('click',()=>{
-	selectElement('.container-nav').classList.toggle('active');
-});
+// selectElement('.menu-icons').addEventListener('click',()=>{
+// 	selectElement('.container-nav').classList.toggle('active');
+// });
 
 //Variables
 

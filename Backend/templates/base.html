@@ -51,19 +51,12 @@
               >
                 <div class="search-bar">
                   <input
-                    type="text"Get good qualtity Electronics straight from the hands from your trusty seniors and make your drawing classes easy and interesting.
-
-                    View More 
-                    ￼￼￼￼￼
+                    type="text"
                     placeholder="Type to search"
                     name="q"
                     id="search-text"
                   />
-                  <a
-                    class="search-btn"
-                    href="javascript:{}"
-                    onclick="document.getElementById('search-form').submit()"
-                  >
+                  <a class="search-btn" href="javascript:{}" onclick="document.getElementById('search-form').submit()">
                     <i class="fas fa-search"></i>
                   </a>
                 </div>
@@ -175,9 +168,10 @@
             </ul>
           </nav>
         </div>
+        {% block notif-update %}
+        {% endblock %}
       </div>
-      {% block notif-update %}
-      {% endblock %}
+      
       <!-- Navigation Bar for small window -->
       <div class="head-wrapper">
         <div class="container">
@@ -216,7 +210,42 @@
                     <a href='{% url "category" "Education Materials"%}'
                       >Education Materials <i class="fa fa-angle-down"></i
                     ></a>
-
+                    <ul class="sub-menu">
+                      <li><a href="{% url 'subcategory1' 'Education Materials' '1st Year' %}">1st Years <i class="fas fa-chevron-right" style="margin-left: 15px"></i></a>
+                        <ul class="sub-menu">
+                          <li><a href="{% url 'subcategory2' 'Education Materials' '1st Year' 'Books' %}">Books</a></li>
+                          <li><a href="{% url 'subcategory2' 'Education Materials' '1st Year' 'Notes' %}">Notes</a></li>
+                        </ul>
+                      </li>
+                        
+                      <li><a href="{% url 'subcategory1' 'Education Materials' '2nd Year' %}">2nd Years <i class="fas fa-chevron-right" style="margin-left: 15px"></i></a>
+                        <ul class="sub-menu">
+                          <li><a href="{% url 'subcategory2' 'Education Materials' '2nd Year' 'Books' %}">Books</a></li>
+                          <li><a href="{% url 'subcategory2' 'Education Materials' '2nd Year' 'Notes' %}">Notes</a></li>
+                        </ul>
+                      </li>
+                        
+                      <li><a href="{% url 'subcategory1' 'Education Materials' '3rd Year' %}">3rd Years <i class="fas fa-chevron-right" style="margin-left: 15px"></i></a>
+                        <ul class="sub-menu">
+                          <li><a href="{% url 'subcategory2' 'Education Materials' '3rd Year' 'Books' %}">Books</a></li>
+                          <li><a href="{% url 'subcategory2' 'Education Materials' '3rd Year' 'Notes' %}">Notes</a></li>
+                        </ul>
+                      </li>
+                        
+                      <li><a href="{% url 'subcategory1' 'Education Materials' '4th Year' %}">4th Years <i class="fas fa-chevron-right" style="margin-left: 15px"></i></a>
+                        <ul class="sub-menu">
+                          <li><a href="{% url 'subcategory2' 'Education Materials' '4th Year' 'Books' %}">Books</a></li>
+                          <li><a href="{% url 'subcategory2' 'Education Materials' '4th Year' 'Notes' %}">Notes</a></li>
+                        </ul>
+                      </li>
+                        
+                      <li><a href="{% url 'subcategory1' 'Education Materials' 'Labcoats' %}"> Labcoats</a>
+                      </li>
+    
+                      <li><a href="{% url 'subcategory1' 'Education Materials' 'Drafter' %}"> Drafter</a>
+                      </li>
+                        
+                    </ul>
                   <li>
                     <a href='{% url "category" "Other Accessories" %}'
                       >Other Accessories <i class="fa fa-angle-down"></i
@@ -230,6 +259,24 @@
               <li>
                 <a href='{% url "profile" %}'>Profile</a>
               </li>
+              <form
+                class="small-search-section"
+                role="search"
+                id="small-search-form"
+                action="{% url 'search' %}"
+              >
+                <div class="small-search-bar">
+                  <input
+                    type="text"
+                    placeholder="Type to search"
+                    name="q"
+                    id="small-search-text"
+                  />
+                  <a class="small-search-btn" href="javascript:{}" onclick="document.getElementById('small-search-form').submit()">
+                    <i class="fas fa-search"></i>
+                  </a>
+                </div>
+                </form>
             </ul>
             <div class="menu-icons">
               <i class="fas fa-bars"></i>
@@ -289,9 +336,13 @@
 		</div>
   </footer>
   <script>
-      document.querySelector('.menu-icons').addEventListener('click',()=>{
-	    document.querySelector('.container-nav').classList.toggle('active');
-      });
-  </script>
+    let clicked=false;
+    let menu_icons=document.querySelector('.menu-icons');
+    let container_nav=document.querySelector('.container-nav')
+    menu_icons.addEventListener('click',()=>{
+      console.log("sadsadsad");
+      container_nav.classList.toggle("active");
+    })
+	</script>
   </body>
 </html>

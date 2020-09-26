@@ -370,44 +370,18 @@ a:hover {
   max-width: 32.5rem;
   background-color: var(--alabaster);
   border-radius: 0.625rem;
-}
-
-.search__button {
-  width: 4.125rem;
-  height: 3rem;
-  padding: 0;
-  border-radius: 0.625rem 0 0 0.625rem;
-  font-size: 0;
-  background-color: var(--alabaster);
-  transition: background-color 0.3s ease;
-  border: none;
-}
-
-.search__button:hover {
-  background-color: var(--true-v);
-}
-.search__button:hover .fa-search {
-  color: var(--alabaster);
-}
-
-.fa-search {
-  font-size: 1.3rem;
-}
-
-.search__input {
-  width: calc(100% - 4.125rem);
-  padding: 0 1rem;
-  border: 1px solid var(--alabaster);
-  background-color: var(--alabaster);
+  align-items: center;
+  justify-content: center;
   font-size: 1.2rem;
-  color: var(--dune);
-  border-radius: 0 0.625rem 0.625rem 0;
-  transition: border-color 0.3s ease;
+  font-weight:bold;
 }
 
-.search__input::placeholder {
-  color: var(--silver);
-  font-size: 1.2rem;
+.search i{
+  margin-right:1.2rem;
+}
+
+.search:hover{
+  cursor: pointer;
 }
 
 .profile__button {

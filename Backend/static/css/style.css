@@ -546,6 +546,56 @@ background: rgba(211,211,211,0.4);
   left: 100%;
   top: -10%;
 }
+
+/*  SaSearch section */
+.small-search-section {
+  margin-top: 50px;
+  margin-left: auto;
+  align-self: center;
+  margin-top: auto; 
+}
+
+.small-search-bar {
+
+  background: white;
+  border: 1px solid #d2cece;
+  box-shadow: 0px 5px 6px #ccc;
+  height: 25px;
+  border-radius: 25px;
+  padding: 10px;
+  bottom: 0;
+}
+
+.small-search-bar > a{
+  display: flex;
+  color: white;
+  padding: 0;
+}
+
+.small-search-btn {
+  color: white;
+  float: right;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #6e2bb7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#small-search-text {
+  border: none;
+  background: none;
+  outline: none;
+  float: left;
+  padding: 0 6px;
+  color: black;
+  font-size: 16px;
+  transition: 0.4s;
+  line-height: 25px;
+  width: 200px;
+}
 /*Cover Section*/
 
 .padding{

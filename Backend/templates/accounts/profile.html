@@ -82,16 +82,9 @@
  	  {% endif %}
     <header class="header">
       <div class="header__wrapper">
-        <form action="" class="search">
-          <button class="search__button focus--box-shadow" type="submit">
-  			<i class="fas fa-search"></i>
-          </button>
-          <input
-            class="search__input focus--box-shadow"
-            type="text"
-            placeholder="Type to Search"
-          />
-        </form>
+        <a href="{% url 'sell' %}" class="search">
+        	<i class="fas fa-plus"></i>Add your products
+        </a>
         <div class="profile">
           <button class="profile__button">
             <span class="profile__name">{{ user.username }}</span>
@@ -109,15 +102,6 @@
     <section class="section" id="MyProducts">
           <header class="section__header">
             <a href="{% url 'myproducts' user.username %}"><h2 class="section__title"> My Products</h2></a>
-            <div class="section__control">
-              <button
-                class="section__button section__button--painted focus--box-shadow"
-                type="button"
-                aria-label="Add New project"
-              >
-              <a href="{% url 'sell' %}" ><i class="fas fa-plus"></i></a>
-              </button>
-            </div>
           </header>
           <ul class="project">
             {% for product in products %}
