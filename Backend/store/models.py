@@ -19,7 +19,7 @@ class Customer(models.Model):
 
 class Product(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-    name = models.CharField(max_length=20, null=True)
+    name = models.CharField(max_length=21, null=True)
     category = models.CharField(max_length=200)
     sub_category1 = models.CharField(max_length=200, null=True)
     sub_category2 = models.CharField(max_length=200, null=True)

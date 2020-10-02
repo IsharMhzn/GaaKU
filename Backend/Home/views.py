@@ -7,7 +7,6 @@ import random
 
 
 def index(request):
-
     subscribed = False
     notifs = []
     newNotif = None
